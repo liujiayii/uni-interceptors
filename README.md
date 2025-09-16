@@ -65,3 +65,20 @@ applyPrototypeInterceptor();
 **平台：** 快手小程序 (MP-KUAISHOU)
 
 </details>
+
+<details>
+<summary>✅ 路由拦截器</summary>
+
+**名称：** RouteInterceptor / applyRouteInterceptor
+
+**功能：** 路由导航守卫，可用于登录状态验证和页面访问控制。
+
+**平台：** 全平台
+
+**配置参数：**
+
+- `loginRoute`: string - 登录页面路径
+- `needLoginPages`: string[] - 需要登录验证的页面路径列表
+- `isLogged`: () => boolean - 判断用户是否已登录的函数
+
+</details>
