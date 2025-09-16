@@ -4,6 +4,8 @@
  * 我这里应为大部分都可以随便进入，所以使用黑名单
  */
 
+import type { Plugin } from "vue";
+
 export type RouteInterceptorOptions = {
   /**
    * 登录页面路径
@@ -59,8 +61,8 @@ const navigateToInterceptor: UniNamespace.InterceptorOptions = {
   },
 };
 
-export const RouteInterceptor = {
-  install(options: RouteInterceptorOptions) {
+export const RouteInterceptor: Plugin = {
+  install(_app, options: RouteInterceptorOptions) {
     // 合并配置
     currentOptions = { ...defaultOptions, ...options };
 
@@ -77,5 +79,5 @@ export const RouteInterceptor = {
  * 也可以直接调用: applyRouteInterceptor(options)
  */
 export function applyRouteInterceptor(options: RouteInterceptorOptions): void {
-  RouteInterceptor.install(options);
+  RouteInterceptor.install?.(null as any, options);
 }
