@@ -1,0 +1,24 @@
+name: build-test
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Pnpm
+        uses: pnpm/action-setup@v4
+        with:
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Run build
+        run: |
+          node -v
+          pnpm -v
+          pnpm install
+          pnpm run build
