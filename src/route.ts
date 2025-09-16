@@ -48,6 +48,10 @@ const navigateToInterceptor: UniNamespace.InterceptorOptions = {
   invoke({ url }: { url: string }) {
     // console.log(url) // /pages/route-interceptor/index?name=feige&age=30
     const path = url.split("?")[0];
+    // 放行登录页自身
+    const loginPath = currentOptions.loginRoute.split("?")[0];
+    if (path === loginPath)
+      return true;
     const isNeedLogin = currentOptions.needLoginPages.includes(path);
     if (!isNeedLogin) {
       return true;
