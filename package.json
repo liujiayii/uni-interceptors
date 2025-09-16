@@ -1,7 +1,7 @@
 {
   "name": "uni-interceptors",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "pnpm@10.16.1",
   "description": "uni interceptors,uni app 拦截器",
   "author": "liujiayii <liujiayii@foxmail.com>",
@@ -37,7 +37,6 @@
     "@dcloudio/types": "^3.4.21",
     "@types/node": "^22.15.17",
     "@typescript-eslint/parser": "^8.39.0",
-    "@unocss/eslint-plugin": "~0.58.7",
     "eslint": "^9.32.0",
     "eslint-plugin-format": "1.0.1",
     "lint-staged": "^16.1.4",
