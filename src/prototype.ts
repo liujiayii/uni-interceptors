@@ -1,4 +1,6 @@
-export const prototypeInterceptor = {
+import type { Plugin } from "vue";
+
+export const prototypeInterceptor: Plugin = {
   install() {
     // 解决低版本手机不识别 array.at() 导致运行报错的问题
     if (typeof Array.prototype.at !== "function") {
@@ -20,5 +22,5 @@ export const prototypeInterceptor = {
  * 也可以直接调用: applyPrototypeInterceptor()
  */
 export function applyPrototypeInterceptor(): void {
-  prototypeInterceptor.install();
+  prototypeInterceptor.install?.(null as any);
 }

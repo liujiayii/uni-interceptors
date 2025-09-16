@@ -1,3 +1,5 @@
+import type { Plugin } from "vue";
+
 const clipboardDataAuthInterceptor: UniNamespace.InterceptorOptions = {
   fail(error: any) {
     // #ifdef MP-TOUTIAO
@@ -34,7 +36,7 @@ const clipboardDataAuthInterceptor: UniNamespace.InterceptorOptions = {
  * 处理抖音小程序剪贴板授权拦截器
  * 当用户拒绝授权时，引导用户去设置页面授权
  */
-export const SetClipboardDataAuthInterceptor = {
+export const SetClipboardDataAuthInterceptor: Plugin = {
   install() {
     uni.addInterceptor("setClipboardData", clipboardDataAuthInterceptor);
   },
@@ -46,5 +48,5 @@ export const SetClipboardDataAuthInterceptor = {
  * 也可以直接调用: applySetClipboardDataAuthInterceptor()
  */
 export function applySetClipboardDataAuthInterceptor(): void {
-  SetClipboardDataAuthInterceptor.install();
+  SetClipboardDataAuthInterceptor.install?.(null as any);
 }
