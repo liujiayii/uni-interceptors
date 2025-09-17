@@ -1,4 +1,4 @@
-name: build-test
+name: Build Test
 
 on: pull_request
 
@@ -8,9 +8,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+
       - name: Install Pnpm
         uses: pnpm/action-setup@v4
-        with:
+
       - name: Node
         uses: actions/setup-node@v5
         with:
