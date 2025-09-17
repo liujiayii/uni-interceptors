@@ -13,18 +13,7 @@ const isIos = platform === "ios";
 export async function showAuthTip(authorize: AuthType): Promise<boolean> {
   // iOS平台处理
   if (isIos) {
-    return new Promise((resolve) => {
-      uni.showModal({
-        title: authTips[authorize].title,
-        content: authTips[authorize].describe,
-        success: (res) => {
-          resolve(!!res.confirm);
-        },
-        fail: () => {
-          resolve(false);
-        },
-      });
-    });
+    return true;
   }
 
   // 安卓端权限检查和处理
@@ -56,26 +45,7 @@ export async function showAuthTip(authorize: AuthType): Promise<boolean> {
 export async function showManualAuth(authorize: AuthType): Promise<boolean> {
   // iOS平台处理
   if (isIos) {
-    return new Promise((resolve) => {
-      uni.showModal({
-        title: "提示",
-        content: authTips[authorize].failTips,
-        confirmText: "去设置",
-        cancelText: "取消",
-        success: (res) => {
-          if (res.confirm) {
-            // iOS打开应用设置
-            plus.runtime.openURL("app-settings:");
-            resolve(true);
-          } else {
-            resolve(false);
-          }
-        },
-        fail: () => {
-          resolve(false);
-        },
-      });
-    });
+    return true;
   }
 
   // 安卓端权限检查

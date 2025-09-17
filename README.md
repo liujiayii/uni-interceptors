@@ -95,6 +95,7 @@ applyPrototypeInterceptor();
 
 - Android：`android.permission.CALL_PHONE`（直接拨打电话需要；仅拉起拨号盘通常不需要）
 - iOS：无需额外电话相关权限或 Usage Description；系统会弹出拨号确认框，无法静默拨出
+
 **工作流程：**
 
 1. 调用 `uni.makePhoneCall` 前，先检查是否已获得拨打电话权限

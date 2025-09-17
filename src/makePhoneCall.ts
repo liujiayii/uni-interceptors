@@ -11,7 +11,7 @@ const makePhoneCall: UniNamespace.InterceptorOptions = {
       return false;
     // #endif
 
-    // #ifdef MP
+    // #ifdef MP || WEB
     // 小程序平台通常会在调用时自动申请权限，但可以添加提示
     console.log("即将拨打电话:", args.phoneNumber);
     // #endif
@@ -24,7 +24,7 @@ const makePhoneCall: UniNamespace.InterceptorOptions = {
     showManualAuth(AuthType.PHONE);
     // #endif
 
-    // #ifdef MP
+    // #ifdef MP || WEB
     // 小程序平台处理
     console.error("拨打电话失败:", error);
     // #endif
