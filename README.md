@@ -89,13 +89,12 @@ applyPrototypeInterceptor();
 
 **功能：** 在调用拨打电话前申请权限，并告知用户申请权限的目的；在调用失败后引导用户手动开启权限。
 
-**平台：** App（Android/iOS）
+**平台：** App（Android / iOS）
 
 **权限说明：**
 
-- Android: `android.permission.CALL_PHONE`
-- iOS: 在 `manifest.json` 中配置权限使用说明
-
+- Android：`android.permission.CALL_PHONE`（直接拨打电话需要；仅拉起拨号盘通常不需要）
+- iOS：无需额外电话相关权限或 Usage Description；系统会弹出拨号确认框，无法静默拨出
 **工作流程：**
 
 1. 调用 `uni.makePhoneCall` 前，先检查是否已获得拨打电话权限
