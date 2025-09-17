@@ -42,7 +42,7 @@
     "eslint-plugin-format": "1.0.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.6",
-    "tsdown": "^0.15.1",
+    "tsdown": "^0.15.2",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4",
     "vue": "^3.5.21",
