@@ -83,6 +83,29 @@ applyPrototypeInterceptor();
 </details>
 
 <details>
+<summary>✅ 拨打电话权限拦截器(uni.makePhoneCall)</summary>
+
+**名称：** makePhoneCallInterceptor / applyMakePhoneCallInterceptor
+
+**功能：** 在调用拨打电话前申请权限，并告知用户申请权限的目的；在调用失败后引导用户手动开启权限。
+
+**平台：** App（Android / iOS）
+
+**权限说明：**
+
+- Android：`android.permission.CALL_PHONE`（直接拨打电话需要；仅拉起拨号盘通常不需要）
+- iOS：无需额外电话相关权限或 Usage Description；系统会弹出拨号确认框，无法静默拨出
+
+**工作流程：**
+
+1. 调用 `uni.makePhoneCall` 前，先检查是否已获得拨打电话权限
+2. 如果未获得权限，弹窗告知用户权限使用目的并请求授权
+3. 用户确认后系统请求权限，用户拒绝则取消拨打电话
+4. 如果调用拨打电话失败，引导用户手动开启权限
+
+</details>
+
+<details>
 <summary>✅ 路由拦截器</summary>
 
 **名称：** RouteInterceptor / applyRouteInterceptor
