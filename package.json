@@ -1,7 +1,7 @@
 {
   "name": "uni-interceptors",
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "packageManager": "pnpm@10.16.1",
   "description": "uni interceptors,uni app 拦截器",
   "author": "liujiayii <liujiayii@foxmail.com>",
@@ -25,7 +25,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsdown",
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
+    "build2": "tsdown",
     "dev": "tsdown --watch",
     "test": "vitest",
     "lint": "eslint .",
@@ -42,6 +44,7 @@
     "eslint-plugin-format": "1.0.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.6",
+    "rimraf": "^5.0.9",
     "tsdown": "^0.15.2",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4",
