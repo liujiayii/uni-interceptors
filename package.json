@@ -25,7 +25,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsdown",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "build2": "tsdown",
     "dev": "tsdown --watch",
     "test": "vitest",
     "lint": "eslint .",
