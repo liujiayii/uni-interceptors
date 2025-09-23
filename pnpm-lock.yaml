@@ -33,7 +33,7 @@ importers:
         specifier: ^16.1.6
         version: 16.1.6
       rimraf:
-        specifier: ^5.0.9
+        specifier: ^5.0.10
         version: 5.0.10
       tsdown:
         specifier: ^0.15.4
