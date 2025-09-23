@@ -12,6 +12,7 @@
     "declaration": true,
     "emitDeclarationOnly": false,
     "outDir": "dist",
+    "rootDir": "src",
     "esModuleInterop": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
