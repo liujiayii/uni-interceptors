@@ -1,6 +1,6 @@
 import type { AuthType } from "./_constant";
 import { authTips } from "./_constant";
-import { isAppIos } from "./env";
+import { isApp, isAppIos } from "./env";
 
 /**
  * 是否需要显示请求权限提示
@@ -8,7 +8,11 @@ import { isAppIos } from "./env";
  * @returns boolean
  */
 export function shouldShowRequestPermissionRationale(authorize: AuthType): boolean {
-  // 仅在Android平台需要检查
+  // 非 App 端：不触发 plus，视为无需本地权限
+  if (!isApp) {
+    return true;
+  }
+  // iOS 平台处理
   if (isAppIos) {
     return false;
   }
@@ -24,7 +28,11 @@ export function shouldShowRequestPermissionRationale(authorize: AuthType): boole
  * @returns boolean
  */
 export function checkSelfPermission(authorize: AuthType): boolean {
-  // iOS平台处理
+  // 非 App 端：不触发 plus，视为无需本地权限
+  if (!isApp) {
+    return true;
+  }
+  // iOS 平台处理
   if (isAppIos) {
     return true;
   }
