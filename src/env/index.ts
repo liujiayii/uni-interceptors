@@ -6,12 +6,12 @@ const { platform, environment = "" } = systemInfo;
 
 /** h5环境 */
 export const isH5 = UNI_PLATFORM === "h5";
-const userAgent = navigator.userAgent.toLowerCase();
+const userAgent = typeof navigator !== "undefined" ? navigator.userAgent.toLowerCase() : "";
 
 /** h5环境微信环境 */
-export const isH5WeiXin = isH5 && String(userAgent.match(/MicroMessenger/i)) === "micromessenger";
+export const isH5WeiXin = isH5 && /micromessenger/i.test(userAgent);
 /** h5环境微博环境 */
-export const isH5WeiBo = isH5 && String(userAgent.match(/weibo/i)) === "weibo";
+export const isH5WeiBo = isH5 && /weibo/i.test(userAgent);
 /** app环境 */
 export const isApp = UNI_PLATFORM === "app";
 /** ios app */
