@@ -3,8 +3,6 @@ import type { Plugin } from "vue";
 const storageInvokeInterceptor: UniNamespace.InterceptorOptions = {
   invoke(args: { data: any }) {
     // #ifdef MP-KUAISHOU
-    // 解决快手小程序setStorage不支持proxy对象的问题
-    // 相关链接: https://github.com/dcloudio/uni-app/issues/4182
     args.data = JSON.parse(JSON.stringify(args.data));
     // #endif
   },
