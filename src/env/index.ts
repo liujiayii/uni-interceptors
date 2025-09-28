@@ -1,6 +1,5 @@
 // eslint-disable-next-line node/prefer-global/process
 const UNI_PLATFORM = process.env.UNI_PLATFORM;
-// 使用类型断言来处理 environment 属性可能不存在的情况
 const systemInfo = uni.getSystemInfoSync();
 const { platform, environment = "" } = systemInfo;
 

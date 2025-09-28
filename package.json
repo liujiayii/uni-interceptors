@@ -24,6 +24,11 @@
       "types": "./dist/env/index.d.ts",
       "import": "./dist/env/index.js",
       "require": "./dist/env/index.js"
+    },
+    "./tools": {
+      "types": "./dist/tools/index.d.ts",
+      "import": "./dist/tools/index.js",
+      "require": "./dist/tools/index.js"
     }
   },
   "main": "./dist/index.js",

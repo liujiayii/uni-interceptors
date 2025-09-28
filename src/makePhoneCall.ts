@@ -1,11 +1,11 @@
 import type { Plugin } from "vue";
-import { AuthType } from "./_constant";
 import {
+  AuthType,
   checkSelfPermission,
   shouldShowRequestPermissionRationale,
   showAuthTip,
   showManualAuth,
-} from "./_utils";
+} from "./tools";
 
 const makePhoneCall: UniNamespace.InterceptorOptions = {
   invoke(args) {
