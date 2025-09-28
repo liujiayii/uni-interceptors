@@ -15,8 +15,16 @@
     "url": "https://github.com/liujiayii/uni-interceptors/issues"
   },
   "exports": {
-    ".": "./dist/index.js",
-    "./package.json": "./package.json"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./env": {
+      "types": "./dist/env/index.d.ts",
+      "import": "./dist/env/index.js",
+      "require": "./dist/env/index.js"
+    }
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
