@@ -18,5 +18,5 @@ export default antfu({
   },
   formatters: true,
   rules: {},
-  ignores: ["dist"],
+  ignores: ["dist", "*/*.html"],
 });
