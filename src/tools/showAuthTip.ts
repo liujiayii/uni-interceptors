@@ -12,11 +12,15 @@ export async function showAuthTip(authorize: AuthType): Promise<boolean> {
   // 如果已经授权直接返回
   if (result)
     return true;
-
+  const tip = authTips[authorize];
+  if (!tip) {
+    console.warn(`[showAuthTip] 未配置 ${authorize} 的提示文案`);
+    return false;
+  }
   return new Promise((resolve) => {
     uni.showModal({
-      title: authTips[authorize].title,
-      content: authTips[authorize].describe,
+      title: tip.title,
+      content: tip.describe,
       success: (res) => {
         resolve(!!res.confirm);
       },
