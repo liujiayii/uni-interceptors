@@ -4,6 +4,7 @@ export default antfu({
   globals: {
     uni: "readonly",
   },
+  unocss: true,
   type: "lib",
   stylistic: {
     semi: true,

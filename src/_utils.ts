@@ -1,18 +1,39 @@
 import type { AuthType } from "./_constant";
 import { authTips } from "./_constant";
-
-const platform = uni.getSystemInfoSync().platform;
-
-const isIos = platform === "ios";
+import { isApp, isAppIos } from "./env";
 
 /**
- * 授权前告知用户使用意图
+ * 是否需要显示请求权限提示
  * @param authorize
  * @returns boolean
  */
-export async function showAuthTip(authorize: AuthType): Promise<boolean> {
-  // iOS平台处理
-  if (isIos) {
+export function shouldShowRequestPermissionRationale(authorize: AuthType): boolean {
+  // 非 App 端：不触发 plus，视为无需本地权限
+  if (!isApp) {
+    return true;
+  }
+  // iOS 平台处理
+  if (isAppIos) {
+    return false;
+  }
+
+  const activity = plus.android.runtimeMainActivity();
+  const rationale: any = plus.android.importClass("androidx.core.app.ActivityCompat");
+  return rationale.shouldShowRequestPermissionRationale(activity, authorize);
+}
+
+/**
+ * 检查权限
+ * @param authorize
+ * @returns boolean
+ */
+export function checkSelfPermission(authorize: AuthType): boolean {
+  // 非 App 端：不触发 plus，视为无需本地权限
+  if (!isApp) {
+    return true;
+  }
+  // iOS 平台处理
+  if (isAppIos) {
     return true;
   }
 
@@ -20,9 +41,19 @@ export async function showAuthTip(authorize: AuthType): Promise<boolean> {
   const compat: any = plus.android.importClass("androidx.core.content.ContextCompat");
   const context = plus.android.runtimeMainActivity();
   const result = compat.checkSelfPermission(context, authorize);
+  console.log(`权限检查结果:${result}`);
+  return result === 0;
+}
 
+/**
+ * 授权前告知用户使用意图
+ * @param authorize
+ * @returns boolean
+ */
+export async function showAuthTip(authorize: AuthType): Promise<boolean> {
+  const result = checkSelfPermission(authorize);
   // 如果已经授权直接返回
-  if (result === 0)
+  if (result)
     return true;
 
   return new Promise((resolve) => {
@@ -43,26 +74,17 @@ export async function showAuthTip(authorize: AuthType): Promise<boolean> {
  * 用户拒绝授权提示手动授权
  */
 export async function showManualAuth(authorize: AuthType): Promise<boolean> {
-  // iOS平台处理
-  if (isIos) {
-    return true;
-  }
-
-  // 安卓端权限检查
-  const compat: any = plus.android.importClass("androidx.core.content.ContextCompat");
-  const context = plus.android.runtimeMainActivity();
-  const result = compat.checkSelfPermission(context, authorize);
-
+  const result = checkSelfPermission(authorize);
   // 如果已经授权直接返回
-  if (result === 0)
+  if (result)
     return Promise.resolve(true);
 
   return new Promise((resolve) => {
     uni.showModal({
-      title: "提示",
+      title: "重要提醒",
       content: authTips[authorize].failTips,
       confirmText: "去设置",
-      cancelText: "取消",
+      cancelText: "暂不开启",
       success: (res) => {
         if (res.confirm) {
           uni.openAppAuthorizeSetting({

@@ -8,6 +8,8 @@ import {
 import { createSSRApp } from "vue";
 import { isLogged, loginRoute, needLoginPages } from "@/interceptor/route";
 import App from "./App.vue";
+import "./nvue.css";
+import "uno.css";
 
 export function createApp(): any {
   const app = createSSRApp(App);
