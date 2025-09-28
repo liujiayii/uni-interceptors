@@ -4,5 +4,11 @@
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
   "rangeStrategy": "bump",
-  "ignoreDeps": []
+  "ignoreDeps": [
+    "@dcloudio/*",
+    "!@dcloudio/types",
+    "vite",
+    "vue",
+    "@vue/runtime-core"
+  ]
 }
