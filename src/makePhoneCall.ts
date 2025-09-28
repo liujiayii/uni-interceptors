@@ -30,23 +30,23 @@ const makePhoneCall: UniNamespace.InterceptorOptions = {
     // #endif
   },
   success() {
+    // #ifdef APP-PLUS
     console.log("makePhoneCall success:");
-    const result = checkSelfPermission(AuthType.PHONE);
-    if (!result) {
-      // #ifdef APP-PLUS
-      const shouldShowRationale = shouldShowRequestPermissionRationale(AuthType.PHONE);
+    const granted = checkSelfPermission(AuthType.PHONE);
+    if (!granted) {
+      const showRationale = shouldShowRequestPermissionRationale(AuthType.PHONE);
 
-      console.log(`shouldShowRequestPermissionRationale:${shouldShowRationale}`);
-      if (!shouldShowRationale) {
+      console.log(`shouldShowRequestPermissionRationale:${showRationale}`);
+      if (!showRationale) {
         showManualAuth(AuthType.PHONE);
       }
-      // #endif
-
-      // #ifdef MP || WEB
-      // 小程序平台处理
-      console.error("拨打电话失败:");
-      // #endif
     }
+    // #endif
+
+    // #ifdef MP || WEB
+    console.log("makePhoneCall success:");
+    // MP/WEB 无需本地权限检查
+    // #endif
   },
   fail(error) {
     console.log(`makePhoneCall error:${error}`);
