@@ -1,0 +1,46 @@
+label,
+scroll-view,
+swiper-item,
+view {
+  /* #ifndef H5 */
+  display: flex;
+  /*  #endif */
+  /* #ifdef H5 */
+  /* H5样式被覆盖了 */
+  display: flex !important;
+  /*  #endif */
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  align-items: stretch;
+  align-content: flex-start;
+}
+
+image,
+input,
+scroll-view,
+swiper,
+swiper-item,
+text,
+textarea,
+video,
+view {
+  position: relative;
+  border: 0 solid #000;
+  box-sizing: border-box;
+}
+
+swiper-item {
+  /* #ifndef MP-KUAISHOU */
+  position: absolute;
+  /* #endif */
+  /* #ifdef MP-KUAISHOU */
+  /* 快手小程序的swiper-item不支持position:absolute */
+  position: relative !important;
+  /* #endif */
+}
+
+button {
+  margin: 0;
+}
