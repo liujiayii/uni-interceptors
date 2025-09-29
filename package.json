@@ -48,6 +48,9 @@
     "typecheck": "tsc --noEmit",
     "prepare": "husky"
   },
+  "dependencies": {
+    "@uni-helper/uni-env": "^0.1.8"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
     "@dcloudio/types": "^3.4.21",

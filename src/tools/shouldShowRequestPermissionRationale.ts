@@ -1,5 +1,5 @@
 import type { AuthType } from "./authTips";
-import { isApp, isAppIos } from "../env";
+import { isApp, isAppIOS } from "@uni-helper/uni-env";
 
 /**
  * 是否需要显示请求权限提示
@@ -12,7 +12,7 @@ export function shouldShowRequestPermissionRationale(authorize: AuthType): boole
     return false;
   }
   // iOS 平台处理
-  if (isAppIos) {
+  if (isAppIOS) {
     return false;
   }
 
