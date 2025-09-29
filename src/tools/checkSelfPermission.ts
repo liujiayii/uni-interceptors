@@ -1,5 +1,5 @@
 import type { AuthType } from "./authTips";
-import { isApp, isAppIos } from "../env";
+import { isApp, isAppIOS } from "@uni-helper/uni-env";
 
 /**
  * 检查权限
@@ -12,7 +12,7 @@ export function checkSelfPermission(authorize: AuthType): boolean {
     return true;
   }
   // iOS 平台处理
-  if (isAppIos) {
+  if (isAppIOS) {
     return true;
   }
 
