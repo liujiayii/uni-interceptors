@@ -1,11 +1,8 @@
 {
   "pages": [
-    {
-      "path": "pages/index/index",
-      "style": {
-        "navigationBarTitleText": "uni-app"
-      }
-    }
+    { "path": "pages/index/index" },
+    { "path": "pages/need-login/index" },
+    { "path": "pages/login/index" }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
