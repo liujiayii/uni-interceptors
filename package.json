@@ -1,7 +1,7 @@
 {
   "name": "uni-interceptors",
   "type": "module",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "packageManager": "pnpm@10.17.1",
   "description": "uni interceptors,uni app 拦截器",
   "author": "liujiayii <liujiayii@foxmail.com>",
