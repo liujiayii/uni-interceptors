@@ -344,7 +344,7 @@ showManualAuth("android.permission.ACCESS_FINE_LOCATION", "位置权限", "请�
 **类型定义：**
 
 ```typescript
-type MiniProgramPlatform = "mp-alipay" | "mp-weixin" | "mp-toutiao" | "mp-kuaishou" | "mp-jd" | "app" | "h5";
+type MiniProgramPlatform = "mp-alipay" | "mp-weixin" | "mp-baidu" | "mp-qq" | "mp-toutiao" | "mp-kuaishou" | "mp-jd" | "app" | "h5";
 ```
 
 **使用示例：**
