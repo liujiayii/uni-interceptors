@@ -8,11 +8,20 @@ export function useChooseImage(opts: UniApp.ChooseImageOptions): Promise<UniApp.
   return new Promise((resolve, reject) => {
     // 微信由于旧接口不再维护，针对微信小程序平台改用chooseMedia接口
     // #ifdef MP-WEIXIN
-    const chooseMediaOptions: any = {
+    interface ChooseMediaOptions {
+      count?: number;
+      sizeType: string[];
+      sourceType?: ("album" | "camera")[];
+      mediaType: ("image" | "video" | "mix")[];
+      extension?: string[];
+    }
+    const chooseMediaOptions: ChooseMediaOptions = {
       count,
-      sizeType: Array.isArray(sizeType) ? sizeType : [sizeType].filter(Boolean) as string[],
+      sizeType: Array.isArray(sizeType)
+        ? sizeType
+        : [sizeType].filter(Boolean) as string[],
       sourceType: sourceType as ("album" | "camera")[],
-      mediaType: ["image"] as any,
+      mediaType: ["image"],
     };
 
     // 如果 extension 存在，则添加到选项中
