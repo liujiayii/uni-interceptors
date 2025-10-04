@@ -3,8 +3,8 @@ import { onReady, onResize } from "@dcloudio/uni-app";
 import { ref } from "vue";
 
 /**
- * 获取窗口rpx单位尺寸
- * @returns {number} 窗口高度
+ * 获取窗口尺寸信息(包含rpx转换比率)
+ * @returns Ref对象,包含窗口宽度、高度和rpx转换比率
  */
 export function useWindowSize(): Ref<{ width: number; height: number; rate: number }> {
   const result = ref({
