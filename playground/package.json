@@ -34,7 +34,7 @@
     "vue": "^3.4.21"
   },
   "devDependencies": {
-    "@dcloudio/types": "^3.4.21",
+    "@dcloudio/types": "^3.4.22",
     "@dcloudio/uni-automator": "3.0.0-4070620250821001",
     "@dcloudio/uni-cli-shared": "3.0.0-4070620250821001",
     "@dcloudio/uni-stacktracey": "3.0.0-4070620250821001",
@@ -42,10 +42,10 @@
     "@unocss/eslint-plugin": "^66.5.2",
     "@vue/runtime-core": "^3.4.21",
     "@vue/tsconfig": "^0.8.1",
-    "typescript": "^5.9.2",
+    "typescript": "^5.9.3",
     "unocss": "^66.5.2",
     "unocss-applet": "^0.11.0",
     "vite": "5.2.8",
-    "vue-tsc": "^3.0.8"
+    "vue-tsc": "^3.1.0"
   }
 }

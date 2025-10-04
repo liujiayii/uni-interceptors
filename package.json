@@ -2,7 +2,7 @@
   "name": "uni-interceptors",
   "type": "module",
   "version": "0.0.9",
-  "packageManager": "pnpm@10.17.1",
+  "packageManager": "pnpm@10.18.0",
   "description": "uni interceptors,uni app 拦截器",
   "author": "liujiayii <liujiayii@foxmail.com>",
   "license": "MIT",
@@ -49,20 +49,20 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@uni-helper/uni-env": "^0.1.8"
+    "@uni-helper/uni-env": "^0.2.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
-    "@dcloudio/types": "^3.4.21",
-    "@types/node": "^22.18.6",
-    "@typescript-eslint/parser": "^8.44.1",
-    "eslint": "^9.36.0",
+    "@dcloudio/types": "^3.4.22",
+    "@types/node": "^22.18.8",
+    "@typescript-eslint/parser": "^8.45.0",
+    "eslint": "^9.37.0",
     "eslint-plugin-format": "1.0.2",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.2",
+    "lint-staged": "^16.2.3",
     "rimraf": "^6.0.1",
-    "tsdown": "^0.15.5",
-    "typescript": "^5.9.2",
+    "tsdown": "^0.15.6",
+    "typescript": "^5.9.3",
     "vitest": "^3.2.4",
     "vue": "^3.5.21",
     "vue-eslint-parser": "^10.2.0"
