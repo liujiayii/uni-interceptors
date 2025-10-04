@@ -3,7 +3,7 @@ import {
   AuthType,
   checkAndRequestLocationAuth,
   showAuthTip,
-} from "./tools";
+} from "../tools";
 
 const chooseLocation: UniNamespace.InterceptorOptions = {
   invoke(args) {

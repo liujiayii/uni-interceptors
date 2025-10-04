@@ -25,6 +25,11 @@
       "import": "./dist/env/index.js",
       "require": "./dist/env/index.js"
     },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.js",
+      "require": "./dist/hooks/index.js"
+    },
     "./tools": {
       "types": "./dist/tools/index.d.ts",
       "import": "./dist/tools/index.js",
@@ -54,8 +59,11 @@
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
     "@dcloudio/types": "^3.4.22",
+    "@dcloudio/uni-app": "3.0.0-4070620250821001",
     "@types/node": "^22.18.8",
     "@typescript-eslint/parser": "^8.45.0",
+    "@uni-helper/uni-use": "^0.19.15",
+    "es-toolkit": "^1.39.10",
     "eslint": "^9.37.0",
     "eslint-plugin-format": "1.0.2",
     "husky": "^9.1.7",
