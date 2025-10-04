@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
-    "@dcloudio/types": "^3.4.21",
+    "@dcloudio/types": "^3.4.22",
     "@types/node": "^22.18.8",
     "@typescript-eslint/parser": "^8.44.1",
     "eslint": "^9.37.0",
