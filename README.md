@@ -62,30 +62,29 @@ export default {
       try {
         const res = await useChooseImage({
           count: 1,
-          sizeType: ['original', 'compressed'],
-          sourceType: ['album', 'camera']
+          sizeType: ["original", "compressed"],
+          sourceType: ["album", "camera"]
         });
-        console.log('选择的图片：', res);
+        console.log("选择的图片：", res);
       } catch (error) {
-        console.error('选择图片失败：', error);
+        console.error("选择图片失败：", error);
       }
     };
-    
+
     // 使用页面显示 hook
     useOnShow(() => {
-      console.log('页面显示');
+      console.log("页面显示");
     });
-    
+
     // 使用窗口大小 hook
     const { windowWidth, windowHeight } = useWindowSize();
-    
+
     return {
       chooseImage,
       windowWidth,
       windowHeight
     };
   }
-}
 };
 ```
 

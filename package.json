@@ -30,6 +30,11 @@
       "import": "./dist/hooks/index.js",
       "require": "./dist/hooks/index.js"
     },
+    "./interceptors": {
+      "types": "./dist/interceptors/index.d.ts",
+      "import": "./dist/interceptors/index.js",
+      "require": "./dist/interceptors/index.js"
+    },
     "./tools": {
       "types": "./dist/tools/index.d.ts",
       "import": "./dist/tools/index.js",

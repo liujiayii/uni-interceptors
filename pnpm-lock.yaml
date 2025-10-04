@@ -93,6 +93,12 @@ importers:
       '@dcloudio/uni-mp-weixin':
         specifier: 3.0.0-4070620250821001
         version: 3.0.0-4070620250821001(@vueuse/core@10.11.1(vue@3.5.22(typescript@5.9.3)))(postcss@8.5.6)(rollup@4.52.4)(vue@3.5.22(typescript@5.9.3))
+      '@uni-helper/uni-use':
+        specifier: ^0.19.15
+        version: 0.19.15(@vueuse/core@10.11.1(vue@3.5.22(typescript@5.9.3)))(postcss@8.5.6)(rollup@4.52.4)(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))
+      es-toolkit:
+        specifier: ^1.39.10
+        version: 1.39.10
       uni-interceptors:
         specifier: workspace:*
         version: link:..
@@ -115,9 +121,6 @@ importers:
       '@dcloudio/vite-plugin-uni':
         specifier: 3.0.0-4070620250821001
         version: 3.0.0-4070620250821001(@vueuse/core@10.11.1(vue@3.5.22(typescript@5.9.3)))(postcss@8.5.6)(rollup@4.52.4)(vite@5.2.8(@types/node@22.18.8)(terser@5.44.0))(vue@3.5.22(typescript@5.9.3))
-      '@uni-helper/uni-use':
-        specifier: ^0.19.15
-        version: 0.19.15(@vueuse/core@10.11.1(vue@3.5.22(typescript@5.9.3)))(postcss@8.5.6)(rollup@4.52.4)(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))
       '@unocss/eslint-plugin':
         specifier: ^66.5.2
         version: 66.5.2(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
@@ -127,9 +130,6 @@ importers:
       '@vue/tsconfig':
         specifier: ^0.8.1
         version: 0.8.1(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))
-      es-toolkit:
-        specifier: ^1.39.10
-        version: 1.39.10
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
