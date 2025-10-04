@@ -11,6 +11,9 @@ importers:
       '@uni-helper/uni-env':
         specifier: ^0.2.0
         version: 0.2.0
+      es-toolkit:
+        specifier: ^1.39.10
+        version: 1.39.10
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^5.4.1
@@ -30,9 +33,6 @@ importers:
       '@uni-helper/uni-use':
         specifier: ^0.19.15
         version: 0.19.15(@vueuse/core@10.11.1(vue@3.5.22(typescript@5.9.3)))(postcss@8.5.6)(rollup@4.52.4)(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))
-      es-toolkit:
-        specifier: ^1.39.10
-        version: 1.39.10
       eslint:
         specifier: ^9.37.0
         version: 9.37.0(jiti@2.6.1)
