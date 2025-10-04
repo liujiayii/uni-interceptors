@@ -5,7 +5,16 @@ declare global {
   /**
    * 小程序平台类型
    */
-  type MiniProgramPlatform = "mp-alipay" | "mp-weixin" | "mp-toutiao" | "mp-kuaishou" | "mp-jd" | "app" | "h5";
+  type MiniProgramPlatform
+    = | "mp-alipay"
+      | "mp-weixin"
+      | "mp-baidu"
+      | "mp-qq"
+      | "mp-toutiao"
+      | "mp-kuaishou"
+      | "mp-jd"
+      | "app"
+      | "h5";
 
   namespace NodeJS {
     interface ProcessEnv {

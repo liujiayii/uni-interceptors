@@ -153,41 +153,39 @@ applyPrototypeInterceptor();
 
 **使用示例：**
 
-```javascript
-// 作为 Vue 插件使用
-import { chooseLocationInterceptor } from "uni-interceptors";
+```typescript
+import {
+  // 直接调用函数使用
+  applyChooseLocationInterceptor,
+  // 在其他地方使用工具函数
+  checkAndRequestLocationAuth,
+  // 检查App端权限
+  checkSelfPermission,
+  // 作为 Vue 插件使用
+  chooseLocationInterceptor,
+  // 显示权限提示
+  showAuthTip,
+  // 引导用户手动开启权限
+  showManualAuth
+} from "uni-interceptors";
+
 import { createApp } from "vue";
 
 const app = createApp(App);
 app.use(chooseLocationInterceptor);
-
-// 直接调用函数使用
-import { applyChooseLocationInterceptor } from "uni-interceptors";
 applyChooseLocationInterceptor();
 
-// 在其他地方使用工具函数
-import { checkAndRequestLocationAuth, MiniProgramPlatform } from "uni-interceptors";
-
 // 检查微信小程序位置权限
-checkAndRequestLocationAuth('mp-weixin' as MiniProgramPlatform).then(granted => {
+checkAndRequestLocationAuth("mp-weixin" as MiniProgramPlatform).then((granted) => {
   if (granted) {
     // 已获得权限，可以调用位置相关API
   } else {
     // 未获得权限，需要处理
   }
 });
-
-// 检查App端权限
-import { checkSelfPermission } from "uni-interceptors";
-const hasPermission = checkSelfPermission('android.permission.ACCESS_FINE_LOCATION');
-
-// 显示权限提示
-import { showAuthTip } from "uni-interceptors";
-showAuthTip('位置权限', '需要位置权限以提供更好的服务');
-
-// 引导用户手动开启权限
-import { showManualAuth } from "uni-interceptors";
-showManualAuth('android.permission.ACCESS_FINE_LOCATION', '位置权限', '请在设置中开启位置权限');
+const hasPermission = checkSelfPermission("android.permission.ACCESS_FINE_LOCATION");
+showAuthTip("位置权限", "需要位置权限以提供更好的服务");
+showManualAuth("android.permission.ACCESS_FINE_LOCATION", "位置权限", "请在设置中开启位置权限");
 ```
 
 </details>
@@ -221,16 +219,18 @@ showManualAuth('android.permission.ACCESS_FINE_LOCATION', '位置权限', '请�
 **功能：** 检查并请求小程序位置权限
 
 **参数：**
+
 - `platform`: MiniProgramPlatform - 小程序平台类型
 
 **返回值：** `Promise<boolean>` - 是否获得授权
 
 **使用示例：**
-```javascript
+
+```typescript
 import { checkAndRequestLocationAuth, MiniProgramPlatform } from "uni-interceptors";
 
 // 检查微信小程序位置权限
-checkAndRequestLocationAuth('mp-weixin' as MiniProgramPlatform).then(granted => {
+checkAndRequestLocationAuth("mp-weixin" as MiniProgramPlatform).then((granted) => {
   if (granted) {
     // 已获得权限，可以调用位置相关API
   } else {
@@ -247,15 +247,17 @@ checkAndRequestLocationAuth('mp-weixin' as MiniProgramPlatform).then(granted => 
 **功能：** 检查App端是否拥有指定权限
 
 **参数：**
+
 - `permission`: string - 权限名称，如 'android.permission.ACCESS_FINE_LOCATION'
 
 **返回值：** `boolean` - 是否拥有权限
 
 **使用示例：**
+
 ```javascript
 import { checkSelfPermission } from "uni-interceptors";
 
-const hasLocationPermission = checkSelfPermission('android.permission.ACCESS_FINE_LOCATION');
+const hasLocationPermission = checkSelfPermission("android.permission.ACCESS_FINE_LOCATION");
 if (hasLocationPermission) {
   // 已拥有位置权限
 } else {
@@ -271,17 +273,19 @@ if (hasLocationPermission) {
 **功能：** 判断是否应该显示权限请求说明
 
 **参数：**
+
 - `permission`: string - 权限名称
 
 **返回值：** `boolean` - 是否应该显示权限请求说明
 
 **使用示例：**
+
 ```javascript
 import { shouldShowRequestPermissionRationale } from "uni-interceptors";
 
-if (shouldShowRequestPermissionRationale('android.permission.ACCESS_FINE_LOCATION')) {
+if (shouldShowRequestPermissionRationale("android.permission.ACCESS_FINE_LOCATION")) {
   // 应该显示权限请求说明
-  showAuthTip('位置权限', '需要位置权限以提供更好的服务');
+  showAuthTip("位置权限", "需要位置权限以提供更好的服务");
 }
 ```
 
@@ -295,14 +299,16 @@ if (shouldShowRequestPermissionRationale('android.permission.ACCESS_FINE_LOCATIO
 **功能：** 显示权限提示弹窗
 
 **参数：**
+
 - `title`: string - 弹窗标题
 - `content`: string - 弹窗内容
 
 **使用示例：**
+
 ```javascript
 import { showAuthTip } from "uni-interceptors";
 
-showAuthTip('位置权限', '需要位置权限以提供更好的服务');
+showAuthTip("位置权限", "需要位置权限以提供更好的服务");
 ```
 
 </details>
@@ -313,15 +319,17 @@ showAuthTip('位置权限', '需要位置权限以提供更好的服务');
 **功能：** 引导用户手动开启权限
 
 **参数：**
+
 - `permission`: string - 权限名称
 - `title`: string - 弹窗标题
 - `content`: string - 弹窗内容
 
 **使用示例：**
+
 ```javascript
 import { showManualAuth } from "uni-interceptors";
 
-showManualAuth('android.permission.ACCESS_FINE_LOCATION', '位置权限', '请在设置中开启位置权限');
+showManualAuth("android.permission.ACCESS_FINE_LOCATION", "位置权限", "请在设置中开启位置权限");
 ```
 
 </details>
@@ -334,15 +342,17 @@ showManualAuth('android.permission.ACCESS_FINE_LOCATION', '位置权限', '请�
 **功能：** 小程序平台类型
 
 **类型定义：**
+
 ```typescript
 type MiniProgramPlatform = "mp-alipay" | "mp-weixin" | "mp-toutiao" | "mp-kuaishou" | "mp-jd" | "app" | "h5";
 ```
 
 **使用示例：**
-```javascript
+
+```typescript
 import { MiniProgramPlatform } from "uni-interceptors";
 
-const platform: MiniProgramPlatform = 'mp-weixin';
+const platform: MiniProgramPlatform = "mp-weixin";
 ```
 
 </details>
@@ -353,6 +363,7 @@ const platform: MiniProgramPlatform = 'mp-weixin';
 **功能：** 权限类型枚举
 
 **使用示例：**
+
 ```javascript
 import { AuthType } from "uni-interceptors";
 
@@ -367,6 +378,7 @@ import { AuthType } from "uni-interceptors";
 **功能：** 权限提示信息集合
 
 **使用示例：**
+
 ```javascript
 import { authTips } from "uni-interceptors";
 
