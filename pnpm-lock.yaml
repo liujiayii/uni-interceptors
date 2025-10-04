@@ -66,6 +66,9 @@ importers:
 
   playground:
     dependencies:
+      '@dcloudio/uni-app':
+        specifier: 3.0.0-4070620250821001
+        version: 3.0.0-4070620250821001(@dcloudio/types@3.4.22)(@vueuse/core@10.11.1(vue@3.5.22(typescript@5.9.3)))(postcss@8.5.6)(rollup@4.52.4)(vue@3.5.22(typescript@5.9.3))
       '@dcloudio/uni-app-plus':
         specifier: 3.0.0-4070620250821001
         version: 3.0.0-4070620250821001(@vueuse/core@10.11.1(vue@3.5.22(typescript@5.9.3)))(postcss@8.5.6)(rollup@4.52.4)(vite@5.2.8(@types/node@22.18.8)(terser@5.44.0))(vue@3.5.22(typescript@5.9.3))
@@ -100,9 +103,6 @@ importers:
       '@dcloudio/types':
         specifier: ^3.4.22
         version: 3.4.22
-      '@dcloudio/uni-app':
-        specifier: 3.0.0-4070620250821001
-        version: 3.0.0-4070620250821001(@dcloudio/types@3.4.22)(@vueuse/core@10.11.1(vue@3.5.22(typescript@5.9.3)))(postcss@8.5.6)(rollup@4.52.4)(vue@3.5.22(typescript@5.9.3))
       '@dcloudio/uni-automator':
         specifier: 3.0.0-4070620250821001
         version: 3.0.0-4070620250821001(@vueuse/core@10.11.1(vue@3.5.22(typescript@5.9.3)))(jest-environment-node@27.5.1)(jest@27.0.4)(postcss@8.5.6)(rollup@4.52.4)(vue@3.5.22(typescript@5.9.3))

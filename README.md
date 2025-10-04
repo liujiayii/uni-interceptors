@@ -11,6 +11,7 @@
 - 需要实现全局功能如路由守卫、数据存储优化等
 - 希望简化常见业务逻辑的处理
 - 需要处理 App、小程序权限申请问题
+- 需要使用封装好的 hooks 简化开发流程
 
 ## 🚀 安装
 
@@ -43,6 +44,48 @@ import { applyPrototypeInterceptor } from "uni-interceptors";
 
 // 应用拦截器
 applyPrototypeInterceptor();
+```
+
+</details>
+
+<details>
+<summary>✅ 使用 Hooks</summary>
+
+```javascript
+import { useChooseImage, useOnShow, useWindowSize } from "uni-interceptors";
+
+// 在组件中使用
+export default {
+  async setup() {
+    // 使用图片选择 hook
+    const chooseImage = async () => {
+      try {
+        const res = await useChooseImage({
+          count: 1,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['album', 'camera']
+        });
+        console.log('选择的图片：', res);
+      } catch (error) {
+        console.error('选择图片失败：', error);
+      }
+    };
+    
+    // 使用页面显示 hook
+    useOnShow(() => {
+      console.log('页面显示');
+    });
+    
+    // 使用窗口大小 hook
+    const { windowWidth, windowHeight } = useWindowSize();
+    
+    return {
+      chooseImage,
+      windowWidth,
+      windowHeight
+    };
+  }
+};
 ```
 
 </details>
@@ -149,7 +192,7 @@ applyPrototypeInterceptor();
 - `shouldShowRequestPermissionRationale(permission: string)`：判断是否应该显示权限请求说明
 - `showAuthTip(title: string, content: string)`：显示权限提示弹窗
 - `showManualAuth(permission: string, title: string, content: string)`：引导用户手动开启权限
-- `MiniProgramPlatform`：小程序平台类型（'mp-alipay' | 'mp-weixin' | 'mp-toutiao' | 'mp-kuaishou' | 'mp-jd' | 'app' | 'h5'）
+- `MiniProgramPlatform`：小程序平台类型（'mp-alipay' | 'mp-weixin' | 'mp-baidu' | 'mp-qq' | 'mp-toutiao' | 'mp-kuaishou' | 'mp-jd' | 'app' | 'h5'）
 
 **使用示例：**
 
@@ -207,9 +250,155 @@ showManualAuth("android.permission.ACCESS_FINE_LOCATION", "位置权限", "请�
 
 </details>
 
+## 🪝 Hooks 列表
+
+<details>
+<summary>✅ useChooseImage Hook</summary>
+
+**功能：** 封装图片选择功能，处理不同平台的兼容性问题。
+
+**平台：** 全平台
+
+**参数：**
+
+- `count`: number - 最多可以选择的图片张数
+- `sizeType`: string[] - 所选的图片的尺寸，可选值：'original'（原图）、'compressed'（压缩图）
+- `sourceType`: string[] - 选择图片的来源，可选值：'album'（从相册选图）、'camera'（使用相机）
+- `extension`: string[] - 文件扩展名过滤
+
+**返回值：** `Promise<UniApp.ChooseImageSuccessCallbackResult>` - 图片选择结果
+
+**使用示例：**
+
+```typescript
+import { useChooseImage } from "uni-interceptors";
+
+// 在组件中使用
+export default {
+  async setup() {
+    const chooseImage = async () => {
+      try {
+        const res = await useChooseImage({
+          count: 1,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['album', 'camera']
+        });
+        console.log('选择的图片：', res.tempFilePaths);
+      } catch (error) {
+        console.error('选择图片失败：', error);
+      }
+    };
+    
+    return { chooseImage };
+  }
+};
+```
+
+**特性：**
+
+- 自动处理微信小程序的兼容性问题，在微信小程序中使用 `chooseMedia` 接口
+- 统一不同平台的返回结果格式
+- 支持文件扩展名过滤
+
+</details>
+
+<details>
+<summary>✅ useOnShow Hook</summary>
+
+**功能：** 监听页面显示事件，方便在页面显示时执行特定逻辑。
+
+**平台：** 全平台
+
+**参数：**
+
+- `callback`: () => void - 页面显示时的回调函数
+
+**使用示例：**
+
+```typescript
+import { useOnShow } from "uni-interceptors";
+
+// 在组件中使用
+export default {
+  setup() {
+    // 监听页面显示事件
+    useOnShow(() => {
+      console.log('页面显示');
+      // 可以在这里执行页面显示时的逻辑，如数据刷新等
+    });
+    
+    return {};
+  }
+};
+```
+
+**特性：**
+
+- 自动处理页面生命周期
+- 支持在组件中使用，无需手动管理事件监听和移除
+
+</details>
+
+<details>
+<summary>✅ useWindowSize Hook</summary>
+
+**功能：** 获取窗口尺寸信息，方便响应式布局。
+
+**平台：** 全平台
+
+**返回值：** `{ windowWidth: number, windowHeight: number }` - 窗口尺寸信息
+
+**使用示例：**
+
+```typescript
+import { useWindowSize } from "uni-interceptors";
+
+// 在组件中使用
+export default {
+  setup() {
+    // 获取窗口尺寸
+    const { windowWidth, windowHeight } = useWindowSize();
+    
+    return {
+      windowWidth,
+      windowHeight
+    };
+  }
+};
+```
+
+**特性：**
+
+- 自动响应窗口尺寸变化
+- 返回格式化的尺寸信息，方便直接使用
+
+</details>
+
 ## 🛠️ 工具函数
 
 项目提供了一系列可复用的工具函数，用于处理权限检查、请求和用户引导等功能。
+
+### 环境检测
+
+<details>
+<summary>isMpWeiXinWork</summary>
+
+**功能：** 检测当前环境是否为微信小程序企业版
+
+**类型：** `boolean`
+
+**使用示例：**
+
+```javascript
+import { isMpWeiXinWork } from "uni-interceptors";
+
+if (isMpWeiXinWork) {
+  // 在微信小程序企业版中的特殊处理
+  console.log("当前运行在微信小程序企业版");
+}
+```
+
+</details>
 
 ### 权限检查与请求
 
@@ -397,6 +586,8 @@ import { authTips } from "uni-interceptors";
 - 🔥 **位置权限处理**：全面处理 App 和小程序端的位置权限申请和引导
 - 🧩 **工具函数**：提供可复用的权限检查和请求工具函数
 - 🛠️ **丰富的工具集**：提供权限检查、请求、用户引导等全方位工具函数
+- 🪝 **实用 Hooks**：提供封装好的 hooks，简化常见功能的开发流程
+- 🌍 **环境检测**：提供环境检测功能，方便针对不同环境进行特殊处理
 
 ## ⚠️ 注意事项
 
@@ -426,11 +617,19 @@ import { authTips } from "uni-interceptors";
 
 ### 添加新的拦截器
 
-1. 在 `src` 目录下创建新的拦截器文件
+1. 在 `src/interceptors` 目录下创建新的拦截器文件
 2. 实现拦截器逻辑，确保支持多平台
 3. 在 `src/index.ts` 中导出您的拦截器
 4. 添加相应的测试用例
 5. 在 README.md 中添加拦截器文档
+
+### 添加新的 Hooks
+
+1. 在 `src/hooks` 目录下创建新的 hook 文件
+2. 实现 hook 逻辑，确保类型安全
+3. 在 `src/hooks/index.ts` 中导出您的 hook
+4. 添加相应的测试用例
+5. 在 README.md 的"Hooks 列表"章节中添加 hook 文档
 
 ### 添加新的工具函数
 
@@ -439,6 +638,14 @@ import { authTips } from "uni-interceptors";
 3. 在 `src/tools/index.ts` 中导出您的工具函数
 4. 添加相应的测试用例
 5. 在 README.md 的"工具函数"章节中添加函数文档
+
+### 添加新的环境检测功能
+
+1. 在 `src/env` 目录下创建新的环境检测文件
+2. 实现环境检测逻辑，确保类型安全
+3. 在 `src/env/index.ts` 中导出您的环境检测功能
+4. 添加相应的测试用例
+5. 在 README.md 的"环境检测"章节中添加功能文档
 
 ### 代码规范
 
