@@ -55,7 +55,7 @@
     "@antfu/eslint-config": "^5.4.1",
     "@dcloudio/types": "^3.4.21",
     "@types/node": "^22.18.8",
-    "@typescript-eslint/parser": "^8.44.1",
+    "@typescript-eslint/parser": "^8.45.0",
     "eslint": "^9.37.0",
     "eslint-plugin-format": "1.0.2",
     "husky": "^9.1.7",
