@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@uni-helper/uni-env':
-        specifier: ^0.1.8
-        version: 0.1.8
+        specifier: ^0.2.0
+        version: 0.2.0
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^5.4.1
@@ -2020,8 +2020,8 @@ packages:
     resolution: {integrity: sha512-576+u0QD+Jp3tZzvfRfxon0EA2lzcDt3lhUbsC6Lgzy9x2VR4E+JUiNyGHi5T8vk0TV+fpJ5GLG1JsJuWCaKhw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@uni-helper/uni-env@0.1.8':
-    resolution: {integrity: sha512-oZQisgM5sFarGrswKHJvS5S7xNMXLjcBcPTKp2gzLMon+chdHiKua1+Hlqe/NX79Re35W4A6/QHDrw9cZ5AVGQ==}
+  '@uni-helper/uni-env@0.2.0':
+    resolution: {integrity: sha512-uEtnVBJcqjhauJxbh4VTpU4GPV6FGIFZrKyIOG4jjWAXmAg2C4T2yVNGSUPcMXLmSJLxHZe3y8IsV9vgTbPmIA==}
 
   '@unocss-applet/preset-applet@0.11.0':
     resolution: {integrity: sha512-nIDwW2hgb+aNGGQHHgRomGiGSKEhLOwtuwisdWbEwqzTzfdgw1dW5wzKrmgp+S+i3UQwNq1LGBnDJU4p6SH4hQ==}
@@ -7997,7 +7997,7 @@ snapshots:
       '@typescript-eslint/types': 8.44.1
       eslint-visitor-keys: 4.2.1
 
-  '@uni-helper/uni-env@0.1.8':
+  '@uni-helper/uni-env@0.2.0':
     dependencies:
       std-env: 3.9.0
 
