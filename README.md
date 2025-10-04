@@ -176,7 +176,7 @@ app.use(chooseLocationInterceptor);
 applyChooseLocationInterceptor();
 
 // 检查微信小程序位置权限
-checkAndRequestLocationAuth("mp-weixin" as MiniProgramPlatform).then((granted) => {
+checkAndRequestLocationAuth("mp-weixin").then((granted) => {
   if (granted) {
     // 已获得权限，可以调用位置相关API
   } else {
@@ -230,7 +230,7 @@ showManualAuth("android.permission.ACCESS_FINE_LOCATION", "位置权限", "请�
 import { checkAndRequestLocationAuth, MiniProgramPlatform } from "uni-interceptors";
 
 // 检查微信小程序位置权限
-checkAndRequestLocationAuth("mp-weixin" as MiniProgramPlatform).then((granted) => {
+checkAndRequestLocationAuth("mp-weixin").then((granted) => {
   if (granted) {
     // 已获得权限，可以调用位置相关API
   } else {
@@ -408,7 +408,7 @@ import { authTips } from "uni-interceptors";
 - **小程序权限键**：微信、百度、头条、QQ小程序使用 `scope.userLocation`，支付宝小程序使用 `location`
 - **App配置**：在 App 端使用位置权限前，请确保已在 manifest.json 中正确配置相关权限
 - **iOS配置**：iOS 端需要在 Info.plist 中添加位置权限描述，否则应用会崩溃
-- **工具函数使用**：`checkAndRequestLocationAuth` 函数需要传入正确的平台参数，使用字符串字面量加类型断言的方式，如 `'mp-weixin' as MiniProgramPlatform`
+- **工具函数使用**：`checkAndRequestLocationAuth` 函数需要传入正确的平台参数，使用字符串字面量，如 `'mp-weixin'`
 - **平台类型**：MiniProgramPlatform 包含以下平台类型：'mp-alipay' | 'mp-weixin' | 'mp-toutiao' | 'mp-kuaishou' | 'mp-jd' | 'app' | 'h5'
 - **兼容性**：本拦截器已处理各平台兼容性问题，但建议在目标设备上进行充分测试
 
