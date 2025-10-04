@@ -1,6 +1,6 @@
-export { applyChooseLocationInterceptor, chooseLocationInterceptor } from "./chooseLocation";
-export { applyMakePhoneCallInterceptor, makePhoneCallInterceptor } from "./makePhoneCall";
-export { applyPrototypeInterceptor, prototypeInterceptor } from "./prototype";
-export { applyRouteInterceptor, checkLoginAndRedirect, RouteInterceptor, type RouteInterceptorOptions } from "./route";
-export { applySetClipboardDataAuthInterceptor, SetClipboardDataAuthInterceptor } from "./setClipboardData";
-export { applyKuaiShouSetStorageProxyFixInterceptor, KuaiShouSetStorageProxyFixInterceptor } from "./setStorage";
+export { applyChooseLocationInterceptor, chooseLocationInterceptor } from "./interceptors/chooseLocation";
+export { applyMakePhoneCallInterceptor, makePhoneCallInterceptor } from "./interceptors/makePhoneCall";
+export { applyPrototypeInterceptor, prototypeInterceptor } from "./interceptors/prototype";
+export { applyRouteInterceptor, checkLoginAndRedirect, RouteInterceptor, type RouteInterceptorOptions } from "./interceptors/route";
+export { applySetClipboardDataAuthInterceptor, SetClipboardDataAuthInterceptor } from "./interceptors/setClipboardData";
+export { applyKuaiShouSetStorageProxyFixInterceptor, KuaiShouSetStorageProxyFixInterceptor } from "./interceptors/setStorage";

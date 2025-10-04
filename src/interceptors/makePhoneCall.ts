@@ -5,7 +5,7 @@ import {
   shouldShowRequestPermissionRationale,
   showAuthTip,
   showManualAuth,
-} from "./tools";
+} from "../tools";
 
 const makePhoneCall: UniNamespace.InterceptorOptions = {
   invoke(args) {
