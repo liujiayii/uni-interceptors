@@ -61,13 +61,18 @@ export function useChooseImage(opts: UniApp.ChooseImageOptions): Promise<UniApp.
 
 function normalizeChooseMediaRes(res: any): UniApp.ChooseImageSuccessCallbackResult {
   const tempFilePaths: string[] = res.tempFiles.map((item: any) => item.tempFilePath);
-  const tempFiles: UniApp.ChooseImageSuccessCallbackResult["tempFiles"] = res.tempFiles.map((item: any) => ({
-    path: item.tempFilePath,
-    size: item.size,
-    name: item.tempFilePath.substring(item.tempFilePath.lastIndexOf("/") + 1),
-    fileType: "image",
-    cloudPath: `${Date.now()}_${item.tempFilePath.substring(item.tempFilePath.lastIndexOf("."))}`,
-  }));
+  const timestamp = Date.now();
+  const tempFiles: UniApp.ChooseImageSuccessCallbackResult["tempFiles"] = res.tempFiles.map((item: any, index: number) => {
+    const dotIndex = item.tempFilePath.lastIndexOf(".");
+    const extension = dotIndex >= 0 ? item.tempFilePath.slice(dotIndex) : "";
+    return {
+      path: item.tempFilePath,
+      size: item.size,
+      name: item.tempFilePath.substring(item.tempFilePath.lastIndexOf("/") + 1),
+      fileType: "image",
+      cloudPath: `${timestamp}_${index}${extension}`,
+    };
+  });
 
   const result: UniApp.ChooseImageSuccessCallbackResult = {
     tempFilePaths,
