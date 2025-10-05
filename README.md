@@ -1,8 +1,8 @@
-# uni-interceptors 🛠️
+# uni-tools 🛠️
 
-> uniapp 拦截器工具箱
+> uniapp 工具库
 
-这个仓库提供了一套用于 uniapp 开发的通用拦截器，帮助解决平台兼容性问题和实现权限申请功能，让你的 uniapp 应用更加稳定和易维护。
+这个仓库提供了一套用于 uniapp 开发的通用工具库，包含拦截器、hooks、工具函数和环境检测等功能，帮助解决平台兼容性问题和实现权限申请功能，让你的 uniapp 应用更加稳定和易维护。
 
 ## 🎯 适用场景
 
@@ -12,11 +12,12 @@
 - 希望简化常见业务逻辑的处理
 - 需要处理 App、小程序权限申请问题
 - 需要使用封装好的 hooks 简化开发流程
+- 需要环境检测功能，针对不同环境进行特殊处理
 
 ## 🚀 安装
 
 ```bash
-pnpm install uni-interceptors
+pnpm install uni-tools
 ```
 
 ## 📖 使用方式
@@ -25,7 +26,7 @@ pnpm install uni-interceptors
 <summary>✅ 作为 Vue 插件使用</summary>
 
 ```javascript
-import { prototypeInterceptor } from "uni-interceptors";
+import { prototypeInterceptor } from "uni-tools";
 import { createApp } from "vue";
 
 const app = createApp(App);
@@ -40,7 +41,7 @@ app.use(prototypeInterceptor);
 <summary>✅ 直接调用函数使用</summary>
 
 ```javascript
-import { applyPrototypeInterceptor } from "uni-interceptors";
+import { applyPrototypeInterceptor } from "uni-tools";
 
 // 应用拦截器
 applyPrototypeInterceptor();
@@ -52,7 +53,7 @@ applyPrototypeInterceptor();
 <summary>✅ 使用 Hooks</summary>
 
 ```javascript
-import { useChooseImage, useOnShow, useWindowSize } from "uni-interceptors";
+import { useChooseImage, useOnShow, useWindowSize } from "uni-tools";
 
 // 在组件中使用
 export default {
@@ -86,6 +87,25 @@ export default {
     };
   }
 };
+```
+
+</details>
+
+<details>
+<summary>✅ 按模块导入</summary>
+
+```javascript
+// 按需导入环境检测功能
+import { isMpWeiXinWork } from "uni-tools/env";
+
+// 按需导入hooks
+import { useChooseImage } from "uni-tools/hooks";
+
+// 按需导入拦截器
+import { applyChooseLocationInterceptor } from "uni-tools/interceptors";
+
+// 按需导入工具函数
+import { checkSelfPermission } from "uni-tools/tools";
 ```
 
 </details>
@@ -210,7 +230,7 @@ import {
   showAuthTip,
   // 引导用户手动开启权限
   showManualAuth
-} from "uni-interceptors";
+} from "uni-tools";
 
 import { createApp } from "vue";
 
@@ -271,7 +291,7 @@ showManualAuth("android.permission.ACCESS_FINE_LOCATION", "位置权限", "请�
 **使用示例：**
 
 ```typescript
-import { useChooseImage } from "uni-interceptors";
+import { useChooseImage } from "uni-tools";
 
 // 在组件中使用
 export default {
@@ -316,7 +336,7 @@ export default {
 **使用示例：**
 
 ```typescript
-import { useOnShow } from "uni-interceptors";
+import { useOnShow } from "uni-tools";
 
 // 在组件中使用
 export default {
@@ -351,7 +371,7 @@ export default {
 **使用示例：**
 
 ```typescript
-import { useWindowSize } from "uni-interceptors";
+import { useWindowSize } from "uni-tools";
 
 // 在组件中使用
 export default {
@@ -390,7 +410,7 @@ export default {
 **使用示例：**
 
 ```javascript
-import { isMpWeiXinWork } from "uni-interceptors";
+import { isMpWeiXinWork } from "uni-tools";
 
 if (isMpWeiXinWork) {
   // 在微信小程序企业版中的特殊处理
@@ -416,7 +436,7 @@ if (isMpWeiXinWork) {
 **使用示例：**
 
 ```typescript
-import { checkAndRequestLocationAuth, MiniProgramPlatform } from "uni-interceptors";
+import { checkAndRequestLocationAuth } from "uni-tools";
 
 // 检查微信小程序位置权限
 checkAndRequestLocationAuth("mp-weixin").then((granted) => {
@@ -444,7 +464,7 @@ checkAndRequestLocationAuth("mp-weixin").then((granted) => {
 **使用示例：**
 
 ```javascript
-import { checkSelfPermission } from "uni-interceptors";
+import { checkSelfPermission } from "uni-tools";
 
 const hasLocationPermission = checkSelfPermission("android.permission.ACCESS_FINE_LOCATION");
 if (hasLocationPermission) {
@@ -470,7 +490,7 @@ if (hasLocationPermission) {
 **使用示例：**
 
 ```javascript
-import { shouldShowRequestPermissionRationale } from "uni-interceptors";
+import { shouldShowRequestPermissionRationale } from "uni-tools";
 
 if (shouldShowRequestPermissionRationale("android.permission.ACCESS_FINE_LOCATION")) {
   // 应该显示权限请求说明
@@ -495,7 +515,7 @@ if (shouldShowRequestPermissionRationale("android.permission.ACCESS_FINE_LOCATIO
 **使用示例：**
 
 ```javascript
-import { showAuthTip } from "uni-interceptors";
+import { showAuthTip } from "uni-tools";
 
 showAuthTip("位置权限", "需要位置权限以提供更好的服务");
 ```
@@ -516,9 +536,33 @@ showAuthTip("位置权限", "需要位置权限以提供更好的服务");
 **使用示例：**
 
 ```javascript
-import { showManualAuth } from "uni-interceptors";
+import { showManualAuth } from "uni-tools";
 
 showManualAuth("android.permission.ACCESS_FINE_LOCATION", "位置权限", "请在设置中开启位置权限");
+```
+
+</details>
+
+### 通用工具
+
+<details>
+<summary>cloneDeep(value: any)</summary>
+
+**功能：** 深度克隆对象
+
+**参数：**
+
+- `value`: any - 需要克隆的对象
+
+**返回值：** `any` - 克隆后的对象
+
+**使用示例：**
+
+```javascript
+import { cloneDeep } from "uni-tools";
+
+const original = { a: 1, b: { c: 2 } };
+const cloned = cloneDeep(original);
 ```
 
 </details>
@@ -539,7 +583,7 @@ type MiniProgramPlatform = "mp-alipay" | "mp-weixin" | "mp-baidu" | "mp-qq" | "m
 **使用示例：**
 
 ```typescript
-import { MiniProgramPlatform } from "uni-interceptors";
+import { MiniProgramPlatform } from "uni-tools";
 
 const platform: MiniProgramPlatform = "mp-weixin";
 ```
@@ -554,7 +598,7 @@ const platform: MiniProgramPlatform = "mp-weixin";
 **使用示例：**
 
 ```javascript
-import { AuthType } from "uni-interceptors";
+import { AuthType } from "uni-tools";
 
 // 使用权限类型枚举
 ```
@@ -569,7 +613,7 @@ import { AuthType } from "uni-interceptors";
 **使用示例：**
 
 ```javascript
-import { authTips } from "uni-interceptors";
+import { authTips } from "uni-tools";
 
 // 使用权限提示信息
 ```
@@ -580,14 +624,15 @@ import { authTips } from "uni-interceptors";
 
 - 🔄 **多平台兼容** - 解决不同平台的兼容性问题
 - 🔧 **易于使用** - 支持 Vue 插件方式和直接调用两种使用方式
-- 📦 **按需引入** - 可以只引入需要的拦截器，减少包体积
+- 📦 **按需引入** - 可以只引入需要的模块，减少包体积
 - 🛡️ **类型安全** - 完整的 TypeScript 类型支持
-- 🎯 **功能聚焦** - 每个拦截器只解决特定问题，保持代码简洁
+- 🎯 **功能聚焦** - 每个模块只解决特定问题，保持代码简洁
 - 🔥 **位置权限处理**：全面处理 App 和小程序端的位置权限申请和引导
 - 🧩 **工具函数**：提供可复用的权限检查和请求工具函数
 - 🛠️ **丰富的工具集**：提供权限检查、请求、用户引导等全方位工具函数
 - 🪝 **实用 Hooks**：提供封装好的 hooks，简化常见功能的开发流程
 - 🌍 **环境检测**：提供环境检测功能，方便针对不同环境进行特殊处理
+- 📦 **模块化设计**：支持按模块导入，减少不必要的代码引入
 
 ## ⚠️ 注意事项
 
@@ -602,6 +647,7 @@ import { authTips } from "uni-interceptors";
 - **工具函数使用**：`checkAndRequestLocationAuth` 函数需要传入正确的平台参数，使用字符串字面量，如 `'mp-weixin'`
 - **平台类型**：MiniProgramPlatform 包含以下平台类型：'mp-alipay' | 'mp-weixin' | 'mp-toutiao' | 'mp-kuaishou' | 'mp-jd' | 'app' | 'h5'
 - **兼容性**：本拦截器已处理各平台兼容性问题，但建议在目标设备上进行充分测试
+- **按模块导入**：使用 `import { xxx } from "uni-tools/xxx"` 的方式可以只导入特定模块，减少包体积
 
 ## 🤝 贡献
 
@@ -619,33 +665,37 @@ import { authTips } from "uni-interceptors";
 
 1. 在 `src/interceptors` 目录下创建新的拦截器文件
 2. 实现拦截器逻辑，确保支持多平台
-3. 在 `src/index.ts` 中导出您的拦截器
-4. 添加相应的测试用例
-5. 在 README.md 中添加拦截器文档
+3. 在 `src/interceptors/index.ts` 中导出您的拦截器
+4. 在 `src/index.ts` 中添加导出
+5. 添加相应的测试用例
+6. 在 README.md 中添加拦截器文档
 
 ### 添加新的 Hooks
 
 1. 在 `src/hooks` 目录下创建新的 hook 文件
 2. 实现 hook 逻辑，确保类型安全
 3. 在 `src/hooks/index.ts` 中导出您的 hook
-4. 添加相应的测试用例
-5. 在 README.md 的"Hooks 列表"章节中添加 hook 文档
+4. 在 `src/index.ts` 中添加导出
+5. 添加相应的测试用例
+6. 在 README.md 的"Hooks 列表"章节中添加 hook 文档
 
 ### 添加新的工具函数
 
 1. 在 `src/tools` 目录下创建新的工具函数文件
 2. 实现工具函数逻辑，确保类型安全
 3. 在 `src/tools/index.ts` 中导出您的工具函数
-4. 添加相应的测试用例
-5. 在 README.md 的"工具函数"章节中添加函数文档
+4. 在 `src/index.ts` 中添加导出
+5. 添加相应的测试用例
+6. 在 README.md 的"工具函数"章节中添加函数文档
 
 ### 添加新的环境检测功能
 
 1. 在 `src/env` 目录下创建新的环境检测文件
 2. 实现环境检测逻辑，确保类型安全
 3. 在 `src/env/index.ts` 中导出您的环境检测功能
-4. 添加相应的测试用例
-5. 在 README.md 的"环境检测"章节中添加功能文档
+4. 在 `src/index.ts` 中添加导出
+5. 添加相应的测试用例
+6. 在 README.md 的"环境检测"章节中添加功能文档
 
 ### 代码规范
 
