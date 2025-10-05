@@ -17,9 +17,9 @@ export function useChooseImage(opts: UniApp.ChooseImageOptions): Promise<UniApp.
     };
     const chooseMediaOptions: ChooseMediaOptions = {
       count,
-      sizeType: Array.isArray(sizeType)
+      sizeType: Array.isArray(sizeType) && sizeType.length > 0
         ? sizeType
-        : [sizeType].filter(Boolean) as string[],
+        : ["original", "compressed"],
 const chooseMediaOptions: ChooseMediaOptions = {
   count,
   sizeType: Array.isArray(sizeType)
