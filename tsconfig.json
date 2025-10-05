@@ -18,5 +18,5 @@
     "verbatimModuleSyntax": true,
     "skipLibCheck": true
   },
-  "include": ["src", "typings/index.d.ts"]
+  "include": ["src", "src/typings/index.d.ts"]
 }

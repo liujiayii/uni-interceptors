@@ -1,18 +1,18 @@
 {
-  "name": "uni-interceptors",
+  "name": "uni-tools",
   "type": "module",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "packageManager": "pnpm@10.18.0",
-  "description": "uni interceptors,uni app 拦截器",
+  "description": "uni tools,uni app 工具库",
   "author": "liujiayii <liujiayii@foxmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/liujiayii/uni-interceptors",
+  "homepage": "https://github.com/liujiayii/uni-tools",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/liujiayii/uni-interceptors.git"
+    "url": "git+https://github.com/liujiayii/uni-tools.git"
   },
   "bugs": {
-    "url": "https://github.com/liujiayii/uni-interceptors/issues"
+    "url": "https://github.com/liujiayii/uni-tools/issues"
   },
   "exports": {
     ".": {
