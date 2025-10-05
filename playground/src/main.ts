@@ -1,10 +1,10 @@
-import type { RouteInterceptorOptions } from "uni-interceptors";
+import type { RouteInterceptorOptions } from "uni-toolkit";
 import {
   KuaiShouSetStorageProxyFixInterceptor,
   makePhoneCallInterceptor,
   RouteInterceptor,
   SetClipboardDataAuthInterceptor,
-} from "uni-interceptors";
+} from "uni-toolkit";
 import { createSSRApp } from "vue";
 import { isLogged, loginRoute, needLoginPages } from "@/interceptor/route";
 import App from "./App.vue";

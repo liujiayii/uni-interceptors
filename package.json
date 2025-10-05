@@ -1,18 +1,18 @@
 {
-  "name": "uni-tools",
+  "name": "uni-toolkit",
   "type": "module",
   "version": "0.1.0",
   "packageManager": "pnpm@10.18.0",
   "description": "uni tools,uni app 工具库",
   "author": "liujiayii <liujiayii@foxmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/liujiayii/uni-tools",
+  "homepage": "https://github.com/liujiayii/uni-toolkit",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/liujiayii/uni-tools.git"
+    "url": "git+https://github.com/liujiayii/uni-toolkit.git"
   },
   "bugs": {
-    "url": "https://github.com/liujiayii/uni-tools/issues"
+    "url": "https://github.com/liujiayii/uni-toolkit/issues"
   },
   "exports": {
     ".": {

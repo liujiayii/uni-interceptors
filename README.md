@@ -1,4 +1,4 @@
-# uni-tools 🛠️
+# uni-toolkit 🛠️
 
 > uniapp 工具库
 
@@ -17,7 +17,7 @@
 ## 🚀 安装
 
 ```bash
-pnpm install uni-tools
+pnpm install uni-toolkit
 ```
 
 ## 📖 使用方式
@@ -26,7 +26,7 @@ pnpm install uni-tools
 <summary>✅ 作为 Vue 插件使用</summary>
 
 ```javascript
-import { prototypeInterceptor } from "uni-tools";
+import { prototypeInterceptor } from "uni-toolkit";
 import { createApp } from "vue";
 
 const app = createApp(App);
@@ -41,7 +41,7 @@ app.use(prototypeInterceptor);
 <summary>✅ 直接调用函数使用</summary>
 
 ```javascript
-import { applyPrototypeInterceptor } from "uni-tools";
+import { applyPrototypeInterceptor } from "uni-toolkit";
 
 // 应用拦截器
 applyPrototypeInterceptor();
@@ -53,7 +53,7 @@ applyPrototypeInterceptor();
 <summary>✅ 使用 Hooks</summary>
 
 ```javascript
-import { useChooseImage, useOnShow, useWindowSize } from "uni-tools";
+import { useChooseImage, useOnShow, useWindowSize } from "uni-toolkit";
 
 // 在组件中使用
 export default {
@@ -96,16 +96,16 @@ export default {
 
 ```javascript
 // 按需导入环境检测功能
-import { isMpWeiXinWork } from "uni-tools/env";
+import { isMpWeiXinWork } from "uni-toolkit/env";
 
 // 按需导入hooks
-import { useChooseImage } from "uni-tools/hooks";
+import { useChooseImage } from "uni-toolkit/hooks";
 
 // 按需导入拦截器
-import { applyChooseLocationInterceptor } from "uni-tools/interceptors";
+import { applyChooseLocationInterceptor } from "uni-toolkit/interceptors";
 
 // 按需导入工具函数
-import { checkSelfPermission } from "uni-tools/tools";
+import { checkSelfPermission } from "uni-toolkit/tools";
 ```
 
 </details>
@@ -230,7 +230,7 @@ import {
   showAuthTip,
   // 引导用户手动开启权限
   showManualAuth
-} from "uni-tools";
+} from "uni-toolkit";
 
 import { createApp } from "vue";
 
@@ -291,7 +291,7 @@ showManualAuth("android.permission.ACCESS_FINE_LOCATION", "位置权限", "请�
 **使用示例：**
 
 ```typescript
-import { useChooseImage } from "uni-tools";
+import { useChooseImage } from "uni-toolkit";
 
 // 在组件中使用
 export default {
@@ -336,7 +336,7 @@ export default {
 **使用示例：**
 
 ```typescript
-import { useOnShow } from "uni-tools";
+import { useOnShow } from "uni-toolkit";
 
 // 在组件中使用
 export default {
@@ -371,7 +371,7 @@ export default {
 **使用示例：**
 
 ```typescript
-import { useWindowSize } from "uni-tools";
+import { useWindowSize } from "uni-toolkit";
 
 // 在组件中使用
 export default {
@@ -410,7 +410,7 @@ export default {
 **使用示例：**
 
 ```javascript
-import { isMpWeiXinWork } from "uni-tools";
+import { isMpWeiXinWork } from "uni-toolkit";
 
 if (isMpWeiXinWork) {
   // 在微信小程序企业版中的特殊处理
@@ -436,7 +436,7 @@ if (isMpWeiXinWork) {
 **使用示例：**
 
 ```typescript
-import { checkAndRequestLocationAuth } from "uni-tools";
+import { checkAndRequestLocationAuth } from "uni-toolkit";
 
 // 检查微信小程序位置权限
 checkAndRequestLocationAuth("mp-weixin").then((granted) => {
@@ -464,7 +464,7 @@ checkAndRequestLocationAuth("mp-weixin").then((granted) => {
 **使用示例：**
 
 ```javascript
-import { checkSelfPermission } from "uni-tools";
+import { checkSelfPermission } from "uni-toolkit";
 
 const hasLocationPermission = checkSelfPermission("android.permission.ACCESS_FINE_LOCATION");
 if (hasLocationPermission) {
@@ -490,7 +490,7 @@ if (hasLocationPermission) {
 **使用示例：**
 
 ```javascript
-import { shouldShowRequestPermissionRationale } from "uni-tools";
+import { shouldShowRequestPermissionRationale } from "uni-toolkit";
 
 if (shouldShowRequestPermissionRationale("android.permission.ACCESS_FINE_LOCATION")) {
   // 应该显示权限请求说明
@@ -515,7 +515,7 @@ if (shouldShowRequestPermissionRationale("android.permission.ACCESS_FINE_LOCATIO
 **使用示例：**
 
 ```javascript
-import { showAuthTip } from "uni-tools";
+import { showAuthTip } from "uni-toolkit";
 
 showAuthTip("位置权限", "需要位置权限以提供更好的服务");
 ```
@@ -536,7 +536,7 @@ showAuthTip("位置权限", "需要位置权限以提供更好的服务");
 **使用示例：**
 
 ```javascript
-import { showManualAuth } from "uni-tools";
+import { showManualAuth } from "uni-toolkit";
 
 showManualAuth("android.permission.ACCESS_FINE_LOCATION", "位置权限", "请在设置中开启位置权限");
 ```
@@ -559,7 +559,7 @@ showManualAuth("android.permission.ACCESS_FINE_LOCATION", "位置权限", "请�
 **使用示例：**
 
 ```javascript
-import { cloneDeep } from "uni-tools";
+import { cloneDeep } from "uni-toolkit";
 
 const original = { a: 1, b: { c: 2 } };
 const cloned = cloneDeep(original);
@@ -583,7 +583,7 @@ type MiniProgramPlatform = "mp-alipay" | "mp-weixin" | "mp-baidu" | "mp-qq" | "m
 **使用示例：**
 
 ```typescript
-import { MiniProgramPlatform } from "uni-tools";
+import { MiniProgramPlatform } from "uni-toolkit";
 
 const platform: MiniProgramPlatform = "mp-weixin";
 ```
@@ -598,7 +598,7 @@ const platform: MiniProgramPlatform = "mp-weixin";
 **使用示例：**
 
 ```javascript
-import { AuthType } from "uni-tools";
+import { AuthType } from "uni-toolkit";
 
 // 使用权限类型枚举
 ```
@@ -613,7 +613,7 @@ import { AuthType } from "uni-tools";
 **使用示例：**
 
 ```javascript
-import { authTips } from "uni-tools";
+import { authTips } from "uni-toolkit";
 
 // 使用权限提示信息
 ```
@@ -647,7 +647,7 @@ import { authTips } from "uni-tools";
 - **工具函数使用**：`checkAndRequestLocationAuth` 函数需要传入正确的平台参数，使用字符串字面量，如 `'mp-weixin'`
 - **平台类型**：MiniProgramPlatform 包含以下平台类型：'mp-alipay' | 'mp-weixin' | 'mp-toutiao' | 'mp-kuaishou' | 'mp-jd' | 'app' | 'h5'
 - **兼容性**：本拦截器已处理各平台兼容性问题，但建议在目标设备上进行充分测试
-- **按模块导入**：使用 `import { xxx } from "uni-tools/xxx"` 的方式可以只导入特定模块，减少包体积
+- **按模块导入**：使用 `import { xxx } from "uni-toolkit/xxx"` 的方式可以只导入特定模块，减少包体积
 
 ## 🤝 贡献
 

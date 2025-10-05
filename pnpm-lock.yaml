@@ -99,7 +99,7 @@ importers:
       es-toolkit:
         specifier: ^1.39.10
         version: 1.39.10
-      uni-interceptors:
+      uni-toolkit:
         specifier: workspace:*
         version: link:..
       vue:
