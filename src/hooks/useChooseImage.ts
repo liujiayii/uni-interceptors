@@ -95,6 +95,10 @@ function normalizeChooseAndUploadFileRes(res: UniApp.ChooseImageSuccessCallbackR
   // 创建一个新的对象，避免直接修改输入参数
   const result: UniApp.ChooseImageSuccessCallbackResult = {
     tempFilePaths: res.tempFilePaths || tempFilesArray.map((file: any) => file.path),
+  // capture one timestamp before mapping to ensure unique, consistent cloudPath
+  const timestamp = Date.now();
+  const result: UniApp.ChooseImageSuccessCallbackResult = {
+    tempFilePaths: res.tempFilePaths || tempFilesArray.map((file: any) => file.path),
     tempFiles: tempFilesArray.map((item: any, index: number) => {
       const name = item.name || item.path.substring(item.path.lastIndexOf("/") + 1);
       return {
@@ -102,8 +106,10 @@ function normalizeChooseAndUploadFileRes(res: UniApp.ChooseImageSuccessCallbackR
         size: item.size,
         name,
         fileType: fileType || item.fileType,
-        cloudPath: item.cloudPath || `${Date.now()}_${index}${name.substring(name.lastIndexOf("."))}`,
+        cloudPath: item.cloudPath || `${timestamp}_${index}${name.substring(name.lastIndexOf("."))}`,
       };
+    }),
+  };
     }),
   };
   return result;
