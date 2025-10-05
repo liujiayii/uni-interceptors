@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { SetClipboardDataAuthInterceptor } from "../src/setClipboardData";
-import { KuaiShouSetStorageProxyFixInterceptor } from "../src/setStorage";
+import { KuaiShouSetStorageProxyFixInterceptor, SetClipboardDataAuthInterceptor } from "../src/interceptors";
 
 describe("interceptors", () => {
   it("should export SetClipboardDataAuthInterceptor", () => {
