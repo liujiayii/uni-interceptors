@@ -1,7 +1,7 @@
 {
   "name": "uni-tools",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "packageManager": "pnpm@10.18.0",
   "description": "uni tools,uni app 工具库",
   "author": "liujiayii <liujiayii@foxmail.com>",
