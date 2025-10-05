@@ -8,9 +8,9 @@ import { ref } from "vue";
  */
 export function useWindowSize(): Ref<{ width: number; height: number; rate: number }> {
   const result = ref({
-    width: 0,
-    height: 0,
-    rate: 0,
+    width: 750,
+    height: 1334,
+    rate: 2,
   });
   function update(): void {
     const res = uni.getSystemInfoSync();

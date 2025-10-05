@@ -20,14 +20,8 @@ export function useChooseImage(opts: UniApp.ChooseImageOptions): Promise<UniApp.
       sizeType: Array.isArray(sizeType) && sizeType.length > 0
         ? sizeType
         : ["original", "compressed"],
-const chooseMediaOptions: ChooseMediaOptions = {
-  count,
-  sizeType: Array.isArray(sizeType)
-    ? sizeType
-    : [sizeType].filter(Boolean) as string[],
-  sourceType: (Array.isArray(sourceType) ? sourceType : undefined) as ("album" | "camera")[] | undefined,
-  mediaType: ["image"],
-};
+
+      sourceType: (Array.isArray(sourceType) ? sourceType : undefined) as ("album" | "camera")[] | undefined,
       mediaType: ["image"],
     };
 
@@ -95,11 +89,9 @@ function normalizeChooseAndUploadFileRes(res: UniApp.ChooseImageSuccessCallbackR
   // 创建一个新的对象，避免直接修改输入参数
   const result: UniApp.ChooseImageSuccessCallbackResult = {
     tempFilePaths: res.tempFilePaths || tempFilesArray.map((file: any) => file.path),
-  // capture one timestamp before mapping to ensure unique, consistent cloudPath
-  const timestamp = Date.now();
-  const result: UniApp.ChooseImageSuccessCallbackResult = {
-    tempFilePaths: res.tempFilePaths || tempFilesArray.map((file: any) => file.path),
     tempFiles: tempFilesArray.map((item: any, index: number) => {
+      // capture one timestamp before mapping to ensure unique, consistent cloudPath
+      const timestamp = Date.now();
       const name = item.name || item.path.substring(item.path.lastIndexOf("/") + 1);
       return {
         path: item.path,
@@ -108,8 +100,6 @@ function normalizeChooseAndUploadFileRes(res: UniApp.ChooseImageSuccessCallbackR
         fileType: fileType || item.fileType,
         cloudPath: item.cloudPath || `${timestamp}_${index}${name.substring(name.lastIndexOf("."))}`,
       };
-    }),
-  };
     }),
   };
   return result;
