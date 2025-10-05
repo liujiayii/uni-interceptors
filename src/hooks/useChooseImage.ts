@@ -20,7 +20,14 @@ export function useChooseImage(opts: UniApp.ChooseImageOptions): Promise<UniApp.
       sizeType: Array.isArray(sizeType)
         ? sizeType
         : [sizeType].filter(Boolean) as string[],
-      sourceType: sourceType as ("album" | "camera")[],
+const chooseMediaOptions: ChooseMediaOptions = {
+  count,
+  sizeType: Array.isArray(sizeType)
+    ? sizeType
+    : [sizeType].filter(Boolean) as string[],
+  sourceType: (Array.isArray(sourceType) ? sourceType : undefined) as ("album" | "camera")[] | undefined,
+  mediaType: ["image"],
+};
       mediaType: ["image"],
     };
 
