@@ -16,12 +16,11 @@ const permissionKeyMapping: PermissionKeyMapping = {
   // 位置权限
   location: {
     authKey: () => {
+      let key = "scope.userLocation";
       // #ifdef MP-ALIPAY
-      return "location";
+      key = "location";
       // #endif
-      // #ifndef MP-ALIPAY
-      return "scope.userLocation";
-      // #endif
+      return key;
     },
     title: "位置权限获取失败",
     content: "请在设置中开启位置权限，以便使用位置相关功能",
@@ -29,12 +28,11 @@ const permissionKeyMapping: PermissionKeyMapping = {
   // 相机权限
   camera: {
     authKey: () => {
+      let key = "scope.camera";
       // #ifdef MP-ALIPAY
-      return "camera";
+      key = "camera";
       // #endif
-      // #ifndef MP-ALIPAY
-      return "scope.camera";
-      // #endif
+      return key;
     },
     title: "相机权限获取失败",
     content: "请在设置中开启相机权限，以便使用拍照功能",
@@ -42,12 +40,11 @@ const permissionKeyMapping: PermissionKeyMapping = {
   // 相册权限
   album: {
     authKey: () => {
+      let key = "scope.album";
       // #ifdef MP-ALIPAY
-      return "album";
+      key = "album";
       // #endif
-      // #ifndef MP-ALIPAY
-      return "scope.album";
-      // #endif
+      return key;
     },
     title: "相册权限获取失败",
     content: "请在设置中开启相册权限，以便使用图片选择功能",
