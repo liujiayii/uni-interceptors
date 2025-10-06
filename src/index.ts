@@ -10,13 +10,11 @@ export {
   applyChooseLocationInterceptor,
   applyKuaiShouSetStorageProxyFixInterceptor,
   applyMakePhoneCallInterceptor,
-  applyPrototypeInterceptor,
   applyRouteInterceptor,
   applySetClipboardDataAuthInterceptor,
   chooseLocationInterceptor,
   KuaiShouSetStorageProxyFixInterceptor,
   makePhoneCallInterceptor,
-  prototypeInterceptor,
   RouteInterceptor,
   SetClipboardDataAuthInterceptor,
 } from "./interceptors";
