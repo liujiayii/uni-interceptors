@@ -28,13 +28,27 @@ const permissionKeyMapping: PermissionKeyMapping = {
   },
   // 相机权限
   camera: {
-    authKey: "scope.camera",
+    authKey: () => {
+      // #ifdef MP-ALIPAY
+      return "camera";
+      // #endif
+      // #ifndef MP-ALIPAY
+      return "scope.camera";
+      // #endif
+    },
     title: "相机权限获取失败",
     content: "请在设置中开启相机权限，以便使用拍照功能",
   },
   // 相册权限
   album: {
-    authKey: "scope.writePhotosAlbum",
+    authKey: () => {
+      // #ifdef MP-ALIPAY
+      return "album";
+      // #endif
+      // #ifndef MP-ALIPAY
+      return "scope.album";
+      // #endif
+    },
     title: "相册权限获取失败",
     content: "请在设置中开启相册权限，以便使用图片选择功能",
   },
