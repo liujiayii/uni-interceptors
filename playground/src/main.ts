@@ -1,9 +1,9 @@
 import type { RouteInterceptorOptions } from "uni-toolkit";
 import {
-  KuaiShouSetStorageProxyFixInterceptor,
   makePhoneCallInterceptor,
   RouteInterceptor,
-  SetClipboardDataAuthInterceptor,
+  SetClipboardDataInterceptor,
+  StorageInterceptor,
 } from "uni-toolkit";
 import { createSSRApp } from "vue";
 import { isLogged, loginRoute, needLoginPages } from "@/interceptor/route";
@@ -16,10 +16,10 @@ export function createApp(): any {
   app.use<RouteInterceptorOptions>(RouteInterceptor, { loginRoute, isLogged, needLoginPages });
   app.use(makePhoneCallInterceptor);
   // #ifdef MP-KUAISHOU
-  app.use(KuaiShouSetStorageProxyFixInterceptor);
+  app.use(StorageInterceptor);
   // #endif
   // #ifdef MP-TOUTIAO
-  app.use(SetClipboardDataAuthInterceptor);
+  app.use(SetClipboardDataInterceptor);
   // #endif
   return {
     app,

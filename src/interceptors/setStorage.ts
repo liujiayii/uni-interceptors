@@ -1,6 +1,6 @@
 import type { Plugin } from "vue";
 
-const storageInvokeInterceptor: UniNamespace.InterceptorOptions = {
+const storageInterceptor: UniNamespace.InterceptorOptions = {
   invoke(args: { data: any }) {
     // #ifdef MP-KUAISHOU
     args.data = JSON.parse(JSON.stringify(args.data));
@@ -19,17 +19,17 @@ const storageInvokeInterceptor: UniNamespace.InterceptorOptions = {
  * 解决快手小程序setStorage不支持proxy对象的问题
  * - 相关链接: https://github.com/dcloudio/uni-app/issues/4182
  */
-export const KuaiShouSetStorageProxyFixInterceptor: Plugin = {
+export const StorageInterceptor: Plugin = {
   install() {
-    uni.addInterceptor("setStorage", storageInvokeInterceptor);
+    uni.addInterceptor("setStorage", storageInterceptor);
   },
 };
 
 /**
  * 直接应用快手小程序setStorage代理修复拦截器
- * 可以作为 Vue 插件使用: Vue.use(KuaiShouSetStorageProxyFixInterceptor)
- * 也可以直接调用: applyKuaiShouSetStorageProxyFixInterceptor()
+ * 可以作为 Vue 插件使用: Vue.use(StorageInterceptor)
+ * 也可以直接调用: applyStorageInterceptor()
  */
-export function applyKuaiShouSetStorageProxyFixInterceptor(): void {
-  KuaiShouSetStorageProxyFixInterceptor.install?.(null as any);
+export function applyStorageInterceptor(): void {
+  StorageInterceptor.install?.(null as any);
 }

@@ -1,14 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { KuaiShouSetStorageProxyFixInterceptor, SetClipboardDataAuthInterceptor } from "../src/interceptors";
+import { SetClipboardDataInterceptor, StorageInterceptor } from "../src/interceptors";
 
 describe("interceptors", () => {
-  it("should export SetClipboardDataAuthInterceptor", () => {
-    expect(SetClipboardDataAuthInterceptor).toBeDefined();
-    expect(SetClipboardDataAuthInterceptor.install).toBeTypeOf("function");
+  it("should export SetClipboardDataInterceptor", () => {
+    expect(SetClipboardDataInterceptor).toBeDefined();
+    expect(SetClipboardDataInterceptor.install).toBeTypeOf("function");
   });
 
-  it("should export KuaiShouSetStorageProxyFixInterceptor", () => {
-    expect(KuaiShouSetStorageProxyFixInterceptor).toBeDefined();
-    expect(KuaiShouSetStorageProxyFixInterceptor.install).toBeTypeOf("function");
+  it("should export StorageInterceptor", () => {
+    expect(StorageInterceptor).toBeDefined();
+    expect(StorageInterceptor.install).toBeTypeOf("function");
   });
 });

@@ -8,15 +8,15 @@ export {
 
 export {
   applyChooseLocationInterceptor,
-  applyKuaiShouSetStorageProxyFixInterceptor,
   applyMakePhoneCallInterceptor,
   applyRouteInterceptor,
-  applySetClipboardDataAuthInterceptor,
+  applySetClipboardDataInterceptor,
+  applyStorageInterceptor,
   chooseLocationInterceptor,
-  KuaiShouSetStorageProxyFixInterceptor,
   makePhoneCallInterceptor,
   RouteInterceptor,
-  SetClipboardDataAuthInterceptor,
+  SetClipboardDataInterceptor,
+  StorageInterceptor,
 } from "./interceptors";
 
 export { type RouteInterceptorOptions } from "./interceptors";
@@ -24,3 +24,5 @@ export { type RouteInterceptorOptions } from "./interceptors";
 export {
   cloneDeep,
 } from "./tools";
+
+export type { MiniProgramPlatform } from "./typings";
