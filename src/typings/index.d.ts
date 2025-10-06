@@ -1,20 +1,20 @@
 /// <reference types="@dcloudio/types" />
 
+/**
+ * 小程序平台类型
+ */
+export type MiniProgramPlatform
+  = | "mp-alipay"
+    | "mp-weixin"
+    | "mp-baidu"
+    | "mp-qq"
+    | "mp-toutiao"
+    | "mp-kuaishou"
+    | "mp-jd"
+    | "app"
+    | "h5";
 /* eslint-disable ts/consistent-type-definitions */
 declare global {
-  /**
-   * 小程序平台类型
-   */
-  type MiniProgramPlatform
-    = | "mp-alipay"
-      | "mp-weixin"
-      | "mp-baidu"
-      | "mp-qq"
-      | "mp-toutiao"
-      | "mp-kuaishou"
-      | "mp-jd"
-      | "app"
-      | "h5";
 
   namespace NodeJS {
     interface ProcessEnv {

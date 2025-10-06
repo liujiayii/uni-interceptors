@@ -1,6 +1,6 @@
 import type { Plugin } from "vue";
 
-const clipboardDataAuthInterceptor: UniNamespace.InterceptorOptions = {
+const clipboardDataInterceptor: UniNamespace.InterceptorOptions = {
   fail(error: any) {
     // #ifdef MP-TOUTIAO
     // 抖音小程序用户拒绝授权剪贴板权限
@@ -36,17 +36,17 @@ const clipboardDataAuthInterceptor: UniNamespace.InterceptorOptions = {
  * 处理抖音小程序剪贴板授权拦截器
  * 当用户拒绝授权时，引导用户去设置页面授权
  */
-export const SetClipboardDataAuthInterceptor: Plugin = {
+export const SetClipboardDataInterceptor: Plugin = {
   install() {
-    uni.addInterceptor("setClipboardData", clipboardDataAuthInterceptor);
+    uni.addInterceptor("setClipboardData", clipboardDataInterceptor);
   },
 };
 
 /**
- * 直接应用剪贴板数据授权拦截器
- * 可以作为 Vue 插件使用: Vue.use(SetClipboardDataAuthInterceptor)
- * 也可以直接调用: applySetClipboardDataAuthInterceptor()
+ * 直接应用剪贴板数据拦截器
+ * 可以作为 Vue 插件使用: Vue.use(SetClipboardDataInterceptor)
+ * 也可以直接调用: applySetClipboardDataInterceptor()
  */
-export function applySetClipboardDataAuthInterceptor(): void {
-  SetClipboardDataAuthInterceptor.install?.(null as any);
+export function applySetClipboardDataInterceptor(): void {
+  SetClipboardDataInterceptor.install?.(null as any);
 }
