@@ -1,9 +1,5 @@
 import type { Plugin } from "vue";
-import {
-  AuthType,
-  checkAndRequestLocationAuth,
-  showAuthTip,
-} from "../tools";
+import { AuthType, checkAndRequestLocationAuth, showAuthTip } from "../tools";
 
 const chooseLocation: UniNamespace.InterceptorOptions = {
   invoke(args) {
@@ -25,7 +21,7 @@ const chooseLocation: UniNamespace.InterceptorOptions = {
     // #ifdef MP-WEIXIN || MP-BAIDU || MP-TOUTIAO || MP-QQ || MP-JD || MP-KUAISHOU
     return new Promise((resolve, reject) => {
       // 使用封装的工具函数处理微信、百度、头条、QQ小程序位置权限
-      checkAndRequestLocationAuth("mp-weixin").then((granted) => {
+      checkAndRequestLocationAuth().then((granted) => {
         if (granted) {
           console.log(`位置权限授权结果:${granted}`);
           resolve(args);
@@ -40,7 +36,7 @@ const chooseLocation: UniNamespace.InterceptorOptions = {
     // #ifdef MP-ALIPAY
     return new Promise((resolve, reject) => {
       // 使用封装的工具函数处理支付宝小程序位置权限
-      checkAndRequestLocationAuth("mp-alipay").then((granted) => {
+      checkAndRequestLocationAuth().then((granted) => {
         if (granted) {
           console.log(`位置权限授权结果:${granted}`);
           resolve(args);

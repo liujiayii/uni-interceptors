@@ -20,15 +20,50 @@
 
 ## 权限检查与请求
 
-### checkAndRequestLocationAuth
+### checkAndRequestPermissions
 
-**功能：** 检查并请求小程序位置权限
+**功能：** 通用的权限检查与请求函数，支持检查和请求多种类型的权限，包括位置、相机和相册权限。
 
 #### 参数
 
-| 参数     | 类型                | 必填 | 说明           |
-| -------- | ------------------- | ---- | -------------- |
-| platform | MiniProgramPlatform | 是   | 小程序平台类型 |
+| 参数名          | 类型                | 必填 | 说明                                             |
+| --------------- | ------------------- | ---- | ------------------------------------------------ |
+| platform        | MiniProgramPlatform | 是   | 小程序平台类型                                   |
+| permissionTypes | string[]            | 是   | 权限类型数组，支持 'location'、'camera'、'album' |
+
+#### 返回值
+
+`Promise<boolean>` - 是否获得授权
+
+#### 使用示例
+
+```typescript
+import { checkAndRequestPermissions } from "uni-toolkit";
+
+// 检查位置权限
+const hasLocationPermission = await checkAndRequestPermissions("mp-weixin", ["location"]);
+
+// 检查相机权限
+const hasCameraPermission = await checkAndRequestPermissions("mp-weixin", ["camera"]);
+
+// 检查相册权限
+const hasAlbumPermission = await checkAndRequestPermissions("mp-weixin", ["album"]);
+
+// 同时检查相机和相册权限
+const hasImagePermissions = await checkAndRequestPermissions("mp-weixin", ["camera", "album"]);
+```
+
+#### 说明
+
+该函数是一个通用的权限检查与请求函数，支持多种权限类型。它会根据传入的权限类型数组，检查并请求相应的权限。函数返回一个Promise，解析为一个布尔值，表示是否获得了所有请求的权限。
+
+### checkAndRequestLocationAuth
+
+**功能：** 检查并请求小程序位置权限（支持所有小程序平台），是 checkAndRequestPermissions 的封装函数。
+
+#### 参数
+
+无参数
 
 #### 返回值
 
@@ -39,21 +74,51 @@
 ```typescript
 import { checkAndRequestLocationAuth } from "uni-toolkit";
 
-// 检查微信小程序位置权限
-checkAndRequestLocationAuth("mp-weixin").then((granted) => {
-  if (granted) {
-    // 已获得权限，可以调用位置相关API
-    console.log("位置权限已获得");
-  } else {
-    // 未获得权限，需要处理
-    console.log("位置权限未获得");
-  }
-});
+// 检查位置权限
+const hasPermission = await checkAndRequestLocationAuth("mp-weixin");
 ```
 
 #### 说明
 
-该函数用于检查并请求小程序平台的位置权限。它会先检查当前是否已经获得了位置权限，如果没有，则会尝试向用户请求权限。函数返回一个Promise，解析为一个布尔值，表示是否获得了权限。
+该函数用于检查并请求小程序平台的位置权限。它是 checkAndRequestPermissions 函数的封装，专门用于处理位置权限。函数返回一个Promise，解析为一个布尔值，表示是否获得了权限。
+
+### checkAndRequestImageAuth
+
+**功能：** 检查并请求小程序图片选择权限（支持所有小程序平台），是 checkAndRequestPermissions 的封装函数。
+
+#### 参数
+
+| 参数       | 类型     | 必填 | 说明                                     |
+| ---------- | -------- | ---- | ---------------------------------------- |
+| sourceType | string[] | 否   | 图片来源类型，默认为 ['album', 'camera'] |
+
+#### 返回值
+
+`Promise<boolean>` - 是否获得授权
+
+#### 使用示例
+
+```typescript
+import { checkAndRequestImageAuth } from "uni-toolkit";
+
+// 检查相册和相机权限
+const hasPermission = await checkAndRequestImageAuth("mp-weixin");
+
+// 仅检查相册权限
+const hasAlbumPermission = await checkAndRequestImageAuth("mp-weixin", ["album"]);
+
+// 仅检查相机权限
+const hasCameraPermission = await checkAndRequestImageAuth("mp-weixin", ["camera"]);
+```
+
+#### 说明
+
+该函数用于检查并请求小程序平台的图片选择权限。它是 checkAndRequestPermissions 函数的封装，专门用于处理图片选择相关的权限。根据 sourceType 参数，它会检查并请求相机权限和/或相册权限。函数返回一个Promise，解析为一个布尔值，表示是否获得了所需权限。
+
+sourceType 参数说明：
+
+- 'album' - 相册权限，用于从相册选择图片
+- 'camera' - 相机权限，用于拍照获取图片
 
 ### checkSelfPermission
 
