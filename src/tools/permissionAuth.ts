@@ -44,6 +44,10 @@ const permissionKeyMapping: PermissionKeyMapping = {
       // #ifdef MP-ALIPAY
       key = "album";
       // #endif
+      // #ifdef MP-WEIXIN
+      // 微信小程序选择图片不需要权限
+      key = "";
+      // #endif
       return key;
     },
     title: "相册权限获取失败",
@@ -84,6 +88,12 @@ export function checkAndRequestPermissions(permissionTypes: string[]): Promise<b
           const authKey = typeof permissionConfig.authKey === "function"
             ? permissionConfig.authKey()
             : permissionConfig.authKey;
+
+          // 微信小程序选择图片不需要相册权限，直接通过
+          if (permissionType === "album" && authKey === "") {
+            permissionResults[permissionType] = true;
+            continue;
+          }
 
           // 检查权限状态
           if (authSetting && authSetting[authKey as keyof UniApp.AuthSetting] === true) {
@@ -141,6 +151,11 @@ export function checkAndRequestPermissions(permissionTypes: string[]): Promise<b
                     const authKey = typeof permissionConfig.authKey === "function"
                       ? permissionConfig.authKey()
                       : permissionConfig.authKey;
+
+                    // 微信小程序选择图片不需要相册权限，直接通过
+                    if (permissionType === "album" && authKey === "") {
+                      continue;
+                    }
 
                     const granted = newAuthSetting && newAuthSetting[authKey] === true;
                     if (!granted) {
