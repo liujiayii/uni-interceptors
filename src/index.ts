@@ -11,13 +11,13 @@ export {
   applyMakePhoneCallInterceptor,
   applyRouteInterceptor,
   applySetClipboardDataInterceptor,
-  applyStorageInterceptor,
+  applySetStorageInterceptor,
   checkLoginAndRedirect,
   chooseLocationInterceptor,
   makePhoneCallInterceptor,
-  RouteInterceptor,
-  SetClipboardDataInterceptor,
-  StorageInterceptor,
+  routeInterceptor,
+  setClipboardDataInterceptor,
+  setStorageInterceptor,
 } from "./interceptors";
 
 export { type RouteInterceptorOptions } from "./interceptors";

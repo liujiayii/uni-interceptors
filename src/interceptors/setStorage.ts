@@ -19,7 +19,7 @@ const storageInterceptor: UniNamespace.InterceptorOptions = {
  * 解决快手小程序setStorage不支持proxy对象的问题
  * - 相关链接: https://github.com/dcloudio/uni-app/issues/4182
  */
-export const StorageInterceptor: Plugin = {
+export const setStorageInterceptor: Plugin = {
   install() {
     uni.addInterceptor("setStorage", storageInterceptor);
   },
@@ -27,9 +27,9 @@ export const StorageInterceptor: Plugin = {
 
 /**
  * 直接应用快手小程序setStorage代理修复拦截器
- * 可以作为 Vue 插件使用: Vue.use(StorageInterceptor)
- * 也可以直接调用: applyStorageInterceptor()
+ * 可以作为 Vue 插件使用: Vue.use(setStorageInterceptor)
+ * 也可以直接调用: applySetStorageInterceptor()
  */
-export function applyStorageInterceptor(): void {
-  StorageInterceptor.install?.(null as any);
+export function applySetStorageInterceptor(): void {
+  setStorageInterceptor.install?.(null as any);
 }

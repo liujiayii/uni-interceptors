@@ -79,7 +79,7 @@ const navigateToInterceptor: UniNamespace.InterceptorOptions = {
   },
 };
 
-export const RouteInterceptor: Plugin = {
+export const routeInterceptor: Plugin = {
   install(_app, options: RouteInterceptorOptions) {
     // 合并配置
     currentOptions = { ...defaultOptions, ...options };
@@ -93,9 +93,9 @@ export const RouteInterceptor: Plugin = {
 
 /**
  * 直接应用路由拦截器
- * 可以作为 Vue 插件使用: Vue.use(RouteInterceptor, options)
+ * 可以作为 Vue 插件使用: Vue.use(routeInterceptor, options)
  * 也可以直接调用: applyRouteInterceptor(options)
  */
 export function applyRouteInterceptor(options: RouteInterceptorOptions): void {
-  RouteInterceptor.install?.(null as any, options);
+  routeInterceptor.install?.(null as any, options);
 }
