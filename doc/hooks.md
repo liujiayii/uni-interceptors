@@ -6,7 +6,7 @@
 
 - [useChooseImage](#usechooseimage)
 - [useOnShow](#useonshow)
-- [useWindowSize](#usewindowsize)
+- [useDesignSize](#usedesignsize)
 
 ## useChooseImage
 
@@ -95,30 +95,31 @@ export default {
 - 自动处理页面生命周期
 - 支持在组件中使用，无需手动管理事件监听和移除
 
-## useWindowSize
+## useDesignSize
 
-**功能：** 获取窗口尺寸信息，方便响应式布局。
+**功能：** 获取设计尺寸信息，方便响应式布局。
 
 **平台：** 全平台
 
 ### 返回值
 
-`{ windowWidth: number, windowHeight: number }` - 窗口尺寸信息
+`{ width: number, height: number, rate: number }` - 设计尺寸信息，包含rpx转换比率
 
 ### 使用示例
 
 ```typescript
-import { useWindowSize } from "uni-toolkit";
+import { useDesignSize } from "uni-toolkit";
 
 // 在组件中使用
 export default {
   setup() {
-    // 获取窗口尺寸
-    const { windowWidth, windowHeight } = useWindowSize();
+    // 获取设计尺寸
+    const { width, height, rate } = useDesignSize();
 
     return {
-      windowWidth,
-      windowHeight
+      width,
+      height,
+      rate
     };
   }
 };
@@ -128,3 +129,4 @@ export default {
 
 - 自动响应窗口尺寸变化
 - 返回格式化的尺寸信息，方便直接使用
+- 提供rpx转换比率，便于不同设备间的尺寸转换
