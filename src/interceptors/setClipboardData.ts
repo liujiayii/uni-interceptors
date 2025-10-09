@@ -36,7 +36,7 @@ const clipboardDataInterceptor: UniNamespace.InterceptorOptions = {
  * 处理抖音小程序剪贴板授权拦截器
  * 当用户拒绝授权时，引导用户去设置页面授权
  */
-export const SetClipboardDataInterceptor: Plugin = {
+export const setClipboardDataInterceptor: Plugin = {
   install() {
     uni.addInterceptor("setClipboardData", clipboardDataInterceptor);
   },
@@ -44,9 +44,9 @@ export const SetClipboardDataInterceptor: Plugin = {
 
 /**
  * 直接应用剪贴板数据拦截器
- * 可以作为 Vue 插件使用: Vue.use(SetClipboardDataInterceptor)
+ * 可以作为 Vue 插件使用: Vue.use(setClipboardDataInterceptor)
  * 也可以直接调用: applySetClipboardDataInterceptor()
  */
 export function applySetClipboardDataInterceptor(): void {
-  SetClipboardDataInterceptor.install?.(null as any);
+  setClipboardDataInterceptor.install?.(null as any);
 }
