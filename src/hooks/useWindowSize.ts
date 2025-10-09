@@ -14,11 +14,13 @@ export function useWindowSize(): Ref<{ width: number; height: number; rate: numb
   });
   function update(): void {
     const res = uni.getSystemInfoSync();
+    const rate = 750 / res.windowWidth;
     result.value = {
-      width: res.windowWidth,
-      height: res.windowHeight,
-      rate: 750 / res.windowWidth,
+      width: 750,
+      height: Math.ceil(res.windowHeight * rate),
+      rate,
     };
+    console.log("useWindowSize", result.value);
   }
   onReady(() => {
     update();
