@@ -12,6 +12,7 @@ export {
   applyRouteInterceptor,
   applySetClipboardDataInterceptor,
   applyStorageInterceptor,
+  checkLoginAndRedirect,
   chooseLocationInterceptor,
   makePhoneCallInterceptor,
   RouteInterceptor,
