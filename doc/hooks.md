@@ -67,9 +67,23 @@ export default {
 
 ### 参数
 
-| 参数     | 类型       | 必填 | 说明                 |
-| -------- | ---------- | ---- | -------------------- |
-| callback | () => void | 是   | 页面显示时的回调函数 |
+| 参数     | 类型             | 必填 | 默认值 | 说明                       |
+| -------- | ---------------- | ---- | ------ | -------------------------- |
+| callback | () => void       | 是   | -      | 页面显示时的回调函数       |
+| options  | UseOnShowOptions | 否   | {}     | 配置选项，用于控制监听行为 |
+
+### UseOnShowOptions
+
+| 参数           | 类型    | 必填 | 默认值 | 说明                                                                                 |
+| -------------- | ------- | ---- | ------ | ------------------------------------------------------------------------------------ |
+| pageOnly       | boolean | 否   | true   | 是否只响应当前页面的onShow事件                                                       |
+| immediate      | boolean | 否   | false  | 是否在组件挂载后立即执行一次                                                         |
+| triggerHistory | boolean | 否   | true   | 是否在组件挂载后触发最近的历史事件（如果有），解决父组件onShow时子组件还未注册的问题 |
+| context        | any     | 否   | -      | 事件处理函数的执行上下文                                                             |
+
+### 返回值
+
+`{ trigger: () => void }` - 包含手动触发方法的对象
 
 ### 使用示例
 
@@ -79,13 +93,29 @@ import { useOnShow } from "uni-toolkit";
 // 在组件中使用
 export default {
   setup() {
-    // 监听页面显示事件
+    // 基本用法
     useOnShow(() => {
       console.log("页面显示");
       // 可以在这里执行页面显示时的逻辑，如数据刷新等
     });
 
-    return {};
+    // 使用选项
+    const { trigger } = useOnShow(() => {
+      console.log("页面显示或手动触发");
+      // 页面显示时的逻辑
+    }, {
+      pageOnly: true, // 只响应当前页面
+      immediate: true, // 立即执行一次
+      triggerHistory: true, // 触发历史事件
+      context: this // 指定执行上下文
+    });
+
+    // 手动触发
+    const manualTrigger = () => {
+      trigger();
+    };
+
+    return { manualTrigger };
   }
 };
 ```
@@ -94,6 +124,10 @@ export default {
 
 - 自动处理页面生命周期
 - 支持在组件中使用，无需手动管理事件监听和移除
+- 提供灵活的配置选项，控制监听行为
+- 支持手动触发回调函数
+- 自动处理上下文绑定
+- 支持历史事件触发，解决组件注册时机问题
 
 ## useDesignSize
 
