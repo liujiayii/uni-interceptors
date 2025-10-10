@@ -40,13 +40,14 @@ class EventBus {
   emit(event: string, ...args: any[]): void {
     console.log(`EventBus: Emitting event '${event}' with args:`, args);
 
-    if (!this.events[event])
-      return;
-
-    // 保存事件到历史记录
+    // 先保存历史，再通知监听器（即使当前无监听器也记录，供后续回放）
     this.saveToHistory(event, args);
 
-    this.events[event].forEach((handler) => {
+    const handlers = this.events[event];
+    if (!handlers || handlers.length === 0)
+      return;
+
+    handlers.forEach((handler) => {
       try {
         handler(...args);
       } catch (error) {

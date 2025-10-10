@@ -47,9 +47,11 @@ export function useOnShow(
   const wrappedHook = context ? hook.bind(context) : hook;
 
   // 事件处理函数
+  let historyTriggeredDuringRegister = false;
   const handlePageOnShow = (eventData: { pageId: string }): void => {
     console.log("handlePageOnShow called with eventData:", eventData, "component pageId:", pageId, "pageOnly:", pageOnly);
     if (!pageOnly || eventData.pageId === pageId) {
+      historyTriggeredDuringRegister = true; // 若为历史回放，将在注册阶段置位
       console.log("Executing useOnShow hook for component with pageId:", pageId);
       wrappedHook();
     }
@@ -59,8 +61,8 @@ export function useOnShow(
   console.log("Registering event listener for page:onShow with triggerHistory:", triggerHistory);
   eventBus.on("page:onShow", handlePageOnShow, triggerHistory);
 
-  // 如果immediate为true，立即执行一次
-  if (immediate) {
+  // 如果immediate为true，且未在历史回放中触发，立即执行一次
+  if (immediate && !historyTriggeredDuringRegister) {
     console.log("Executing useOnShow hook immediately due to immediate option");
     wrappedHook();
   }
