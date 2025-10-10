@@ -1,54 +1,78 @@
-import type { TryOnShowOptions } from "@uni-helper/uni-use";
-import { onShow } from "@dcloudio/uni-app";
-import { delay } from "es-toolkit";
-import { getCurrentInstance } from "vue";
+import { onUnmounted } from "vue";
+import { eventBus, getCurrentPageRoute } from "../tools";
 
-type OnShowParameters = Parameters<typeof onShow>;
+export type UseOnShowOptions = {
+  /**
+   * 是否只响应当前页面的onShow事件
+   * @default true
+   */
+  pageOnly?: boolean;
 
-/**
- * 尝试获取组件生命周期，并调用 onShow
- *
- * 超过重试次数，根据 runFinally 直接执行或抛出异常
- *
- * 复制自@uni-helper/uni-use的tryOnShow，由于在支付宝小程序第一次不执行的问题，所以复制出来了一份，相关issue：https://github.com/uni-helper/uni-use/issues/57
- */
-export async function useOnShow(
-  hook: OnShowParameters[0],
-  target?: OnShowParameters[1],
-  options: TryOnShowOptions = {},
-): Promise<void> {
+  /**
+   * 是否在组件挂载后立即执行一次
+   * @default false
+   */
+  immediate?: boolean;
+
+  /**
+   * 是否在组件挂载后触发最近的历史事件（如果有）
+   * 这可以解决父组件onShow时子组件还未注册的问题
+   * @default true
+   */
+  triggerHistory?: boolean;
+
+  /**
+   * 事件处理函数的执行上下文
+   */
+  context?: any;
+};
+
+export function useOnShow(
+  hook: () => void,
+  options: UseOnShowOptions = {},
+): { trigger: () => void } {
   const {
-    retry = 3,
-    interval = 500,
-    runFinally = true,
+    pageOnly = true,
+    immediate = false,
+    triggerHistory = true,
+    context,
   } = options;
 
-  function tryBind(): boolean {
-    const instance = (target || getCurrentInstance()) as OnShowParameters[1] | undefined;
-    if (instance) {
-      // #ifdef MP-ALIPAY
-      try {
-        hook?.();
-      } catch {
-        // ignore
-      }
-      // #endif
-      onShow(hook, instance);
-      return true;
+  // 获取当前页面的路由路径作为pageId
+  const pageId = getCurrentPageRoute();
+
+  console.log("useOnShow initialized with pageId:", pageId, "options:", options);
+
+  // 包装原始钩子函数，绑定上下文
+  const wrappedHook = context ? hook.bind(context) : hook;
+
+  // 事件处理函数
+  const handlePageOnShow = (eventData: { pageId: string }): void => {
+    console.log("handlePageOnShow called with eventData:", eventData, "component pageId:", pageId, "pageOnly:", pageOnly);
+    if (!pageOnly || eventData.pageId === pageId) {
+      console.log("Executing useOnShow hook for component with pageId:", pageId);
+      wrappedHook();
     }
+  };
 
-    return false;
-  }
-  for (let circle = 1; circle <= retry; circle++) {
-    if (tryBind()) {
-      return;
-    }
-    await delay(interval);
-  }
+  // 直接绑定事件监听
+  console.log("Registering event listener for page:onShow with triggerHistory:", triggerHistory);
+  eventBus.on("page:onShow", handlePageOnShow, triggerHistory);
 
-  if (runFinally) {
-    return onShow(hook);
+  // 如果immediate为true，立即执行一次
+  if (immediate) {
+    console.log("Executing useOnShow hook immediately due to immediate option");
+    wrappedHook();
   }
 
-  throw new Error("Binding onShow failed, maximum number of attempts exceeded.");
+  // 组件卸载时移除监听
+  onUnmounted(() => {
+    console.log("Removing event listener for useOnShow component with pageId:", pageId);
+    eventBus.off("page:onShow", handlePageOnShow);
+  });
+
+  return {
+    // 提供手动触发的方法
+    trigger: wrappedHook,
+  };
 }
