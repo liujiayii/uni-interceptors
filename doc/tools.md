@@ -13,6 +13,8 @@
   - [showManualAuth](#showmanualauth)
 - [通用工具](#通用工具)
   - [cloneDeep](#clonedeep)
+  - [getCurrentPageRoute](#getcurrentroute)
+  - [isPageLevelComponent](#ispagelevelcomponent)
 - [类型定义与常量](#类型定义与常量)
   - [MiniProgramPlatform](#miniprogramplatform)
   - [AuthType](#authtype)
@@ -263,6 +265,58 @@ console.log(cloned.b === original.b); // false
 #### 说明
 
 该函数用于深度克隆一个对象，返回一个与原对象完全相同但独立的新对象。深度克隆意味着不仅对象本身被复制，对象的所有嵌套属性也会被递归复制。这在需要修改对象但又不想影响原对象的场景中非常有用。
+
+### getCurrentPageRoute
+
+**功能：** 获取当前页面的路由路径
+
+#### 参数
+
+无参数
+
+#### 返回值
+
+`string` - 当前页面的路由路径，如果获取失败则返回空字符串
+
+#### 使用示例
+
+```javascript
+import { getCurrentPageRoute } from "uni-toolkit";
+
+const route = getCurrentPageRoute();
+console.log(route); // "pages/index/index"
+```
+
+#### 说明
+
+该函数用于获取当前页面的路由路径。它通过 `getCurrentPages()` API 获取页面栈，然后从栈顶的页面实例中提取路由信息。这个函数在需要根据当前页面路径执行不同逻辑的场景中非常有用。
+
+### isPageLevelComponent
+
+**功能：** 判断当前组件是否是页面级别
+
+#### 参数
+
+无参数
+
+#### 返回值
+
+`boolean` - 是否是页面级别
+
+#### 使用示例
+
+```javascript
+import { isPageLevelComponent } from "uni-toolkit";
+
+const isPage = isPageLevelComponent();
+console.log(isPage); // true 或 false
+```
+
+#### 说明
+
+该函数用于判断当前组件是否是页面级别。在 uni-app 中，页面和组件都是 .vue 文件，但它们的生命周期和使用方式有所不同。页面级别的组件会直接响应页面的生命周期事件（如 onShow），而普通组件则需要通过事件总线来监听这些事件。
+
+该函数通过检查组件实例的 `renderer` 属性是否为 "page" 来判断当前组件是否是页面级别。这个判断结果可以用于决定如何处理组件的生命周期事件。
 
 ## 类型定义与常量
 
