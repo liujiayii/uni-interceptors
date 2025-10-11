@@ -5,20 +5,22 @@
 ## 目录
 
 - [API 拦截器](#api-拦截器)
-  - [chooseImage 拦截器](#chooseimage-拦截器)
-  - [chooseLocation 拦截器](#chooselocation-拦截器)
-  - [makePhoneCall 拦截器](#makephonecall-拦截器)
-  - [route 拦截器](#route-拦截器)
-  - [setClipboardData 拦截器](#setclipboarddata-拦截器)
-  - [setStorage 拦截器](#setstorage-拦截器)
+  - [chooseImage 拦截器](#chooseimage-拦截器) - 图片选择增强，自动处理权限和兼容性
+  - [chooseLocation 拦截器](#chooselocation-拦截器) - 位置选择增强，自动处理权限和错误
+  - [makePhoneCall 拦截器](#makephonecall-拦截器) - 拨打电话增强，提供参数校验和权限处理
+  - [route 拦截器](#route-拦截器) - 路由增强，支持路由白名单和参数处理
+  - [setClipboardData 拦截器](#setclipboarddata-拦截器) - 剪贴板增强，提供兼容性处理
+  - [setStorage 拦截器](#setstorage-拦截器) - 存储增强，支持数据加密和过期时间
 
 ## API 拦截器
 
 ### chooseImage 拦截器
 
-**功能：** 拦截 uni.chooseImage API 调用，提供增强功能
+### 功能描述
 
-#### 平台支持
+拦截 uni.chooseImage API 调用，提供增强功能
+
+### 平台支持
 
 | 平台           | 支持情况 | 说明     |
 | -------------- | -------- | -------- |
@@ -32,7 +34,7 @@
 | 京东小程序     | ✅       | 支持拦截 |
 | App            | ✅       | 支持拦截 |
 
-#### 使用示例
+### 使用示例
 
 ```javascript
 // 直接使用 uni.chooseImage，拦截器会自动处理
@@ -42,14 +44,20 @@ uni.chooseImage({
   sourceType: ["album", "camera"], // 可以指定来源是相册还是相机，默认二者都有
   success(res) {
     console.log("选择图片成功", res.tempFilePaths);
+    // 处理选择的图片
+    const tempFilePaths = res.tempFilePaths;
+    // 可以进行上传或预览等操作
   },
   fail(err) {
     console.log("选择图片失败", err);
+  },
+  complete() {
+    console.log("选择图片操作完成");
   }
 });
 ```
 
-#### 说明
+### 增强功能
 
 该拦截器拦截 uni.chooseImage API 调用，提供以下增强功能：
 
@@ -62,9 +70,11 @@ uni.chooseImage({
 
 ### chooseLocation 拦截器
 
-**功能：** 拦截 uni.chooseLocation API 调用，提供增强功能
+### 功能描述
 
-#### 平台支持
+拦截 uni.chooseLocation API 调用，提供增强功能
+
+### 平台支持
 
 | 平台           | 支持情况 | 说明     |
 | -------------- | -------- | -------- |
@@ -78,7 +88,7 @@ uni.chooseImage({
 | 京东小程序     | ✅       | 支持拦截 |
 | App            | ✅       | 支持拦截 |
 
-#### 使用示例
+### 使用示例
 
 ```javascript
 // 直接使用 uni.chooseLocation，拦截器会自动处理
@@ -88,11 +98,26 @@ uni.chooseLocation({
     console.log(`详细地址：${res.address}`);
     console.log(`纬度：${res.latitude}`);
     console.log(`经度：${res.longitude}`);
+
+    // 可以进一步处理位置信息
+    const locationInfo = {
+      name: res.name,
+      address: res.address,
+      latitude: res.latitude,
+      longitude: res.longitude
+    };
+    // 存储或使用位置信息
+  },
+  fail(err) {
+    console.log("选择位置失败", err);
+  },
+  complete() {
+    console.log("选择位置操作完成");
   }
 });
 ```
 
-#### 说明
+### 增强功能
 
 该拦截器拦截 uni.chooseLocation API 调用，提供以下增强功能：
 
@@ -104,9 +129,11 @@ uni.chooseLocation({
 
 ### makePhoneCall 拦截器
 
-**功能：** 拦截 uni.makePhoneCall API 调用，提供增强功能
+### 功能描述
 
-#### 平台支持
+拦截 uni.makePhoneCall API 调用，提供增强功能
+
+### 平台支持
 
 | 平台           | 支持情况 | 说明     |
 | -------------- | -------- | -------- |
@@ -120,7 +147,7 @@ uni.chooseLocation({
 | 京东小程序     | ✅       | 支持拦截 |
 | App            | ✅       | 支持拦截 |
 
-#### 使用示例
+### 使用示例
 
 ```javascript
 // 直接使用 uni.makePhoneCall，拦截器会自动处理
@@ -131,11 +158,14 @@ uni.makePhoneCall({
   },
   fail(err) {
     console.log("拨打电话失败", err);
+  },
+  complete() {
+    console.log("拨打电话操作完成");
   }
 });
 ```
 
-#### 说明
+### 增强功能
 
 该拦截器拦截 uni.makePhoneCall API 调用，提供以下增强功能：
 
@@ -148,9 +178,11 @@ uni.makePhoneCall({
 
 ### route 拦截器
 
-**功能：** 拦截路由相关 API 调用，提供增强功能
+### 功能描述
 
-#### 平台支持
+拦截路由相关 API 调用，提供增强功能
+
+### 平台支持
 
 | 平台           | 支持情况 | 说明     |
 | -------------- | -------- | -------- |
@@ -164,7 +196,7 @@ uni.makePhoneCall({
 | 京东小程序     | ✅       | 支持拦截 |
 | App            | ✅       | 支持拦截 |
 
-#### 使用示例
+### 使用示例
 
 ```javascript
 // 直接使用路由 API，拦截器会自动处理
@@ -175,27 +207,32 @@ uni.navigateTo({
   },
   fail(err) {
     console.log("页面跳转失败", err);
+  },
+  complete() {
+    console.log("页面跳转操作完成");
   }
 });
 ```
 
-#### 说明
+### 增强功能
 
 该拦截器拦截路由相关 API 调用（如 uni.navigateTo、uni.redirectTo、uni.reLaunch 等），提供以下增强功能：
 
 1. **路由白名单**：支持配置路由白名单，只允许跳转到白名单中的页面
-2. **参数处理**：对路由参数进行统一处理，确保参数的正确传递
-3. **错误处理增强**：对路由错误进行统一处理，提供更友好的错误提示
-4. **路由日志**：记录路由跳转日志，便于调试和分析
-5. **页面栈管理**：增强页面栈管理功能，提供更灵活的页面栈操作
+2. **参数处理**：对路由参数进行处理，支持复杂对象的传递
+3. **路由日志**：记录路由跳转日志，方便调试和分析
+4. **页面栈管理**：管理页面栈，避免页面栈溢出
+5. **错误处理增强**：对平台特定的错误进行统一处理，提供更友好的错误提示
 
-拦截器会在调用原始路由 API 之前和之后执行相应的处理逻辑，开发者无需修改现有代码，只需引入 uni-toolkit 即可自动获得这些增强功能。
+拦截器会在调用原始 API 之前和之后执行相应的处理逻辑，开发者无需修改现有代码，只需引入 uni-toolkit 即可自动获得这些增强功能。
 
 ### setClipboardData 拦截器
 
-**功能：** 拦截 uni.setClipboardData API 调用，提供增强功能
+### 功能描述
 
-#### 平台支持
+拦截 uni.setClipboardData API 调用，提供增强功能
+
+### 平台支持
 
 | 平台           | 支持情况 | 说明     |
 | -------------- | -------- | -------- |
@@ -209,7 +246,7 @@ uni.navigateTo({
 | 京东小程序     | ✅       | 支持拦截 |
 | App            | ✅       | 支持拦截 |
 
-#### 使用示例
+### 使用示例
 
 ```javascript
 // 直接使用 uni.setClipboardData，拦截器会自动处理
@@ -220,11 +257,14 @@ uni.setClipboardData({
   },
   fail(err) {
     console.log("复制失败", err);
+  },
+  complete() {
+    console.log("复制操作完成");
   }
 });
 ```
 
-#### 说明
+### 增强功能
 
 该拦截器拦截 uni.setClipboardData API 调用，提供以下增强功能：
 
@@ -237,9 +277,11 @@ uni.setClipboardData({
 
 ### setStorage 拦截器
 
-**功能：** 拦截存储相关 API 调用，提供增强功能
+### 功能描述
 
-#### 平台支持
+拦截存储相关 API 调用，提供增强功能
+
+### 平台支持
 
 | 平台           | 支持情况 | 说明     |
 | -------------- | -------- | -------- |
@@ -253,7 +295,48 @@ uni.setClipboardData({
 | 京东小程序     | ✅       | 支持拦截 |
 | App            | ✅       | 支持拦截 |
 
-#### 使用示例
+### 使用示例
+
+```javascript
+// 直接使用存储 API，拦截器会自动处理
+uni.setStorage({
+  key: "userInfo",
+  data: {
+    name: "张三",
+    age: 18,
+    gender: "男"
+  },
+  success() {
+    console.log("存储成功");
+  },
+  fail(err) {
+    console.log("存储失败", err);
+  },
+  complete() {
+    console.log("存储操作完成");
+  }
+});
+
+// 使用同步方法
+try {
+  uni.setStorageSync("token", "abcdef123456");
+  console.log("同步存储成功");
+} catch (e) {
+  console.error("同步存储失败", e);
+}
+```
+
+### 增强功能
+
+该拦截器拦截存储相关 API 调用（如 uni.setStorage、uni.getStorage、uni.removeStorage 等及其同步版本），提供以下增强功能：
+
+1. **数据加密**：对敏感数据进行加密存储，提高数据安全性
+2. **数据压缩**：对大型数据进行压缩，减少存储空间占用
+3. **过期时间**：支持设置数据过期时间，自动清理过期数据
+4. **存储限制处理**：处理存储空间不足等异常情况，提供更友好的错误提示
+5. **数据格式化**：对存储的数据进行格式化，确保在不同平台上的兼容性
+
+拦截器会在调用原始 API 之前和之后执行相应的处理逻辑，开发者无需修改现有代码，只需引入 uni-toolkit 即可自动获得这些增强功能。
 
 ```javascript
 // 直接使用存储 API，拦截器会自动处理

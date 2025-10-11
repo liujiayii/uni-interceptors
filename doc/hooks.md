@@ -4,15 +4,19 @@
 
 ## 目录
 
-- [useChooseImage](#usechooseimage)
-- [useOnShow](#useonshow)
-- [useDesignSize](#usedesignsize)
+- [useChooseImage](#usechooseimage) - 封装图片选择功能
+- [useOnShow](#useonshow) - 统一的页面显示事件钩子
+- [useDesignSize](#usedesignsize) - 获取设计尺寸信息
 
 ## useChooseImage
 
-**功能：** 封装图片选择功能，处理不同平台的兼容性问题。
+### 功能描述
 
-**平台：** 全平台
+封装图片选择功能，处理不同平台的兼容性问题。
+
+### 平台支持
+
+全平台
 
 ### 参数
 
@@ -31,6 +35,7 @@
 
 ```typescript
 import { useChooseImage } from "uni-toolkit";
+import { ref } from "vue";
 
 // 在组件中使用
 export default {
@@ -43,6 +48,9 @@ export default {
           sourceType: ["album", "camera"]
         });
         console.log("选择的图片：", res.tempFilePaths);
+
+        // 实际应用示例 - 显示选择的图片
+        const imgSrc = ref(res.tempFilePaths[0]);
       } catch (error) {
         console.error("选择图片失败：", error);
       }
@@ -61,9 +69,13 @@ export default {
 
 ## useOnShow
 
-**功能：** 统一的页面显示事件钩子，可用于页面级别和组件级别，方便在页面显示时执行特定逻辑。
+### 功能描述
 
-**平台：** 全平台
+统一的页面显示事件钩子，可用于页面级别和组件级别，方便在页面显示时执行特定逻辑。
+
+### 平台支持
+
+全平台
 
 ### 参数
 
@@ -79,6 +91,7 @@ export default {
 | immediate      | boolean | 否   | false  | 是否在组件挂载后立即执行一次                                                         |
 | triggerHistory | boolean | 否   | true   | 是否在组件挂载后触发最近的历史事件（如果有），解决父组件onShow时子组件还未注册的问题 |
 | context        | any     | 否   | -      | 事件处理函数的执行上下文                                                             |
+| isPageLevel    | boolean | 否   | true   | 是否强制指定为页面级别组件，如果未指定将自动通过 isPageLevelComponent 判断           |
 
 ### 返回值
 
@@ -97,7 +110,8 @@ export default {
     // 自动判断使用级别
     useOnShow(() => {
       console.log("页面显示");
-      // 可以在这里执行页面显示时的逻辑
+      // 可以在这里执行页面显示时的逻辑，如数据刷新
+      refreshData();
     });
 
     return {};
@@ -156,10 +170,40 @@ export default {
 };
 ```
 
+#### 强制指定使用级别
+
+```typescript
+import { useOnShow } from "uni-toolkit";
+
+// 在组件中使用
+export default {
+  setup() {
+    // 强制指定为页面级别（绕过自动判断）
+    useOnShow(() => {
+      console.log("强制作为页面级别处理");
+      // 页面级别的逻辑
+    }, {
+      isPageLevel: true // 强制指定为页面级别
+    });
+
+    // 强制指定为组件级别（绕过自动判断）
+    useOnShow(() => {
+      console.log("强制作为组件级别处理");
+      // 组件级别的逻辑
+    }, {
+      isPageLevel: false // 强制指定为组件级别
+    });
+
+    return {};
+  }
+};
+```
+
 ### 特性
 
 - 自动判断当前是页面级别还是组件级别使用，无需手动指定
 - 通过检查组件实例的 `$page` 属性（页面特有）来准确判断页面级别
+- **新增：支持通过 `isPageLevel` 配置项强制指定使用级别，绕过自动判断**
 - 统一的接口，支持页面级别和组件级别使用
 - 页面级别使用时，自动触发页面事件和全局事件
 - 组件级别使用时，自动监听页面事件并执行回调函数
@@ -170,29 +214,52 @@ export default {
 
 ## useDesignSize
 
-**功能：** 获取设计尺寸信息，方便响应式布局。
+### 功能描述
 
-**平台：** 全平台
+获取设计尺寸信息(包含rpx转换比率，750 设计宽度下的归一化尺寸与比例)，方便响应式布局。
+
+### 平台支持
+
+全平台
+
+### 参数
+
+无参数
 
 ### 返回值
 
-`{ width: number, height: number, rate: number }` - 设计尺寸信息，包含rpx转换比率
+`Ref<{ width: number, height: number, rate: number }>` - 设计尺寸信息的响应式引用对象，包含以下属性：
+
+- `width`: 屏幕宽度（固定为750，基于设计宽度）
+- `height`: 屏幕高度（根据实际屏幕高度和比例计算）
+- `rate`: rpx转换比率（750 / 实际屏幕宽度）
 
 ### 使用示例
 
 ```typescript
 import { useDesignSize } from "uni-toolkit";
+import { computed } from "vue";
 
 // 在组件中使用
 export default {
   setup() {
     // 获取设计尺寸
-    const { width, height, rate } = useDesignSize();
+    const designSize = useDesignSize();
+
+    // 实际应用示例 - 计算元素尺寸
+    const elementWidth = computed(() => {
+      return designSize.value.width / 2; // 元素宽度为屏幕宽度的一半
+    });
+
+    // 实际应用示例 - 使用rpx转换
+    const pxValue = computed(() => {
+      return 100 * designSize.value.rate; // 将100rpx转换为px
+    });
 
     return {
-      width,
-      height,
-      rate
+      designSize,
+      elementWidth,
+      pxValue
     };
   }
 };
@@ -200,6 +267,8 @@ export default {
 
 ### 特性
 
+- 基于750设计宽度提供归一化尺寸信息
 - 自动响应窗口尺寸变化
-- 返回格式化的尺寸信息，方便直接使用
+- 返回响应式引用对象，尺寸变化时自动更新
 - 提供rpx转换比率，便于不同设备间的尺寸转换
+- 使用Vue的响应式系统，确保UI随尺寸变化自动更新

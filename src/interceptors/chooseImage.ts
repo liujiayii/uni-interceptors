@@ -5,110 +5,129 @@ const chooseImage: UniNamespace.InterceptorOptions = {
   invoke(args) {
     // #ifdef APP-PLUS
     return new Promise((resolve, reject) => {
-      // 检查是否需要相机权限或相册权限
-      const sourceType = args.sourceType || ["album", "camera"];
-      const needCameraAuth = sourceType.includes("camera");
-      const needPhotoAuth = sourceType.includes("album");
+      try {
+        // 检查是否需要相机权限或相册权限
+        const sourceType = args.sourceType || ["album", "camera"];
+        const needCameraAuth = sourceType.includes("camera");
+        const needPhotoAuth = sourceType.includes("album");
 
-      // 如果只需要相机权限
-      if (needCameraAuth && !needPhotoAuth) {
-        showAuthTip(AuthType.CAMERA).then((result) => {
-          if (result) {
-            console.log(`相机权限授权结果:${result}`);
-            resolve(args);
-          } else {
-            console.log(`相机权限授权结果:${result}`);
-            // 用户拒绝授权
-            reject(new Error("用户拒绝相机权限授权"));
-          }
-        });
-      } else if (!needCameraAuth && needPhotoAuth) {
-      // 如果只需要相册权限
-        showAuthTip(AuthType.PHOTO).then((result) => {
-          if (result) {
-            console.log(`相册权限授权结果:${result}`);
-            resolve(args);
-          } else {
-            console.log(`相册权限授权结果:${result}`);
-            // 用户拒绝授权
-            reject(new Error("用户拒绝相册权限授权"));
-          }
-        });
-      } else if (needCameraAuth && needPhotoAuth) {
-      // 如果同时需要相机和相册权限，优先请求相机权限
-        showAuthTip(AuthType.CAMERA).then((cameraResult) => {
-          if (cameraResult) {
-            showAuthTip(AuthType.PHOTO).then((photoResult) => {
-              if (photoResult) {
-                console.log(`相机和相册权限授权结果:${photoResult}`);
-                resolve(args);
-              } else {
-                console.log(`相册权限授权结果:${photoResult}`);
-                reject(new Error("用户拒绝相册权限授权"));
-              }
-            });
-          } else {
-            console.log(`相机权限授权结果:${cameraResult}`);
-            reject(new Error("用户拒绝相机权限授权"));
-          }
-        });
-      } else {
-        // 如果没有指定 sourceType，默认通过
-        resolve(args);
+        // 如果只需要相机权限
+        if (needCameraAuth && !needPhotoAuth) {
+          showAuthTip(AuthType.CAMERA).then((result) => {
+            if (result) {
+              console.log(`相机权限授权结果:${result}`);
+              resolve(args);
+            } else {
+              console.log(`用户拒绝相机权限授权:${result}`);
+              resolve(args);
+            }
+          }).catch((error) => {
+            console.error("请求相机权限时出错:", error);
+            reject(error);
+          });
+        } else if (!needCameraAuth && needPhotoAuth) {
+        // 如果只需要相册权限
+          showAuthTip(AuthType.PHOTO).then((result) => {
+            if (result) {
+              console.log(`相册权限授权结果:${result}`);
+              resolve(args);
+            } else {
+              console.log(`用户拒绝相册权限授权:${result}`);
+              resolve(args);
+            }
+          }).catch((error) => {
+            console.error("请求相册权限时出错:", error);
+            reject(error);
+          });
+        } else if (needCameraAuth && needPhotoAuth) {
+        // 如果同时需要相机和相册权限，优先请求相机权限
+          showAuthTip(AuthType.CAMERA).then((cameraResult) => {
+            if (cameraResult) {
+              showAuthTip(AuthType.PHOTO).then((photoResult) => {
+                if (photoResult) {
+                  console.log(`相机和相册权限授权结果:${photoResult}`);
+                  resolve(args);
+                } else {
+                  console.log(`用户拒绝相册权限授权:${photoResult}`);
+                  resolve(args);
+                }
+              }).catch((error) => {
+                console.error("请求相册权限时出错:", error);
+                reject(error);
+              });
+            } else {
+              console.log(`相机权限授权结果:${cameraResult}`);
+              reject(new Error("用户拒绝相机权限授权"));
+            }
+          }).catch((error) => {
+            console.error("请求相机权限时出错:", error);
+            reject(error);
+          });
+        } else {
+          // 如果没有指定 sourceType，默认通过
+          resolve(args);
+        }
+      } catch (error) {
+        console.error("处理权限请求时发生异常:", error);
+        reject(error);
       }
     });
     // #endif
 
-    // #ifdef MP-WEIXIN || MP-BAIDU || MP-TOUTIAO || MP-QQ || MP-JD || MP-KUAISHOU
+    // #ifdef MP
     return new Promise((resolve, reject) => {
-      // 使用封装的工具函数处理微信、百度、头条、QQ小程序图片选择权限
-      const sourceType = args.sourceType || ["album", "camera"];
-      checkAndRequestImageAuth(sourceType).then((granted) => {
-        if (granted) {
-          console.log(`图片选择权限授权结果:${granted}`);
-          resolve(args);
-        } else {
-          console.log(`图片选择权限授权结果:${granted}`);
-          reject(new Error("用户拒绝图片选择权限授权"));
-        }
-      });
-    });
-    // #endif
-
-    // #ifdef MP-ALIPAY
-    return new Promise((resolve, reject) => {
-      // 使用封装的工具函数处理支付宝小程序图片选择权限
-      const sourceType = args.sourceType || ["album", "camera"];
-      checkAndRequestImageAuth(sourceType).then((granted) => {
-        if (granted) {
-          console.log(`图片选择权限授权结果:${granted}`);
-          resolve(args);
-        } else {
-          console.log(`图片选择权限授权结果:${granted}`);
-          reject(new Error("用户拒绝图片选择权限授权"));
-        }
-      });
+      try {
+        // 使用封装的工具函数处理小程序图片选择权限
+        const sourceType = args.sourceType || ["album", "camera"];
+        checkAndRequestImageAuth(sourceType).then((granted) => {
+          if (granted) {
+            console.log(`图片选择权限授权结果:${granted}`);
+            resolve(args);
+          } else {
+            console.log(`用户拒绝图片选择权限授权:${granted}`);
+            resolve(args);
+          }
+        }).catch((error) => {
+          console.error("请求图片选择权限时出错:", error);
+          reject(error);
+        });
+      } catch (error) {
+        console.error("处理权限请求时发生异常:", error);
+        reject(error);
+      }
     });
     // #endif
 
     // #ifdef H5
-    // H5端通常由浏览器处理文件选择权限，这里可以添加一些提示
-    console.log("即将选择图片");
-    return true;
+    // H5端通常由浏览器处理文件选择权限，保持与其他平台一致返回Promise
+    return new Promise((resolve) => {
+      try {
+        console.log("即将选择图片");
+        resolve(args);
+      } catch (error) {
+        console.error("H5处理图片选择时出错:", error);
+        // H5环境下通常不会因为权限问题失败，所以这里仍然resolve
+        resolve(args);
+      }
+    });
     // #endif
   },
-  success() {
+  success(res) {
     // #ifdef APP-PLUS
-    console.log("chooseImage success:");
+    console.log("chooseImage success:", res);
     // #endif
 
     // #ifdef MP || H5
-    console.log("chooseImage success:");
+    console.log("chooseImage success:", res);
     // MP/H5 无需本地权限检查
     // #endif
   },
   fail(error) {
     console.log(`chooseImage error:${error}`);
+  },
+  complete(res) {
+    console.log("chooseImage complete:", res);
+    // 可以在这里添加通用的完成处理逻辑
   },
 };
 

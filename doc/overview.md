@@ -22,7 +22,7 @@
 | -------------- | ---------------- | ------ |
 | useChooseImage | 封装图片选择功能 | 全平台 |
 | useOnShow      | 监听页面显示事件 | 全平台 |
-| useWindowSize  | 获取窗口尺寸信息 | 全平台 |
+| useDesignSize  | 获取设计尺寸信息 | 全平台 |
 
 ### Hooks 详情
 

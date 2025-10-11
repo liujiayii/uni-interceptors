@@ -1,6 +1,6 @@
 import { onShow } from "@dcloudio/uni-app";
 import { onUnmounted } from "vue";
-import { eventBus, getCurrentPageRoute, isPageLevelComponent } from "../tools";
+import { eventBus, getCurrentPageRoute } from "../tools";
 
 export type UseOnShowOptions = {
   /**
@@ -20,6 +20,13 @@ export type UseOnShowOptions = {
    * 事件处理函数的执行上下文
    */
   context?: any;
+
+  /**
+   * 是否指定为页面级别组件
+   * 如果未指定，则默认判断为页面级别组件
+   * @default true
+   */
+  isPageLevel?: boolean;
 };
 
 /**
@@ -35,13 +42,14 @@ export function useOnShow(
     immediate = false,
     triggerHistory = true,
     context,
+    isPageLevel = true,
   } = options;
 
   // 获取当前页面的路由路径作为pageId
   const pageId = getCurrentPageRoute();
 
-  // 自动判断是否是页面级别
-  const isPageLevel = isPageLevelComponent();
+  // 判断是否是页面级别：优先使用配置项，否则自动判断
+  // const isPageLevel = isPageLevelComponent();
 
   console.log("useOnShow initialized with pageId:", pageId, "options:", options, "isPageLevel:", isPageLevel);
 
