@@ -91,7 +91,7 @@ export default {
 | immediate      | boolean | 否   | false  | 是否在组件挂载后立即执行一次                                                         |
 | triggerHistory | boolean | 否   | true   | 是否在组件挂载后触发最近的历史事件（如果有），解决父组件onShow时子组件还未注册的问题 |
 | context        | any     | 否   | -      | 事件处理函数的执行上下文                                                             |
-| isPageLevel    | boolean | 否   | true   | 是否强制指定为页面级别组件，如果未指定将自动通过 isPageLevelComponent 判断         |
+| isPageLevel    | boolean | 否   | true   | 是否强制指定为页面级别组件，如果未指定将自动通过 isPageLevelComponent 判断           |
 
 ### 返回值
 
@@ -183,7 +183,7 @@ export default {
       console.log("强制作为页面级别处理");
       // 页面级别的逻辑
     }, {
-      isPageLevel: true  // 强制指定为页面级别
+      isPageLevel: true // 强制指定为页面级别
     });
 
     // 强制指定为组件级别（绕过自动判断）
@@ -191,7 +191,7 @@ export default {
       console.log("强制作为组件级别处理");
       // 组件级别的逻辑
     }, {
-      isPageLevel: false  // 强制指定为组件级别
+      isPageLevel: false // 强制指定为组件级别
     });
 
     return {};
