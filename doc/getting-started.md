@@ -48,7 +48,7 @@ applyChooseLocationInterceptor();
 ## 使用 Hooks
 
 ```javascript
-import { useChooseImage, useOnShow, useWindowSize } from "uni-toolkit";
+import { useChooseImage, useDesignSize, useOnShow } from "uni-toolkit";
 
 // 在组件中使用
 export default {
@@ -72,13 +72,12 @@ export default {
       console.log("页面显示");
     });
 
-    // 使用窗口大小 hook
-    const { windowWidth, windowHeight } = useWindowSize();
+    // 使用设计尺寸 hook
+    const designSize = useDesignSize();
 
     return {
       chooseImage,
-      windowWidth,
-      windowHeight
+      designSize
     };
   }
 };
