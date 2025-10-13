@@ -51,12 +51,12 @@ export function useOnShow(
   // 判断是否是页面级别：优先使用配置项，否则自动判断
   // const isPageLevel = isPageLevelComponent();
 
-  console.log("useOnShow initialized with pageId:", pageId, "options:", options, "isPageLevel:", isPageLevel);
+  // console.log("useOnShow initialized with pageId:", pageId, "options:", options, "isPageLevel:", isPageLevel);
 
   if (isPageLevel) {
     // 页面级别的onShow处理
     onShow(() => {
-      console.log("Page onShow triggered, emitting events for pageId:", pageId);
+    //  console.log("Page onShow triggered, emitting events for pageId:", pageId);
       // 触发页面级别的onShow事件
       eventBus.emit("page:onShow", { pageId });
 
@@ -72,7 +72,7 @@ export function useOnShow(
   } else {
     // 组件级别的onShow处理
     if (!hook) {
-      console.warn("useOnShow: hook function is required when isPageLevel is false");
+      // console.warn("useOnShow: hook function is required when isPageLevel is false");
       return;
     }
 
@@ -82,27 +82,27 @@ export function useOnShow(
     // 事件处理函数
     let historyTriggeredDuringRegister = false;
     const handlePageOnShow = (eventData: { pageId: string }): void => {
-      console.log("handlePageOnShow called with eventData:", eventData, "component pageId:", pageId);
+      // console.log("handlePageOnShow called with eventData:", eventData, "component pageId:", pageId);
       if (eventData.pageId === pageId) {
         historyTriggeredDuringRegister = true; // 若为历史回放，将在注册阶段置位
-        console.log("Executing useOnShow hook for component with pageId:", pageId);
+        // console.log("Executing useOnShow hook for component with pageId:", pageId);
         wrappedHook();
       }
     };
 
     // 直接绑定事件监听
-    console.log("Registering event listener for page:onShow with triggerHistory:", triggerHistory);
+    // console.log("Registering event listener for page:onShow with triggerHistory:", triggerHistory);
     eventBus.on("page:onShow", handlePageOnShow, triggerHistory);
 
     // 如果immediate为true，且未在历史回放中触发，立即执行一次
     if (immediate && !historyTriggeredDuringRegister) {
-      console.log("Executing useOnShow hook immediately due to immediate option");
+    //  console.log("Executing useOnShow hook immediately due to immediate option");
       wrappedHook();
     }
 
     // 组件卸载时移除监听
     onUnmounted(() => {
-      console.log("Removing event listener for useOnShow component with pageId:", pageId);
+      // console.log("Removing event listener for useOnShow component with pageId:", pageId);
       eventBus.off("page:onShow", handlePageOnShow);
     });
   }

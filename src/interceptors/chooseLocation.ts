@@ -1,5 +1,5 @@
 import type { Plugin } from "vue";
-import { AuthType, checkAndRequestLocationAuth, showAuthTip } from "../tools";
+import { AuthType, checkAndRequestLocationAuth, checkSelfPermission, shouldShowRequestPermissionRationale, showAuthTip, showManualAuth } from "../tools";
 
 const chooseLocation: UniNamespace.InterceptorOptions = {
   invoke(args) {
@@ -15,11 +15,11 @@ const chooseLocation: UniNamespace.InterceptorOptions = {
             resolve(args);
           }
         }).catch((error) => {
-          console.error("请求位置权限时出错:", error);
+          console.error(`请求位置权限时出错:${JSON.stringify(error)}`);
           reject(error);
         });
       } catch (error) {
-        console.error("处理位置权限请求时发生异常:", error);
+        console.error(`处理位置权限请求时发生异常:${JSON.stringify(error)}`);
         reject(error);
       }
     });
@@ -64,19 +64,32 @@ const chooseLocation: UniNamespace.InterceptorOptions = {
   },
   success(res) {
     // #ifdef APP-PLUS
-    console.log("chooseLocation success:", res);
+    console.log(`chooseLocation success:${JSON.stringify(res)}`);
     // #endif
 
     // #ifdef MP || H5
-    console.log("chooseLocation success:", res);
+    console.log(`chooseLocation success:${JSON.stringify(res)}`);
     // MP/H5 无需本地权限检查
     // #endif
   },
   fail(error) {
-    console.log(`chooseLocation error:${error}`);
+    // #ifdef APP-PLUS
+    console.log(`chooseLocation error:${JSON.stringify(error)}`);
+    const granted = checkSelfPermission(AuthType.LOCATION);
+    if (!granted) {
+      const showRationale = shouldShowRequestPermissionRationale(AuthType.LOCATION);
+      console.log(`shouldShowRequestPermissionRationale:${showRationale}`);
+      if (!showRationale) {
+        showManualAuth(AuthType.LOCATION);
+      }
+    }
+    // #endif
+    // #ifdef MP
+    console.log(`chooseLocation error:${JSON.stringify(error)}`);
+    // #endif
   },
   complete(res) {
-    console.log("chooseLocation complete:", res);
+    console.log(`chooseLocation complete:${JSON.stringify(res)}`);
     // 可以在这里添加通用的完成处理逻辑
   },
 };

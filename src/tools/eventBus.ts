@@ -11,7 +11,7 @@ class EventBus {
   private maxHistoryAge = 1000; // 事件历史记录的最大保存时间（毫秒）
 
   on(event: string, handler: EventHandler, triggerHistory = true): void {
-    console.log(`EventBus: Registering listener for event '${event}' with triggerHistory: ${triggerHistory}`);
+    // console.log(`EventBus: Registering listener for event '${event}' with triggerHistory: ${triggerHistory}`);
 
     if (!this.events[event]) {
       this.events[event] = [];
@@ -20,13 +20,13 @@ class EventBus {
 
     // 检查是否有历史事件需要触发
     if (triggerHistory) {
-      console.log(`EventBus: Checking for recent history events for '${event}'`);
+      // console.log(`EventBus: Checking for recent history events for '${event}'`);
       this.checkAndTriggerHistory(event, handler);
     }
   }
 
   off(event: string, handler: EventHandler): void {
-    console.log(`EventBus: Removing listener for event '${event}'`);
+    // console.log(`EventBus: Removing listener for event '${event}'`);
 
     if (!this.events[event])
       return;
@@ -38,7 +38,7 @@ class EventBus {
   }
 
   emit(event: string, ...args: any[]): void {
-    console.log(`EventBus: Emitting event '${event}' with args:`, args);
+    // console.log(`EventBus: Emitting event '${event}' with args:`, args);
 
     // 先保存历史，再通知监听器（即使当前无监听器也记录，供后续回放）
     this.saveToHistory(event, args);
@@ -58,7 +58,7 @@ class EventBus {
 
   // 保存事件到历史记录
   private saveToHistory(event: string, args: any[]): void {
-    console.log(`EventBus: Saving event '${event}' to history`);
+    // console.log(`EventBus: Saving event '${event}' to history`);
 
     if (!this.eventHistory[event]) {
       this.eventHistory[event] = [];
@@ -87,7 +87,7 @@ class EventBus {
 
   // 检查并触发历史事件
   private checkAndTriggerHistory(event: string, handler: EventHandler): void {
-    console.log(`EventBus: Checking history for event '${event}'`);
+    // console.log(`EventBus: Checking history for event '${event}'`);
 
     if (!this.eventHistory[event] || this.eventHistory[event].length === 0) {
       console.log(`EventBus: No recent history found for event '${event}'`);
@@ -113,7 +113,7 @@ class EventBus {
 
   // 清除特定事件的历史记录
   clearHistory(event?: string): void {
-    console.log(`EventBus: Clearing ${event ? `history for event '${event}'` : "all event history"}`);
+    // console.log(`EventBus: Clearing ${event ? `history for event '${event}'` : "all event history"}`);
 
     if (event) {
       delete this.eventHistory[event];
