@@ -56,25 +56,22 @@ const permissionKeyMapping: PermissionKeyMapping = {
 };
 
 /**
- * 检查并请求小程序权限（支持所有小程序平台）
+ * 检查小程序权限状态（不触发权限请求）
  * @param permissionTypes 权限类型数组
- * @returns Promise<boolean> 是否获得授权
+ * @returns Promise<{[key: string]: boolean}> 返回各权限的授权状态
  */
-export function checkAndRequestPermissions(permissionTypes: string[]): Promise<boolean> {
-  return new Promise<boolean>((resolve) => {
-    // 如果没有指定权限类型，直接通过
+export function checkPermissions(permissionTypes: string[]): Promise<{ [key: string]: boolean }> {
+  return new Promise<{ [key: string]: boolean }>((resolve) => {
+    // 如果没有指定权限类型，直接返回空对象
     if (!permissionTypes || permissionTypes.length === 0) {
-      resolve(true);
+      resolve({});
       return;
     }
 
     uni.getSetting({
       success: (res) => {
         const authSetting = res.authSetting;
-
-        // 检查各权限状态
         const permissionResults: { [key: string]: boolean } = {};
-        const deniedPermissions: string[] = [];
 
         for (const permissionType of permissionTypes) {
           const permissionConfig = permissionKeyMapping[permissionType];
@@ -102,83 +99,115 @@ export function checkAndRequestPermissions(permissionTypes: string[]): Promise<b
           } else if (authSetting && authSetting[authKey as keyof UniApp.AuthSetting] === false) {
             // 已明确拒绝授权
             permissionResults[permissionType] = false;
-            deniedPermissions.push(permissionType);
           } else {
-            // 未授权且未明确拒绝，暂时设为true，后续会调用API
-            permissionResults[permissionType] = true;
+            // 未授权且未明确拒绝
+            permissionResults[permissionType] = false;
           }
         }
 
-        // 如果所有权限都已授权，直接执行
-        if (deniedPermissions.length === 0) {
-          resolve(true);
-          return;
-        }
-
-        // 如果有权限被拒绝，显示提示并引导用户手动开启
-        const deniedPermissionNames = deniedPermissions.map((permission) => {
-          switch (permission) {
-            case "location": return "位置";
-            case "camera": return "相机";
-            case "album": return "相册";
-            default: return permission;
-          }
-        });
-
-        // 使用第一个被拒绝权限的配置来显示提示
-        const firstDeniedPermission = deniedPermissions[0];
-        const permissionConfig = permissionKeyMapping[firstDeniedPermission];
-
-        uni.showModal({
-          title: permissionConfig.title,
-          content: `请在设置中开启${deniedPermissionNames.join("和")}权限，以便使用相关功能`,
-          confirmText: "去设置",
-          cancelText: "暂不开启",
-          success: (settingRes) => {
-            if (settingRes.confirm) {
-              uni.openSetting({
-                success: (openSettingRes) => {
-                  // 检查用户是否在设置中开启了权限
-                  const newAuthSetting = openSettingRes.authSetting;
-
-                  // 重新检查所有权限状态
-                  let allGranted = true;
-                  for (const permissionType of permissionTypes) {
-                    const permissionConfig = permissionKeyMapping[permissionType];
-                    if (!permissionConfig)
-                      continue;
-
-                    const authKey = typeof permissionConfig.authKey === "function"
-                      ? permissionConfig.authKey()
-                      : permissionConfig.authKey;
-
-                    // 微信小程序选择图片不需要相册权限，直接通过
-                    if (permissionType === "album" && authKey === "") {
-                      continue;
-                    }
-
-                    const granted = newAuthSetting && newAuthSetting[authKey] === true;
-                    if (!granted) {
-                      allGranted = false;
-                    }
-                  }
-
-                  // 返回权限检查结果
-                  resolve(allGranted);
-                },
-                fail: () => {
-                  resolve(false);
-                },
-              });
-            } else {
-              resolve(false);
-            }
-          },
-        });
+        resolve(permissionResults);
       },
       fail: () => {
-        resolve(false);
+        // 获取设置失败，返回所有权限为未授权状态
+        const permissionResults: { [key: string]: boolean } = {};
+        for (const permissionType of permissionTypes) {
+          permissionResults[permissionType] = false;
+        }
+        resolve(permissionResults);
       },
+    });
+  });
+}
+
+/**
+ * 请求小程序权限
+ * @param permissionTypes 权限类型数组
+ * @returns Promise<boolean> 是否获得授权
+ */
+export function requestPermissions(permissionTypes: string[]): Promise<boolean> {
+  return new Promise<boolean>((resolve) => {
+    // 如果没有指定权限类型，直接通过
+    if (!permissionTypes || permissionTypes.length === 0) {
+      resolve(true);
+      return;
+    }
+
+    // 先检查权限状态
+    checkPermissions(permissionTypes).then((permissionResults) => {
+      const deniedPermissions: string[] = [];
+
+      for (const permissionType of permissionTypes) {
+        if (!permissionResults[permissionType]) {
+          deniedPermissions.push(permissionType);
+        }
+      }
+
+      // 如果所有权限都已授权，直接执行
+      if (deniedPermissions.length === 0) {
+        resolve(true);
+        return;
+      }
+
+      // 如果有权限被拒绝，显示提示并引导用户手动开启
+      const deniedPermissionNames = deniedPermissions.map((permission) => {
+        switch (permission) {
+          case "location": return "位置";
+          case "camera": return "相机";
+          case "album": return "相册";
+          default: return permission;
+        }
+      });
+
+      // 使用第一个被拒绝权限的配置来显示提示
+      const firstDeniedPermission = deniedPermissions[0];
+      const permissionConfig = permissionKeyMapping[firstDeniedPermission];
+
+      uni.showModal({
+        title: permissionConfig.title,
+        content: `请在设置中开启${deniedPermissionNames.join("和")}权限，以便使用相关功能`,
+        confirmText: "去设置",
+        cancelText: "暂不开启",
+        success: (settingRes) => {
+          if (settingRes.confirm) {
+            uni.openSetting({
+              success: (openSettingRes) => {
+                // 检查用户是否在设置中开启了权限
+                const newAuthSetting = openSettingRes.authSetting;
+
+                // 重新检查所有权限状态
+                let allGranted = true;
+                for (const permissionType of permissionTypes) {
+                  const permissionConfig = permissionKeyMapping[permissionType];
+                  if (!permissionConfig)
+                    continue;
+
+                  const authKey = typeof permissionConfig.authKey === "function"
+                    ? permissionConfig.authKey()
+                    : permissionConfig.authKey;
+
+                  // 微信小程序选择图片不需要相册权限，直接通过
+                  if (permissionType === "album" && authKey === "") {
+                    continue;
+                  }
+
+                  const granted = newAuthSetting && newAuthSetting[authKey] === true;
+                  if (!granted) {
+                    allGranted = false;
+                  }
+                }
+
+                // 返回权限检查结果
+                resolve(allGranted);
+              },
+              fail: () => {
+                resolve(false);
+              },
+            });
+          } else {
+            resolve(false);
+          }
+        },
+      });
     });
   });
 }
@@ -188,7 +217,7 @@ export function checkAndRequestPermissions(permissionTypes: string[]): Promise<b
  * @returns Promise<boolean> 是否获得授权
  */
 export function checkAndRequestLocationAuth(): Promise<boolean> {
-  return checkAndRequestPermissions(["location"]);
+  return requestPermissions(["location"]);
 }
 
 /**
@@ -210,5 +239,5 @@ export function checkAndRequestImageAuth(
     permissionTypes.push("album");
   }
 
-  return checkAndRequestPermissions(permissionTypes);
+  return requestPermissions(permissionTypes);
 }
