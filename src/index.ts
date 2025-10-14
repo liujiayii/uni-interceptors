@@ -7,12 +7,8 @@ export {
 } from "./hooks";
 
 export {
-  applyChooseLocationInterceptor,
-  applyMakePhoneCallInterceptor,
-  applyRouteInterceptor,
-  applySetClipboardDataInterceptor,
-  applySetStorageInterceptor,
   checkLoginAndRedirect,
+  chooseImageInterceptor,
   chooseLocationInterceptor,
   makePhoneCallInterceptor,
   routeInterceptor,

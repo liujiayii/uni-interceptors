@@ -24,12 +24,3 @@ export const setStorageInterceptor: Plugin = {
     uni.addInterceptor("setStorage", storageInterceptor);
   },
 };
-
-/**
- * 直接应用快手小程序setStorage代理修复拦截器
- * 可以作为 Vue 插件使用: Vue.use(setStorageInterceptor)
- * 也可以直接调用: applySetStorageInterceptor()
- */
-export function applySetStorageInterceptor(): void {
-  setStorageInterceptor.install?.(null as any);
-}

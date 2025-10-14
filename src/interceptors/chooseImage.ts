@@ -1,6 +1,12 @@
 import type { Plugin } from "vue";
 import { AuthType, checkAndRequestImageAuth, showAuthTip } from "../tools";
 
+const failResult = {
+  errMsg: "[chooseImage]:fail permission not granted",
+  errCode: -1,
+  authDenied: true,
+};
+
 const chooseImage: UniNamespace.InterceptorOptions = {
   invoke(args) {
     // #ifdef APP-PLUS
@@ -19,7 +25,10 @@ const chooseImage: UniNamespace.InterceptorOptions = {
               resolve(args);
             } else {
               console.log(`用户拒绝相机权限授权:${result}`);
-              resolve(args);
+              // 对拦截器拦截执行时进行fail\complete调用，确保调用链完整
+              args.fail?.(failResult);
+              args.complete?.(failResult);
+              resolve(false);
             }
           }).catch((error) => {
             console.error("请求相机权限时出错:", error);
@@ -33,7 +42,10 @@ const chooseImage: UniNamespace.InterceptorOptions = {
               resolve(args);
             } else {
               console.log(`用户拒绝相册权限授权:${result}`);
-              resolve(args);
+              // 对拦截器拦截执行时进行fail\complete调用，确保调用链完整
+              args.fail?.(failResult);
+              args.complete?.(failResult);
+              resolve(false);
             }
           }).catch((error) => {
             console.error("请求相册权限时出错:", error);
@@ -49,7 +61,10 @@ const chooseImage: UniNamespace.InterceptorOptions = {
                   resolve(args);
                 } else {
                   console.log(`用户拒绝相册权限授权:${photoResult}`);
-                  resolve(args);
+                  // 对拦截器拦截执行时进行fail\complete调用，确保调用链完整
+                  args.fail?.(failResult);
+                  args.complete?.(failResult);
+                  resolve(false);
                 }
               }).catch((error) => {
                 console.error("请求相册权限时出错:", error);
@@ -57,7 +72,10 @@ const chooseImage: UniNamespace.InterceptorOptions = {
               });
             } else {
               console.log(`相机权限授权结果:${cameraResult}`);
-              reject(new Error("用户拒绝相机权限授权"));
+              // 对拦截器拦截执行时进行fail\complete调用，确保调用链完整
+              args.fail?.(failResult);
+              args.complete?.(failResult);
+              resolve(false);
             }
           }).catch((error) => {
             console.error("请求相机权限时出错:", error);
@@ -85,7 +103,10 @@ const chooseImage: UniNamespace.InterceptorOptions = {
             resolve(args);
           } else {
             console.log(`用户拒绝图片选择权限授权:${granted}`);
-            resolve(args);
+            // 对拦截器拦截执行时进行fail\complete调用，确保调用链完整
+            args.fail?.(failResult);
+            args.complete?.(failResult);
+            resolve(false);
           }
         }).catch((error) => {
           console.error("请求图片选择权限时出错:", error);
@@ -137,7 +158,3 @@ export const chooseImageInterceptor: Plugin = {
     uni.addInterceptor("chooseMedia", chooseImage);
   },
 };
-
-export function applyChooseImageInterceptor(): void {
-  chooseImageInterceptor.install?.(null as any);
-}

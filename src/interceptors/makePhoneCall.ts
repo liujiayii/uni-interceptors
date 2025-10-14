@@ -58,7 +58,3 @@ export const makePhoneCallInterceptor: Plugin = {
     uni.addInterceptor("makePhoneCall", makePhoneCall);
   },
 };
-
-export function applyMakePhoneCallInterceptor(): void {
-  makePhoneCallInterceptor.install?.(null as any);
-}

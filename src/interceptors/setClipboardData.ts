@@ -41,12 +41,3 @@ export const setClipboardDataInterceptor: Plugin = {
     uni.addInterceptor("setClipboardData", clipboardDataInterceptor);
   },
 };
-
-/**
- * 直接应用剪贴板数据拦截器
- * 可以作为 Vue 插件使用: Vue.use(setClipboardDataInterceptor)
- * 也可以直接调用: applySetClipboardDataInterceptor()
- */
-export function applySetClipboardDataInterceptor(): void {
-  setClipboardDataInterceptor.install?.(null as any);
-}

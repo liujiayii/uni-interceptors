@@ -1,6 +1,6 @@
-export { applyChooseImageInterceptor, chooseImageInterceptor } from "./chooseImage";
-export { applyChooseLocationInterceptor, chooseLocationInterceptor } from "./chooseLocation";
-export { applyMakePhoneCallInterceptor, makePhoneCallInterceptor } from "./makePhoneCall";
-export { applyRouteInterceptor, checkLoginAndRedirect, routeInterceptor, type RouteInterceptorOptions } from "./route";
-export { applySetClipboardDataInterceptor, setClipboardDataInterceptor } from "./setClipboardData";
-export { applySetStorageInterceptor, setStorageInterceptor } from "./setStorage";
+export { chooseImageInterceptor } from "./chooseImage";
+export { chooseLocationInterceptor } from "./chooseLocation";
+export { makePhoneCallInterceptor } from "./makePhoneCall";
+export { checkLoginAndRedirect, routeInterceptor, type RouteInterceptorOptions } from "./route";
+export { setClipboardDataInterceptor } from "./setClipboardData";
+export { setStorageInterceptor } from "./setStorage";

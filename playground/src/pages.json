@@ -2,11 +2,12 @@
   "pages": [
     { "path": "pages/index/index" },
     { "path": "pages/need-login/index" },
-    { "path": "pages/login/index" }
+    { "path": "pages/login/index" },
+    { "path": "pages/choose-image/index", "style": { "navigationBarTitleText": "图片选择示例" } }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
+    "navigationBarTitleText": "uni-toolkit 示例",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   }

@@ -1,6 +1,12 @@
 import type { Plugin } from "vue";
 import { AuthType, checkAndRequestLocationAuth, checkSelfPermission, shouldShowRequestPermissionRationale, showAuthTip, showManualAuth } from "../tools";
 
+const failResult = {
+  errMsg: "[getLocation]:fail permission not granted",
+  errCode: -1,
+  authDenied: true,
+};
+
 const chooseLocation: UniNamespace.InterceptorOptions = {
   invoke(args) {
     // #ifdef APP-PLUS
@@ -11,8 +17,11 @@ const chooseLocation: UniNamespace.InterceptorOptions = {
             console.log(`位置权限授权结果:${result}`);
             resolve(args);
           } else {
-            console.log(`用户拒绝位置权限授权:${result}`);
-            resolve(args);
+            console.log(`用户未同意位置权限授权:${result}`);
+            // 对拦截器拦截执行时进行fail\complete调用，确保调用链完整
+            args.fail?.(failResult);
+            args.complete?.(failResult);
+            resolve(false);
           }
         }).catch((error) => {
           console.error(`请求位置权限时出错:${JSON.stringify(error)}`);
@@ -34,8 +43,11 @@ const chooseLocation: UniNamespace.InterceptorOptions = {
             console.log(`位置权限授权结果:${granted}`);
             resolve(args);
           } else {
-            console.log(`用户拒绝位置权限授权:${granted}`);
-            resolve(args);
+            console.log(`用户未同意位置权限授权:${granted}`);
+            // 对拦截器拦截执行时进行fail\complete调用，确保调用链完整
+            args.fail?.(failResult);
+            args.complete?.(failResult);
+            resolve(false);
           }
         }).catch((error) => {
           console.error("请求位置权限时出错:", error);
@@ -100,7 +112,3 @@ export const chooseLocationInterceptor: Plugin = {
     uni.addInterceptor("getLocation", chooseLocation);
   },
 };
-
-export function applyChooseLocationInterceptor(): void {
-  chooseLocationInterceptor.install?.(null as any);
-}

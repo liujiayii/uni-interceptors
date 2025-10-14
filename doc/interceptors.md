@@ -16,11 +16,11 @@
 
 ### chooseImage 拦截器
 
-### 功能描述
+#### 功能描述
 
-拦截 uni.chooseImage API 调用，提供增强功能
+拦截 uni.chooseImage 和 uni.chooseMedia API 调用，提供增强功能，自动处理权限申请和平台兼容性。
 
-### 平台支持
+#### 平台支持
 
 | 平台           | 支持情况 | 说明     |
 | -------------- | -------- | -------- |
@@ -34,7 +34,7 @@
 | 京东小程序     | ✅       | 支持拦截 |
 | App            | ✅       | 支持拦截 |
 
-### 使用示例
+#### 使用示例
 
 ```javascript
 // 直接使用 uni.chooseImage，拦截器会自动处理
@@ -55,18 +55,75 @@ uni.chooseImage({
     console.log("选择图片操作完成");
   }
 });
+
+// 使用 uni.chooseMedia，同样会被拦截
+uni.chooseMedia({
+  count: 1,
+  mediaType: ["image"], // 可以指定是图片还是视频，默认二者都有
+  sourceType: ["album", "camera"],
+  maxDuration: 30, // 拍摄视频最长拍摄时间，单位秒
+  camera: "back", // 默认是'back'，可选'front'
+  success(res) {
+    console.log("选择媒体成功", res.tempFiles);
+    // 处理选择的媒体文件
+    const tempFiles = res.tempFiles;
+  },
+  fail(err) {
+    console.log("选择媒体失败", err);
+  },
+  complete() {
+    console.log("选择媒体操作完成");
+  }
+});
 ```
 
-### 增强功能
+#### 增强功能
 
-该拦截器拦截 uni.chooseImage API 调用，提供以下增强功能：
+该拦截器拦截 uni.chooseImage 和 uni.chooseMedia API 调用，提供以下增强功能：
 
 1. **权限检查**：在 App 端自动检查相机和相册权限，根据 sourceType 参数动态请求相应权限
 2. **权限提示**：在请求权限前，向用户展示权限使用说明，提高授权成功率
-3. **错误处理增强**：对权限拒绝等错误进行统一处理，提供更友好的错误提示
-4. **兼容性处理**：处理不同平台间的差异，确保一致的调用体验
+3. **平台适配**：
+   - **App 端**：根据 sourceType 参数检查和请求相机、相册权限
+   - **小程序端**：使用 checkAndRequestImageAuth 函数处理小程序平台的图片选择权限
+   - **H5 端**：保持原有行为，由浏览器处理文件选择权限
+4. **错误处理增强**：对权限拒绝等错误进行统一处理，提供更友好的错误提示
+5. **调用链完整性**：确保在权限被拒绝时，正确调用 fail 和 complete 回调，保持调用链完整
 
-拦截器会在调用原始 API 之前和之后执行相应的处理逻辑，开发者无需修改现有代码，只需引入 uni-toolkit 即可自动获得这些增强功能。
+#### 权限处理逻辑
+
+- **App 端**：
+  - 如果只需要相机权限，优先请求相机权限
+  - 如果只需要相册权限，请求相册权限
+  - 如果同时需要相机和相册权限，优先请求相机权限，成功后再请求相册权限
+  - 权限请求失败时，调用 fail 和 complete 回调，并返回包含 authDenied 标志的错误对象
+
+- **小程序端**：
+  - 使用 checkAndRequestImageAuth 函数处理图片选择权限
+  - 根据不同小程序平台适配权限请求方式
+  - 微信小程序选择图片不需要相册权限，直接通过
+
+- **H5 端**：
+  - 保持原有行为，由浏览器处理文件选择权限
+  - 不进行权限检查，直接执行原始 API
+
+#### 安装和启用
+
+```javascript
+import { chooseImageInterceptor } from "uni-toolkit";
+// 在 main.js 或入口文件中
+import { createApp } from "vue";
+import App from "./App.vue";
+
+const app = createApp(App);
+
+// 安装拦截器
+app.use(chooseImageInterceptor);
+
+app.mount("#app");
+```
+
+拦截器会在调用原始 API 之前和之后执行相应的处理逻辑，开发者无需修改现有代码，只需引入 uni-toolkit 并安装拦截器即可自动获得这些增强功能。
 
 ### chooseLocation 拦截器
 
