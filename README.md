@@ -23,6 +23,7 @@
 
 - [🎯 适用场景](#-适用场景)
 - [🚀 安装](#-安装)
+- [📦 主要功能](#-主要功能)
 - [📚 详细文档](#-详细文档)
 - [🤝 贡献](#-贡献)
 - [📄 许可证](#-许可证)
@@ -43,6 +44,30 @@
 pnpm install uni-toolkit
 ```
 
+## 📦 主要功能
+
+### 拦截器 (Interceptors)
+
+- **chooseImage 拦截器**: 自动处理图片选择权限，支持 App 和小程序平台的相机、相册权限申请
+- **chooseLocation 拦截器**: 增强位置选择功能，自动处理权限和错误
+- **makePhoneCall 拦截器**: 增强拨打电话功能，提供参数校验和权限处理
+- **route 拦截器**: 路由增强，支持路由白名单和参数处理
+- **setClipboardData 拦截器**: 剪贴板增强，提供兼容性处理
+- **setStorage 拦截器**: 存储增强，支持数据加密和过期时间
+
+### Hooks
+
+- **useChooseImage**: 简化图片选择流程，自动处理权限申请
+- **useDesignSize**: 响应式设计尺寸处理
+- **useOnShow**: 页面显示生命周期处理
+
+### 工具函数 (Tools)
+
+- **权限管理**: 提供完整的权限检查、申请和提示功能
+- **环境检测**: 检测当前运行环境和平台
+- **事件总线**: 轻量级事件通信机制
+- **深拷贝**: 高性能对象深拷贝功能
+
 ## 📚 详细文档
 
 为了提供更好的文档体验，我们将详细文档按功能模块进行了分类：
@@ -59,6 +84,13 @@ pnpm install uni-toolkit
 - [env 文档](https://github.com/liujiayii/uni-toolkit/blob/main/doc/env.md) - 详细介绍环境检测功能
 - [tools 文档](https://github.com/liujiayii/uni-toolkit/blob/main/doc/tools.md) - 详细介绍所有工具函数
 - [interceptors 文档](https://github.com/liujiayii/uni-toolkit/blob/main/doc/interceptors.md) - 详细介绍所有拦截器
+
+### 示例项目
+
+- [playground 示例](https://github.com/liujiayii/uni-toolkit/tree/main/playground) - 完整的示例项目，展示所有功能的实际应用
+  - 图片选择示例：展示了 chooseImageInterceptor 的各种使用场景
+  - 拦截器示例：展示了各种拦截器的实际效果
+  - Hook 使用示例：展示了如何在实际项目中使用 Hooks
 
 ## 🤝 贡献
 

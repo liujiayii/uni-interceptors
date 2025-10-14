@@ -90,12 +90,3 @@ export const routeInterceptor: Plugin = {
     uni.addInterceptor("switchTab", navigateToInterceptor);
   },
 };
-
-/**
- * 直接应用路由拦截器
- * 可以作为 Vue 插件使用: Vue.use(routeInterceptor, options)
- * 也可以直接调用: applyRouteInterceptor(options)
- */
-export function applyRouteInterceptor(options: RouteInterceptorOptions): void {
-  routeInterceptor.install?.(null as any, options);
-}

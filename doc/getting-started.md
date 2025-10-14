@@ -19,18 +19,34 @@ pnpm install uni-toolkit
 ## 作为 Vue 插件使用
 
 ```javascript
-import { chooseLocationInterceptor } from "uni-toolkit";
+import { chooseImageInterceptor, chooseLocationInterceptor } from "uni-toolkit";
 import { createApp } from "vue";
 
 const app = createApp(App);
 
 // 注册拦截器
+app.use(chooseImageInterceptor);
 app.use(chooseLocationInterceptor);
 ```
 
 ### 说明
 
 这种方式将拦截器作为 Vue 插件注册，适用于使用 Vue 3 的项目。注册后，拦截器会自动拦截相应的 uni API 调用，提供增强功能。
+
+### 图片选择拦截器示例
+
+```javascript
+import { chooseImageInterceptor } from "uni-toolkit";
+import { createApp } from "vue";
+
+const app = createApp(App);
+
+// 注册图片选择拦截器
+app.use(chooseImageInterceptor);
+
+// 注册后，可以直接使用 uni.chooseImage，无需额外处理权限
+// 拦截器会自动处理权限申请和平台兼容性
+```
 
 ## 直接调用函数使用
 
@@ -87,6 +103,47 @@ export default {
 
 uni-toolkit 提供了多个实用的 Hooks，可以简化常见功能的开发流程。这些 Hooks 可以在 Vue 组件的 setup 函数中使用，提供响应式的数据和功能。
 
+### 图片选择 Hook 示例
+
+```javascript
+import { useChooseImage } from "uni-toolkit";
+
+// 在组件中使用
+export default {
+  setup() {
+    // 使用图片选择 hook，自动处理权限
+    const selectFromAlbum = async () => {
+      try {
+        const res = await useChooseImage({
+          count: 1,
+          sourceType: ["album"] // 只从相册选择
+        });
+        console.log("从相册选择的图片：", res);
+      } catch (error) {
+        console.error("选择图片失败：", error);
+      }
+    };
+
+    const takePhoto = async () => {
+      try {
+        const res = await useChooseImage({
+          count: 1,
+          sourceType: ["camera"] // 只拍照
+        });
+        console.log("拍摄的图片：", res);
+      } catch (error) {
+        console.error("拍照失败：", error);
+      }
+    };
+
+    return {
+      selectFromAlbum,
+      takePhoto
+    };
+  }
+};
+```
+
 ## 按模块导入
 
 ```javascript
@@ -97,10 +154,10 @@ import { isMpWeiXinWork } from "uni-toolkit/env";
 import { useChooseImage } from "uni-toolkit/hooks";
 
 // 按需导入拦截器
-import { applyChooseLocationInterceptor } from "uni-toolkit/interceptors";
+import { applyChooseLocationInterceptor, chooseImageInterceptor } from "uni-toolkit/interceptors";
 
 // 按需导入工具函数
-import { checkSelfPermission } from "uni-toolkit/tools";
+import { checkAndRequestImageAuth, checkSelfPermission } from "uni-toolkit/tools";
 ```
 
 ### 说明
@@ -113,6 +170,38 @@ import { checkSelfPermission } from "uni-toolkit/tools";
 - `uni-toolkit/hooks` - Hooks 功能
 - `uni-toolkit/interceptors` - 拦截器功能
 - `uni-toolkit/tools` - 工具函数功能
+
+### 图片选择权限处理示例
+
+```javascript
+import { checkAndRequestImageAuth } from "uni-toolkit/tools";
+
+// 在选择图片前检查权限
+async function chooseImageWithPermissionCheck() {
+  // 检查并请求图片选择权限
+  const hasPermission = await checkAndRequestImageAuth(["album", "camera"]);
+
+  if (hasPermission) {
+    // 已获得权限，执行图片选择
+    uni.chooseImage({
+      count: 1,
+      sourceType: ["album", "camera"],
+      success(res) {
+        console.log("选择图片成功", res.tempFilePaths);
+      },
+      fail(err) {
+        console.error("选择图片失败", err);
+      }
+    });
+  } else {
+    // 未获得权限，提示用户
+    uni.showToast({
+      title: "需要图片选择权限才能使用此功能",
+      icon: "none"
+    });
+  }
+}
+```
 
 ## 下一步
 

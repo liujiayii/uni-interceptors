@@ -101,7 +101,7 @@ export function checkPermissions(permissionTypes: string[]): Promise<{ [key: str
             permissionResults[permissionType] = false;
           } else {
             // 未授权且未明确拒绝
-            permissionResults[permissionType] = false;
+            permissionResults[permissionType] = true;
           }
         }
 

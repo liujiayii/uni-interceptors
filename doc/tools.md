@@ -149,13 +149,15 @@ async function checkLocationPermission() {
 
 ### checkAndRequestImageAuth
 
-**功能：** 检查并请求小程序图片选择权限（支持所有小程序平台），是 requestPermissions 的封装函数。
+#### 功能描述
+
+检查并请求小程序图片选择权限（支持所有小程序平台）。
 
 #### 参数
 
-| 参数       | 类型     | 必填 | 说明                                     |
-| ---------- | -------- | ---- | ---------------------------------------- |
-| sourceType | string[] | 否   | 图片来源类型，默认为 ['album', 'camera'] |
+| 参数名     | 类型     | 必填 | 默认值              | 说明                                 |
+| ---------- | -------- | ---- | ------------------- | ------------------------------------ |
+| sourceType | string[] | 否   | ["album", "camera"] | 图片来源类型，可选 'album'、'camera' |
 
 #### 返回值
 
@@ -166,24 +168,50 @@ async function checkLocationPermission() {
 ```typescript
 import { checkAndRequestImageAuth } from "uni-toolkit";
 
-// 检查相册和相机权限
-const hasPermission = await checkAndRequestImageAuth("mp-weixin", ["album", "camera"]);
+// 检查相册和相机权限（默认）
+const hasPermission = await checkAndRequestImageAuth(["album", "camera"]);
 
 // 仅检查相册权限
-const hasAlbumPermission = await checkAndRequestImageAuth("mp-weixin", ["album"]);
+const hasAlbumPermission = await checkAndRequestImageAuth(["album"]);
 
 // 仅检查相机权限
-const hasCameraPermission = await checkAndRequestImageAuth("mp-weixin", ["camera"]);
+const hasCameraPermission = await checkAndRequestImageAuth(["camera"]);
+
+// 在图片选择前检查权限
+async function chooseImage() {
+  const hasPermission = await checkAndRequestImageAuth(["album", "camera"]);
+  if (hasPermission) {
+    // 已获得权限，执行图片选择
+    uni.chooseImage({
+      count: 1,
+      sourceType: ["album", "camera"],
+      success(res) {
+        console.log("选择图片成功", res.tempFilePaths);
+      },
+      fail(err) {
+        console.error("选择图片失败", err);
+      }
+    });
+  } else {
+    // 未获得权限，提示用户
+    uni.showToast({
+      title: "需要图片选择权限才能使用此功能",
+      icon: "none"
+    });
+  }
+}
 ```
 
 #### 说明
 
-该函数用于检查并请求小程序平台的图片选择权限。它是 requestPermissions 函数的封装，专门用于处理图片选择相关的权限。根据 sourceType 参数，它会检查并请求相机权限和/或相册权限。函数返回一个Promise，解析为一个布尔值，表示是否获得了所需权限。
+该函数用于检查并请求小程序平台的图片选择权限。它是 `requestPermissions` 函数的封装，专门用于处理图片选择相关的权限。根据 `sourceType` 参数，它会检查并请求相机权限和/或相册权限。
 
 sourceType 参数说明：
 
 - 'album' - 相册权限，用于从相册选择图片
 - 'camera' - 相机权限，用于拍照获取图片
+
+该函数会根据不同小程序平台采用相应的权限检查和请求策略，并在必要时向用户显示权限说明。对于微信小程序，选择图片不需要相册权限，函数会自动处理这种特殊情况。
 
 ### checkSelfPermission
 
