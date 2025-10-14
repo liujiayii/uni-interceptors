@@ -14,6 +14,12 @@
   <a href="https://github.com/liujiayii/uni-toolkit/actions/workflows/build-test.yml" target="_blank">
     <img src="https://github.com/liujiayii/uni-toolkit/actions/workflows/build-test.yml/badge.svg" alt="Build Status" />
   </a>
+  <a href="https://github.com/liujiayii/uni-toolkit/actions/workflows/deploy-docs.yml" target="_blank">
+    <img src="https://github.com/liujiayii/uni-toolkit/actions/workflows/deploy-docs.yml/badge.svg" alt="Docs Status" />
+  </a>
+  <a href="https://liujiayii.github.io/uni-toolkit/" target="_blank">
+    <img src="https://img.shields.io/badge/docs-online-brightgreen" alt="Online Docs" />
+  </a>
   <a href="./LICENSE" target="_blank">
     <img src="https://img.shields.io/npm/l/uni-toolkit.svg" alt="License" />
   </a>
@@ -70,7 +76,13 @@ pnpm install uni-toolkit
 
 ## 📚 详细文档
 
-为了提供更好的文档体验，我们将详细文档按功能模块进行了分类：
+### 📖 在线文档
+
+访问我们的 [在线文档网站](https://liujiayii.github.io/uni-toolkit/) 获取最新的文档和示例。
+
+### 📝 文档部署
+
+本项目使用 GitHub Actions 自动部署文档到 GitHub Pages。详细部署信息请参考 [DEPLOY.md](./DEPLOY.md)。
 
 ### 入门指南
 
