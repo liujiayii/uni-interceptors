@@ -44,7 +44,7 @@ jobs:
         run: pnpm run docs:build
 
       - name: 上传构建产物
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: docs/.vitepress/dist
 
