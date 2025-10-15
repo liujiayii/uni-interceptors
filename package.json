@@ -93,6 +93,6 @@
     "vue-eslint-parser": "^10.2.0"
   },
   "lint-staged": {
-    "*.{js,ts,vue}": "eslint --cache --fix"
+    "*.{js,ts,vue,md}": "eslint --cache --fix"
   }
 }
