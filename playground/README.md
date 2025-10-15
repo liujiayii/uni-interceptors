@@ -150,7 +150,7 @@ async function useChooseImageHook() {
 ## 🔗 相关文档
 
 - [uni-toolkit 主文档](../README.md)
-- [快速开始指南](../doc/getting-started.md)
-- [拦截器文档](../doc/interceptors.md)
-- [Hooks 文档](../doc/hooks.md)
-- [工具函数文档](../doc/tools.md)
+- [快速开始指南](https://liujiayii.github.io/uni-toolkit/guide/getting-started)
+- [拦截器文档](https://liujiayii.github.io/uni-toolkit/guide/interceptors)
+- [Hooks 文档](https://liujiayii.github.io/uni-toolkit/guide/hooks)
+- [工具函数文档](https://liujiayii.github.io/uni-toolkit/guide/tools)
