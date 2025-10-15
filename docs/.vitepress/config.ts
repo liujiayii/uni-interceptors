@@ -71,7 +71,6 @@ export default defineConfig({
               { text: "authTips", link: "/tools/authTips/index" },
               { text: "checkSelfPermission", link: "/tools/checkSelfPermission/index" },
               { text: "cloneDeep", link: "/tools/cloneDeep/index" },
-              { text: "eventBus", link: "/tools/eventBus/index" },
               { text: "getCurrentPageRoute", link: "/tools/getCurrentPageRoute/index" },
               { text: "isPageLevelComponent", link: "/tools/isPageLevelComponent/index" },
               { text: "permissionAuth", link: "/tools/permissionAuth/index" },

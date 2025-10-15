@@ -1,6 +1,7 @@
 import { onShow } from "@dcloudio/uni-app";
 import { onUnmounted } from "vue";
-import { eventBus, getCurrentPageRoute } from "../../tools";
+import { getCurrentPageRoute } from "../../tools";
+import { eventBus } from "./eventBus";
 
 export type UseOnShowOptions = {
   /**

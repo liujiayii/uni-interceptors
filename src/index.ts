@@ -25,7 +25,6 @@ export {
   checkPermissions,
   checkSelfPermission,
   cloneDeep,
-  eventBus,
   getCurrentPageRoute,
   isPageLevelComponent,
   requestPermissions,
