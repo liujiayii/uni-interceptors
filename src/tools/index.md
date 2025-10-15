@@ -59,8 +59,6 @@ import { checkSelfPermission, cloneDeep, eventBus } from "uni-toolkit/tools";
 
 每个工具函数都有详细的文档和使用示例，您可以通过上方的链接查看具体信息。
 
-````
-
 #### 说明
 
 该函数用于检查并请求小程序平台的图片选择权限。它是 `requestPermissions` 函数的封装，专门用于处理图片选择相关的权限。根据 `sourceType` 参数，它会检查并请求相机权限和/或相册权限。
@@ -107,7 +105,7 @@ async function checkLocationPermission() {
     console.error("检查权限时出错:", error);
   }
 }
-````
+```
 
 #### 增强功能
 
