@@ -31,7 +31,7 @@
 **示例:**
 
 ```typescript
-import { checkPermissions } from "@uni-toolkit/tools";
+import { checkPermissions } from "uni-toolkit/tools";
 
 // 检查位置和相机权限
 checkPermissions(["location", "camera"]).then((results) => {
@@ -55,7 +55,7 @@ checkPermissions(["location", "camera"]).then((results) => {
 **示例:**
 
 ```typescript
-import { requestPermissions } from "@uni-toolkit/tools";
+import { requestPermissions } from "uni-toolkit/tools";
 
 // 请求位置和相机权限
 requestPermissions(["location", "camera"]).then((granted) => {
@@ -80,7 +80,7 @@ requestPermissions(["location", "camera"]).then((granted) => {
 **示例:**
 
 ```typescript
-import { checkAndRequestLocationAuth } from "@uni-toolkit/tools";
+import { checkAndRequestLocationAuth } from "uni-toolkit/tools";
 
 // 获取用户位置
 checkAndRequestLocationAuth().then((granted) => {
@@ -114,7 +114,7 @@ checkAndRequestLocationAuth().then((granted) => {
 **示例:**
 
 ```typescript
-import { checkAndRequestImageAuth } from "@uni-toolkit/tools";
+import { checkAndRequestImageAuth } from "uni-toolkit/tools";
 
 // 请求相册和相机权限（默认）
 checkAndRequestImageAuth().then((granted) => {
@@ -148,45 +148,10 @@ checkAndRequestImageAuth(["camera"]).then((granted) => {
 
 ### 1. 扫码功能
 
-```typescript
-import { checkAndRequestCameraAuth } from "@uni-toolkit/tools";
-
-export default {
-  methods: {
-    async scanCode() {
-      // 请求相机权限
-      const hasPermission = await checkAndRequestCameraAuth();
-      if (!hasPermission) {
-        uni.showToast({
-          title: "需要相机权限才能扫码",
-          icon: "none"
-        });
-        return;
-      }
-
-      // 执行扫码
-      uni.scanCode({
-        success: (res) => {
-          console.log("扫码结果:", res.result);
-          this.handleScanResult(res.result);
-        },
-        fail: (err) => {
-          console.error("扫码失败:", err);
-        }
-      });
-    },
-
-    handleScanResult(result) {
-      // 处理扫码结果
-    }
-  }
-};
-```
-
 ### 2. 用户位置获取
 
 ```typescript
-import { checkAndRequestLocationAuth } from "@uni-toolkit/tools";
+import { checkAndRequestLocationAuth } from "uni-toolkit/tools";
 
 export default {
   data() {
@@ -246,7 +211,7 @@ export default {
 ### 3. 图片上传功能
 
 ```typescript
-import { checkAndRequestImageAuth } from "@uni-toolkit/tools";
+import { checkAndRequestImageAuth } from "uni-toolkit/tools";
 
 export default {
   methods: {

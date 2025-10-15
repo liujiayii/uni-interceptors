@@ -47,11 +47,11 @@
 ## 🚀 安装
 
 ```bash
-npm install @uni-toolkit/core
+npm install uni-toolkit
 # 或
-pnpm add @uni-toolkit/core
+pnpm add uni-toolkit
 # 或
-yarn add @uni-toolkit/core
+yarn add uni-toolkit
 ```
 
 ## 🚀 快速开始
@@ -60,7 +60,7 @@ yarn add @uni-toolkit/core
 
 ```typescript
 // 1. 导入拦截器
-import { chooseImageInterceptor } from "@uni-toolkit/interceptors";
+import { chooseImageInterceptor } from "uni-toolkit/interceptors";
 
 // 2. 在应用入口处安装拦截器
 app.use(chooseImageInterceptor);
@@ -77,7 +77,7 @@ uni.chooseImage({
 
 ```typescript
 // 使用 Hooks
-import { useChooseImage } from "@uni-toolkit/hooks";
+import { useChooseImage } from "uni-toolkit/hooks";
 
 const { chooseImage } = useChooseImage();
 
@@ -93,9 +93,9 @@ async function handleChooseImage() {
 ```
 
 ```typescript
-import { isWeChatMiniProgram } from "@uni-toolkit/env";
+import { isMpWeiXinWork } from "uni-toolkit/env";
 // 使用工具函数
-import { cloneDeep, eventBus } from "@uni-toolkit/tools";
+import { cloneDeep, eventBus } from "uni-toolkit/tools";
 
 // 深拷贝对象
 const clonedData = cloneDeep(originalData);
@@ -104,8 +104,8 @@ const clonedData = cloneDeep(originalData);
 eventBus.emit("user-login", { userId: 123 });
 
 // 环境检测
-if (isWeChatMiniProgram()) {
-  console.log("当前运行在微信小程序环境");
+if (isMpWeiXinWork) {
+  console.log("当前运行在微信小程序企业版环境");
 }
 ```
 
@@ -119,7 +119,6 @@ if (isWeChatMiniProgram()) {
 - **route 拦截器**: 路由增强，支持路由白名单和参数处理
 - **setClipboardData 拦截器**: 剪贴板增强，提供兼容性处理
 - **setStorage 拦截器**: 存储增强，支持数据加密和过期时间
-- **checkLoginAndRedirect 拦截器**: 登录检查与重定向拦截器
 
 ### 🎣 Hooks
 
@@ -143,11 +142,6 @@ if (isWeChatMiniProgram()) {
 ### 🌍 环境检测 (Environment)
 
 - **平台检测**: 检测当前运行环境和平台
-  - `isWeChatMiniProgram` - 检测是否为微信小程序
-  - `isAlipayMiniProgram` - 检测是否为支付宝小程序
-  - `isDouyinMiniProgram` - 检测是否为抖音小程序
-  - `isApp` - 检测是否为 App
-  - `isH5` - 检测是否为 H5
   - `isMpWeiXinWork` - 检测是否为微信小程序企业版
 
 ## 📚 详细文档

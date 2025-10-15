@@ -19,7 +19,7 @@ function getCurrentPageRoute(): string;
 ## 使用方法
 
 ```typescript
-import { getCurrentPageRoute } from "@uni-toolkit/tools";
+import { getCurrentPageRoute } from "uni-toolkit/tools";
 
 // 获取当前页面路由
 const route = getCurrentPageRoute();

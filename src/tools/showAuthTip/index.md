@@ -33,7 +33,7 @@ function showAuthTip(authorize: AuthType): Promise<boolean>;
 ## 使用方法
 
 ```typescript
-import { AuthType, showAuthTip } from "@uni-toolkit/tools";
+import { AuthType, showAuthTip } from "uni-toolkit/tools";
 
 // 请求相机权限
 showAuthTip(AuthType.CAMERA).then((granted) => {

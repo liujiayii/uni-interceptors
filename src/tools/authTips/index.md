@@ -22,7 +22,7 @@
 ## 使用方法
 
 ```typescript
-import { authTips, AuthType } from "@uni-toolkit/tools";
+import { authTips, AuthType } from "uni-toolkit/tools";
 
 // 获取位置权限的提示信息
 const locationTip = authTips[AuthType.LOCATION];

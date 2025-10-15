@@ -22,7 +22,7 @@ function isPageLevelComponent(): boolean;
 ## 使用方法
 
 ```typescript
-import { isPageLevelComponent } from "@uni-toolkit/tools";
+import { isPageLevelComponent } from "uni-toolkit/tools";
 
 // 在组件中使用
 export default {
@@ -255,7 +255,7 @@ export default {
 ### 1. 使用页面路径判断
 
 ```typescript
-import { getCurrentPageRoute } from "@uni-toolkit/tools";
+import { getCurrentPageRoute } from "uni-toolkit/tools";
 
 function isPageByRoute() {
   const route = getCurrentPageRoute();

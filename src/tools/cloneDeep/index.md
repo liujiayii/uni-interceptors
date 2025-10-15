@@ -25,7 +25,7 @@ function cloneDeep<T>(obj: T): T;
 ## 使用方法
 
 ```typescript
-import { cloneDeep } from "@uni-toolkit/tools";
+import { cloneDeep } from "uni-toolkit/tools";
 
 // 简单对象深拷贝
 const originalObj = {

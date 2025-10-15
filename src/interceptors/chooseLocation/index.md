@@ -22,7 +22,7 @@
 ## 使用方法
 
 ```typescript
-import { chooseLocationInterceptor } from "@uni-toolkit/interceptors";
+import { chooseLocationInterceptor } from "uni-toolkit/interceptors";
 
 // 在应用入口处安装拦截器
 app.use(chooseLocationInterceptor);

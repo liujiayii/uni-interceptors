@@ -42,7 +42,6 @@ export default defineConfig({
             text: "拦截器",
             items: [
               { text: "拦截器概览", link: "/interceptors/index" },
-              { text: "checkLoginAndRedirect", link: "/interceptors/checkLoginAndRedirect/index" },
               { text: "chooseImage", link: "/interceptors/chooseImage/index" },
               { text: "chooseLocation", link: "/interceptors/chooseLocation/index" },
               { text: "makePhoneCall", link: "/interceptors/makePhoneCall/index" },

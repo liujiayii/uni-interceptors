@@ -25,7 +25,7 @@ uni-toolkit 提供了多种导入方式，你可以根据需要选择：
 // 导入主包（包含所有功能）
 import uniToolkit from "uni-toolkit";
 
-import { isWeChatMiniProgram } from "uni-toolkit/env";
+import { isMpWeiXinWork } from "uni-toolkit/env";
 import { useChooseImage } from "uni-toolkit/hooks";
 // 按需导入特定模块
 import { chooseImageInterceptor } from "uni-toolkit/interceptors";
@@ -39,10 +39,10 @@ import { checkPermission } from "uni-toolkit/tools";
 import { chooseImageInterceptor, chooseLocationInterceptor } from "uni-toolkit/interceptors";
 
 // 注册图片选择拦截器
-uni.addInterceptor("chooseImage", chooseImageInterceptor);
+app.use(chooseImageInterceptor);
 
 // 注册位置选择拦截器
-uni.addInterceptor("chooseLocation", chooseLocationInterceptor);
+app.use(chooseLocationInterceptor);
 ```
 
 ### 3. 使用 Hooks

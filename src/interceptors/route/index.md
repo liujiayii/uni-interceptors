@@ -22,7 +22,7 @@
 ## 使用方法
 
 ```typescript
-import { routeInterceptor } from "@uni-toolkit/interceptors";
+import { routeInterceptor } from "uni-toolkit/interceptors";
 
 // 在应用入口处安装拦截器
 app.use(routeInterceptor, {
@@ -55,7 +55,7 @@ app.use(routeInterceptor, {
 手动检查登录状态并跳转到登录页的函数。
 
 ```typescript
-import { checkLoginAndRedirect } from "@uni-toolkit/interceptors";
+import { checkLoginAndRedirect } from "uni-toolkit/interceptors";
 
 // 检查登录状态，如果未登录则跳转到登录页
 const isLoggedIn = checkLoginAndRedirect("/pages/user/profile");

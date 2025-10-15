@@ -28,7 +28,7 @@ function showManualAuth(authorize: AuthType): Promise<boolean>;
 ## 使用方法
 
 ```typescript
-import { AuthType, showManualAuth } from "@uni-toolkit/tools";
+import { AuthType, showManualAuth } from "uni-toolkit/tools";
 
 // 引导用户手动开启相机权限
 showManualAuth(AuthType.CAMERA).then((confirmed) => {
@@ -45,7 +45,7 @@ showManualAuth(AuthType.CAMERA).then((confirmed) => {
 ### 1. 权限被拒绝后的处理
 
 ```typescript
-import { AuthType, checkSelfPermission, showManualAuth } from "@uni-toolkit/tools";
+import { AuthType, checkSelfPermission, showManualAuth } from "uni-toolkit/tools";
 
 export default {
   methods: {
@@ -105,7 +105,7 @@ export default {
 ### 2. 多权限管理
 
 ```typescript
-import { AuthType, checkSelfPermission, showManualAuth } from "@uni-toolkit/tools";
+import { AuthType, checkSelfPermission, showManualAuth } from "uni-toolkit/tools";
 
 export default {
   data() {
@@ -202,7 +202,7 @@ export default {
 ### 3. 权限状态持久化
 
 ```typescript
-import { AuthType, checkSelfPermission, showManualAuth } from "@uni-toolkit/tools";
+import { AuthType, checkSelfPermission, showManualAuth } from "uni-toolkit/tools";
 
 export default {
   data() {

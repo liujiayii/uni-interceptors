@@ -36,7 +36,7 @@ function shouldShowRequestPermissionRationale(authorize: AuthType): boolean;
 ## 使用方法
 
 ```typescript
-import { AuthType, shouldShowRequestPermissionRationale } from "@uni-toolkit/tools";
+import { AuthType, shouldShowRequestPermissionRationale } from "uni-toolkit/tools";
 
 // 检查是否需要显示相机权限说明
 const shouldShowCameraRationale = shouldShowRequestPermissionRationale(AuthType.CAMERA);
@@ -63,7 +63,7 @@ if (shouldShowCameraRationale) {
 ### 1. 权限请求流程优化
 
 ```typescript
-import { AuthType, checkSelfPermission, shouldShowRequestPermissionRationale } from "@uni-toolkit/tools";
+import { AuthType, checkSelfPermission, shouldShowRequestPermissionRationale } from "uni-toolkit/tools";
 
 export default {
   methods: {
@@ -122,7 +122,7 @@ export default {
 ### 2. 多权限请求处理
 
 ```typescript
-import { AuthType, shouldShowRequestPermissionRationale } from "@uni-toolkit/tools";
+import { AuthType, shouldShowRequestPermissionRationale } from "uni-toolkit/tools";
 
 export default {
   methods: {
@@ -169,7 +169,7 @@ export default {
 ### 3. 权限请求状态跟踪
 
 ```typescript
-import { AuthType, checkSelfPermission, shouldShowRequestPermissionRationale } from "@uni-toolkit/tools";
+import { AuthType, checkSelfPermission, shouldShowRequestPermissionRationale } from "uni-toolkit/tools";
 
 export default {
   data() {

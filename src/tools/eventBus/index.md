@@ -17,7 +17,7 @@
 ## 基本用法
 
 ```typescript
-import { eventBus } from "@uni-toolkit/tools";
+import { eventBus } from "uni-toolkit/tools";
 
 // 订阅事件
 eventBus.on("user-login", (user) => {

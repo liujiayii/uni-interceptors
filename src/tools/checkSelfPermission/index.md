@@ -30,7 +30,7 @@ function checkSelfPermission(authorize: AuthType): boolean;
 ## 使用方法
 
 ```typescript
-import { AuthType, checkSelfPermission } from "@uni-toolkit/tools";
+import { AuthType, checkSelfPermission } from "uni-toolkit/tools";
 
 // 检查相机权限
 const hasCameraPermission = checkSelfPermission(AuthType.CAMERA);

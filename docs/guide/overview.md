@@ -63,15 +63,14 @@ function handleChooseImage() {
 
 ### 主要工具函数
 
-| 分类     | 函数                         | 功能描述               |
-| -------- | ---------------------------- | ---------------------- |
-| 权限管理 | `checkPermission`            | 检查权限状态           |
-| 权限管理 | `requestPermission`          | 请求权限               |
-| 权限管理 | `showPermissionDeniedDialog` | 显示权限被拒对话框     |
-| 环境检测 | `isWeChatMiniProgram`        | 检测是否为微信小程序   |
-| 环境检测 | `isAlipayMiniProgram`        | 检测是否为支付宝小程序 |
-| 事件总线 | `eventBus`                   | 轻量级事件通信机制     |
-| 工具函数 | `deepClone`                  | 高性能对象深拷贝       |
+| 分类     | 函数                         | 功能描述                   |
+| -------- | ---------------------------- | -------------------------- |
+| 权限管理 | `checkPermission`            | 检查权限状态               |
+| 权限管理 | `requestPermission`          | 请求权限                   |
+| 权限管理 | `showPermissionDeniedDialog` | 显示权限被拒对话框         |
+| 环境检测 | `isMpWeiXinWork`             | 检测是否为微信小程序企业版 |
+| 事件总线 | `eventBus`                   | 轻量级事件通信机制         |
+| 工具函数 | `deepClone`                  | 高性能对象深拷贝           |
 
 ### 使用方式
 
@@ -92,21 +91,16 @@ if (!hasPermission) {
 
 ### 主要环境检测
 
-| 检测项                | 功能描述               |
-| --------------------- | ---------------------- |
-| `isWeChatMiniProgram` | 检测是否为微信小程序   |
-| `isAlipayMiniProgram` | 检测是否为支付宝小程序 |
-| `isDouyinMiniProgram` | 检测是否为抖音小程序   |
-| `isApp`               | 检测是否为 App         |
-| `isH5`                | 检测是否为 H5          |
-| `getPlatform`         | 获取当前平台信息       |
+| 检测项           | 功能描述                   |
+| ---------------- | -------------------------- |
+| `isMpWeiXinWork` | 检测是否为微信小程序企业版 |
 
 ### 使用方式
 
 ```typescript
-import { getPlatform, isWeChatMiniProgram } from "uni-toolkit/env";
+import { getPlatform, isMpWeiXinWork } from "uni-toolkit/env";
 
-if (isWeChatMiniProgram()) {
+if (isMpWeiXinWork) {
   // 微信小程序特定逻辑
 }
 
