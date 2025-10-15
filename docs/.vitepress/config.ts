@@ -6,13 +6,18 @@ export default defineConfig({
   description: "uni tools,uni app 工具库",
   base: "/uni-toolkit/",
 
-  srcDir: "./",
-
+  srcDir: "../",
+  srcExclude: [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/playground/**",
+  ],
+  cleanUrls: true,
   rewrites: {
-    "interceptors/:page/index": "src/interceptors/:page/index.md",
-    "hooks/:page/index": "src/hooks/:page/index.md",
-    "tools/:page/index": "src/tools/:page/index.md",
-    "env/index": "src/env/index.md",
+    "docs/:page": ":page",
+    "docs/guide/:page": "guide/:page",
+    "src/:folder/index.md": ":folder/index.md",
+    "src/:folder/:page/index.md": ":folder/:page/index.md",
   },
 
   // 暂时禁用死链检查
