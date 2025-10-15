@@ -87,6 +87,12 @@ function navigateToChooseImageDemo() {
     url: "/pages/choose-image/index",
   });
 }
+
+function navigateToTestHooks() {
+  uni.navigateTo({
+    url: "/pages/test-hooks",
+  });
+}
 </script>
 
 <template>
@@ -124,6 +130,9 @@ function navigateToChooseImageDemo() {
     </button>
     <button @click="navigateToChooseImageDemo">
       图片选择示例页面
+    </button>
+    <button @click="navigateToTestHooks">
+      Hooks测试页面
     </button>
 
     <!-- 显示选择的图片 -->

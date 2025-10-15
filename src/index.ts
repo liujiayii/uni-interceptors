@@ -19,7 +19,19 @@ export {
 export { type RouteInterceptorOptions } from "./interceptors";
 
 export {
+  authTips,
+  checkAndRequestImageAuth,
+  checkAndRequestLocationAuth,
+  checkPermissions,
+  checkSelfPermission,
   cloneDeep,
+  eventBus,
+  getCurrentPageRoute,
+  isPageLevelComponent,
+  requestPermissions,
+  shouldShowRequestPermissionRationale,
+  showAuthTip,
+  showManualAuth,
 } from "./tools";
 
-export type { MiniProgramPlatform } from "./typings";
+export type { AuthType, MiniProgramPlatform } from "./typings";

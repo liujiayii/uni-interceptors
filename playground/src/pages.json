@@ -3,7 +3,8 @@
     { "path": "pages/index/index" },
     { "path": "pages/need-login/index" },
     { "path": "pages/login/index" },
-    { "path": "pages/choose-image/index", "style": { "navigationBarTitleText": "图片选择示例" } }
+    { "path": "pages/choose-image/index", "style": { "navigationBarTitleText": "图片选择示例" } },
+    { "path": "pages/test-hooks", "style": { "navigationBarTitleText": "Hooks测试" } }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
