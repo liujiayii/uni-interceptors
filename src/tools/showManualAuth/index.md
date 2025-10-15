@@ -20,7 +20,7 @@ function showManualAuth(authorize: AuthType): Promise<boolean>;
 
 ### 返回值
 
-返回一个 Promise<boolean>：
+返回一个 `Promise<boolean>：`
 
 - `true`: 用户确认前往设置或已有权限
 - `false`: 用户取消或显示模态框失败
