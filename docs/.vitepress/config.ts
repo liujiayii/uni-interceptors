@@ -87,6 +87,7 @@ export default defineConfig({
         items: [
           { text: "贡献指南", link: "/guide/contributing" },
           { text: "开发指南", link: "/guide/develop" },
+          { text: "部署指南", link: "/guide/deploy" },
         ],
       },
     ],

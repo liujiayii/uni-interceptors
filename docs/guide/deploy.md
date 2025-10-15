@@ -1,12 +1,26 @@
-# GitHub Pages 自动部署指南
+# GitHub Pages 部署指南
 
 本项目已配置自动部署流程，当您将代码推送到 `main` 分支时，会自动构建并部署 VitePress 文档到 GitHub Pages。
 
+## 启用 GitHub Pages
+
+要使自动部署流程正常工作，您需要在 GitHub 仓库中启用 GitHub Pages 功能。
+
+### 步骤
+
+1. 进入您的 GitHub 仓库页面
+2. 点击 "Settings" 选项卡
+3. 在左侧菜单中找到 "Pages" 选项
+4. 在 "Source" 部分，选择 "GitHub Actions"
+5. 保存设置
+
 ## 工作流程
 
-1. 当代码推送到 `main` 分支时，触发 GitHub Actions 工作流
-2. 工作流会自动安装依赖、构建文档
-3. 构建完成后，自动部署到 GitHub Pages
+完成上述设置后，当您将代码推送到 `main` 分支时，将自动触发以下流程：
+
+1. GitHub Actions 工作流自动运行
+2. 安装依赖并构建 VitePress 文档
+3. 将构建结果部署到 GitHub Pages
 
 ## 本地开发
 
@@ -41,6 +55,16 @@ pnpm run docs:preview
 ```bash
 pnpm run deploy
 ```
+
+## 访问文档
+
+部署完成后，您可以通过以下 URL 访问文档：
+
+```
+https://[您的用户名].github.io/uni-toolkit/
+```
+
+例如：`https://liujiayii.github.io/uni-toolkit/`
 
 ## 配置说明
 

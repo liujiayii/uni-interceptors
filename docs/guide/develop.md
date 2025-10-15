@@ -48,9 +48,8 @@ uni-toolkit/
 │   ├── env/            # 环境检测实现
 │   └── index.ts        # 主入口文件
 ├── docs/               # VitePress 文档目录
-├── doc/                # 原始文档目录（已迁移到 VitePress）
 ├── tests/              # 测试文件目录
-├── examples/           # 示例代码目录
+├── playground/         # 示例代码目录
 ├── package.json        # 项目配置
 ├── tsconfig.json       # TypeScript 配置
 └── README.md           # 项目说明
