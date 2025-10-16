@@ -95,13 +95,10 @@ async function handleChooseImage() {
 ```typescript
 import { isMpWeiXinWork } from "uni-toolkit/env";
 // 使用工具函数
-import { cloneDeep, eventBus } from "uni-toolkit/tools";
+import { cloneDeep } from "uni-toolkit/tools";
 
 // 深拷贝对象
 const clonedData = cloneDeep(originalData);
-
-// 事件通信
-eventBus.emit("user-login", { userId: 123 });
 
 // 环境检测
 if (isMpWeiXinWork) {
@@ -135,7 +132,6 @@ if (isMpWeiXinWork) {
   - `showManualAuth` - 引导用户手动授权
 - **通用工具**:
   - `cloneDeep` - 高性能对象深拷贝功能
-  - `eventBus` - 轻量级事件通信机制
   - `getCurrentPageRoute` - 获取当前页面路由
   - `isPageLevelComponent` - 判断是否为页面级组件
 

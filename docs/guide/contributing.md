@@ -59,7 +59,7 @@
 
 我们使用语义化提交消息，请遵循以下格式：
 
-```
+```text
 <type>(<scope>): <subject>
 
 <body>

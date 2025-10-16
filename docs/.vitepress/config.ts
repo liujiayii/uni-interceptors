@@ -71,7 +71,6 @@ export default defineConfig({
               { text: "authTips", link: "/tools/authTips/index" },
               { text: "checkSelfPermission", link: "/tools/checkSelfPermission/index" },
               { text: "cloneDeep", link: "/tools/cloneDeep/index" },
-              { text: "eventBus", link: "/tools/eventBus/index" },
               { text: "getCurrentPageRoute", link: "/tools/getCurrentPageRoute/index" },
               { text: "isPageLevelComponent", link: "/tools/isPageLevelComponent/index" },
               { text: "permissionAuth", link: "/tools/permissionAuth/index" },
@@ -88,6 +87,7 @@ export default defineConfig({
         items: [
           { text: "贡献指南", link: "/guide/contributing" },
           { text: "开发指南", link: "/guide/develop" },
+          { text: "部署指南", link: "/guide/deploy" },
         ],
       },
     ],

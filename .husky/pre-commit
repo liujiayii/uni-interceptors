@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
+
+# 运行代码格式化和检查
 pnpm lint-staged
-pnpm test 
-pnpm typecheck
+
+# 并行运行测试和类型检查
+pnpm run check:fast

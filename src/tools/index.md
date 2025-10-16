@@ -1,6 +1,6 @@
 # 工具函数
 
-uni-toolkit 提供了一系列实用的工具函数，帮助开发者简化常见任务的处理，包括权限管理、页面路由处理、事件总线等。
+uni-toolkit 提供了一系列实用的工具函数，帮助开发者简化常见任务的处理，包括权限管理、页面路由处理等。
 
 ## 目录
 
@@ -16,11 +16,10 @@ uni-toolkit 提供了一系列实用的工具函数，帮助开发者简化常�
   - [cloneDeep](./cloneDeep) - 深拷贝对象
   - [getCurrentPageRoute](./getCurrentPageRoute) - 获取当前页面路由
   - [isPageLevelComponent](./isPageLevelComponent) - 判断是否为页面级组件
-  - [eventBus](./eventBus) - 事件总线
 
 ## 概述
 
-uni-toolkit 提供了一系列实用的工具函数，帮助开发者简化常见任务的处理，包括权限管理、页面路由处理、事件总线等。这些工具函数可以直接在项目中使用，无需额外配置。
+uni-toolkit 提供了一系列实用的工具函数，帮助开发者简化常见任务的处理，包括权限管理、页面路由处理等。这些工具函数可以直接在项目中使用，无需额外配置。
 
 ### 主要工具函数
 
@@ -35,7 +34,6 @@ uni-toolkit 提供了一系列实用的工具函数，帮助开发者简化常�
 | `cloneDeep`                            | 深拷贝对象           | 对象深拷贝场景     |
 | `getCurrentPageRoute`                  | 获取当前页面路由     | 路由信息获取       |
 | `isPageLevelComponent`                 | 判断是否为页面级组件 | 组件类型判断       |
-| `eventBus`                             | 事件总线             | 组件间通信         |
 
 ### 使用方式
 
@@ -54,7 +52,7 @@ console.log("是否有位置权限:", hasPermission);
 
 ```javascript
 // 按需导入工具函数
-import { checkSelfPermission, cloneDeep, eventBus } from "uni-toolkit/tools";
+import { checkSelfPermission, cloneDeep } from "uni-toolkit/tools";
 ```
 
 每个工具函数都有详细的文档和使用示例，您可以通过上方的链接查看具体信息。
@@ -441,5 +439,4 @@ console.log(locationTip.content); // "需要位置权限以提供更好的服务
 ## 注意事项
 
 - 权限相关工具函数在不同平台上的行为可能有所不同，请参考具体文档
-- 事件总线在使用后记得移除事件监听，避免内存泄漏
 - 深拷贝工具对于大型对象可能会有性能影响
