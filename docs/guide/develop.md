@@ -39,7 +39,7 @@ pnpm link ./uni-toolkit
 
 ## 项目结构
 
-```
+```text
 uni-toolkit/
 ├── src/                 # 源代码目录
 │   ├── interceptors/    # 拦截器实现

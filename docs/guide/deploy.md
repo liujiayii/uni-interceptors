@@ -60,7 +60,7 @@ pnpm run deploy
 
 部署完成后，您可以通过以下 URL 访问文档：
 
-```
+```text
 https://[您的用户名].github.io/uni-toolkit/
 ```
 
