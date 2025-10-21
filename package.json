@@ -76,7 +76,7 @@
     "@antfu/eslint-config": "^6.0.0",
     "@dcloudio/types": "^3.4.25",
     "@dcloudio/uni-app": "3.0.0-4070620250821001",
-    "@types/node": "^24.7.2",
+    "@types/node": "^24.9.1",
     "@typescript-eslint/parser": "^8.46.2",
     "@uni-helper/uni-use": "^0.19.15",
     "eslint": "^9.38.0",
