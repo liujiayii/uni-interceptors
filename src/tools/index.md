@@ -8,6 +8,10 @@ uni-toolkit 提供了一系列实用的工具函数，帮助开发者简化常�
   - [checkSelfPermission](./checkSelfPermission) - 检查应用权限状态
   - [shouldShowRequestPermissionRationale](./shouldShowRequestPermissionRationale) - 判断是否显示权限说明
   - [permissionAuth](./permissionAuth) - 权限认证工具
+  - [checkPermissions](./checkPermissions) - 检查小程序权限状态
+  - [requestPermissions](./requestPermissions) - 请求小程序权限
+  - [checkAndRequestLocationAuth](./checkAndRequestLocationAuth) - 检查并请求位置权限
+  - [checkAndRequestImageAuth](./checkAndRequestImageAuth) - 检查并请求图片选择权限
 - [用户引导与提示](#用户引导与提示)
   - [showAuthTip](./showAuthTip) - 显示权限提示对话框
   - [showManualAuth](./showManualAuth) - 引导用户手动授权
@@ -23,17 +27,21 @@ uni-toolkit 提供了一系列实用的工具函数，帮助开发者简化常�
 
 ### 主要工具函数
 
-| 工具函数                               | 功能描述             | 适用场景           |
-| -------------------------------------- | -------------------- | ------------------ |
-| `checkSelfPermission`                  | 检查应用权限状态     | 需要检查权限的场景 |
-| `shouldShowRequestPermissionRationale` | 判断是否显示权限说明 | 权限请求前判断     |
-| `permissionAuth`                       | 权限认证工具         | 权限认证流程       |
-| `showAuthTip`                          | 显示权限提示对话框   | 权限提示场景       |
-| `showManualAuth`                       | 引导用户手动授权     | 权限被拒绝后引导   |
-| `authTips`                             | 权限提示文本         | 权限提示文案       |
-| `cloneDeep`                            | 深拷贝对象           | 对象深拷贝场景     |
-| `getCurrentPageRoute`                  | 获取当前页面路由     | 路由信息获取       |
-| `isPageLevelComponent`                 | 判断是否为页面级组件 | 组件类型判断       |
+| 工具函数                               | 功能描述               | 适用场景             |
+| -------------------------------------- | ---------------------- | -------------------- |
+| `checkSelfPermission`                  | 检查应用权限状态       | 需要检查权限的场景   |
+| `shouldShowRequestPermissionRationale` | 判断是否显示权限说明   | 权限请求前判断       |
+| `permissionAuth`                       | 权限认证工具           | 权限认证流程         |
+| `checkPermissions`                     | 检查小程序权限状态     | 小程序权限检查       |
+| `requestPermissions`                   | 请求小程序权限         | 小程序权限申请       |
+| `checkAndRequestLocationAuth`          | 检查并请求位置权限     | 位置功能权限申请     |
+| `checkAndRequestImageAuth`             | 检查并请求图片选择权限 | 图片选择功能权限申请 |
+| `showAuthTip`                          | 显示权限提示对话框     | 权限提示场景         |
+| `showManualAuth`                       | 引导用户手动授权       | 权限被拒绝后引导     |
+| `authTips`                             | 权限提示文本           | 权限提示文案         |
+| `cloneDeep`                            | 深拷贝对象             | 对象深拷贝场景       |
+| `getCurrentPageRoute`                  | 获取当前页面路由       | 路由信息获取         |
+| `isPageLevelComponent`                 | 判断是否为页面级组件   | 组件类型判断         |
 
 ### 使用方式
 
@@ -67,6 +75,224 @@ sourceType 参数说明：
 - 'camera' - 相机权限，用于拍照获取图片
 
 该函数会根据不同小程序平台采用相应的权限检查和请求策略，并在必要时向用户显示权限说明。对于微信小程序，选择图片不需要相册权限，函数会自动处理这种特殊情况。
+
+### checkAndRequestLocationAuth
+
+#### 功能描述
+
+检查并请求小程序位置权限，支持所有小程序平台。
+
+#### 参数
+
+无
+
+#### 返回值
+
+`Promise<boolean>` - 是否获得授权
+
+#### 使用示例
+
+```typescript
+import { checkAndRequestLocationAuth } from "uni-toolkit/tools";
+
+async function getLocation() {
+  try {
+    const hasPermission = await checkAndRequestLocationAuth();
+    if (hasPermission) {
+      // 已获得位置权限，可以获取位置信息
+      uni.getLocation({
+        type: "gcj02",
+        success: (res) => {
+          console.log("当前位置：", res.latitude, res.longitude);
+        }
+      });
+    } else {
+      console.log("用户未授予位置权限");
+    }
+  } catch (error) {
+    console.error("获取位置权限失败:", error);
+  }
+}
+```
+
+#### 说明
+
+该函数用于检查并请求小程序平台的位置权限。它是 `requestPermissions` 函数的封装，专门用于处理位置相关的权限。该函数会根据不同小程序平台采用相应的权限检查和请求策略，并在必要时向用户显示权限说明。
+
+### checkAndRequestImageAuth
+
+#### 功能描述
+
+检查并请求小程序图片选择权限，支持所有小程序平台。
+
+#### 参数
+
+| 参数名     | 类型     | 必填 | 默认值              | 说明             |
+| ---------- | -------- | ---- | ------------------- | ---------------- |
+| sourceType | string[] | 否   | ["album", "camera"] | 图片来源类型数组 |
+
+sourceType 参数说明：
+
+- 'album' - 相册权限，用于从相册选择图片
+- 'camera' - 相机权限，用于拍照获取图片
+
+#### 返回值
+
+`Promise<boolean>` - 是否获得授权
+
+#### 使用示例
+
+```typescript
+import { checkAndRequestImageAuth } from "uni-toolkit/tools";
+
+async function chooseImage() {
+  try {
+    // 检查并请求图片选择权限（包括相册和相机）
+    const hasPermission = await checkAndRequestImageAuth(["album", "camera"]);
+    if (hasPermission) {
+      // 已获得图片选择权限，可以选择图片
+      uni.chooseImage({
+        count: 1,
+        sourceType: ["album", "camera"],
+        success: (res) => {
+          console.log("选择的图片：", res.tempFilePaths);
+        }
+      });
+    } else {
+      console.log("用户未授予图片选择权限");
+    }
+  } catch (error) {
+    console.error("获取图片选择权限失败:", error);
+  }
+}
+
+// 只请求相机权限
+async function takePhoto() {
+  const hasPermission = await checkAndRequestImageAuth(["camera"]);
+  if (hasPermission) {
+    uni.chooseImage({
+      count: 1,
+      sourceType: ["camera"],
+      success: (res) => {
+        console.log("拍照结果：", res.tempFilePaths);
+      }
+    });
+  }
+}
+```
+
+#### 说明
+
+该函数用于检查并请求小程序平台的图片选择权限。它是 `requestPermissions` 函数的封装，专门用于处理图片选择相关的权限。根据 `sourceType` 参数，它会检查并请求相机权限和/或相册权限。
+
+该函数会根据不同小程序平台采用相应的权限检查和请求策略，并在必要时向用户显示权限说明。对于微信小程序，选择图片不需要相册权限，函数会自动处理这种特殊情况。
+
+### checkPermissions
+
+#### 功能描述
+
+检查小程序权限状态（不触发权限请求），支持同时检查多个权限。
+
+#### 参数
+
+| 参数名          | 类型     | 必填 | 说明         |
+| --------------- | -------- | ---- | ------------ |
+| permissionTypes | string[] | 是   | 权限类型数组 |
+
+权限类型说明：
+
+- 'location' - 位置权限
+- 'camera' - 相机权限
+- 'album' - 相册权限
+
+#### 返回值
+
+`Promise<{[key: string]: boolean}>` - 返回各权限的授权状态
+
+#### 使用示例
+
+```typescript
+import { checkPermissions } from "uni-toolkit/tools";
+
+async function checkAllPermissions() {
+  try {
+    // 同时检查多个权限
+    const permissions = await checkPermissions(["location", "camera", "album"]);
+
+    console.log("位置权限:", permissions.location); // true 或 false
+    console.log("相机权限:", permissions.camera); // true 或 false
+    console.log("相册权限:", permissions.album); // true 或 false
+
+    // 根据权限状态执行不同操作
+    if (permissions.location) {
+      // 有位置权限，获取位置信息
+      getLocation();
+    } else {
+      // 没有位置权限，提示用户
+      showLocationPermissionTip();
+    }
+  } catch (error) {
+    console.error("检查权限失败:", error);
+  }
+}
+```
+
+#### 说明
+
+该函数用于检查小程序平台的权限状态，不会触发权限请求弹窗。它可以同时检查多个权限，并返回一个包含各权限状态的键值对对象。
+
+对于微信小程序，选择图片不需要相册权限，函数会自动处理这种特殊情况，直接返回 true。
+
+### requestPermissions
+
+#### 功能描述
+
+请求小程序权限，支持同时请求多个权限。
+
+#### 参数
+
+| 参数名          | 类型     | 必填 | 说明         |
+| --------------- | -------- | ---- | ------------ |
+| permissionTypes | string[] | 是   | 权限类型数组 |
+
+权限类型说明：
+
+- 'location' - 位置权限
+- 'camera' - 相机权限
+- 'album' - 相册权限
+
+#### 返回值
+
+`Promise<boolean>` - 是否所有权限都已获得授权
+
+#### 使用示例
+
+```typescript
+import { requestPermissions } from "uni-toolkit/tools";
+
+async function requestAllPermissions() {
+  try {
+    // 同时请求多个权限
+    const granted = await requestPermissions(["location", "camera"]);
+
+    if (granted) {
+      console.log("所有权限都已获得授权");
+      // 执行需要这些权限的操作
+    } else {
+      console.log("部分或全部权限未获得授权");
+      // 提示用户权限不足
+    }
+  } catch (error) {
+    console.error("请求权限失败:", error);
+  }
+}
+```
+
+#### 说明
+
+该函数用于请求小程序平台的权限。它会先检查权限状态，对于未授权的权限，会显示权限请求弹窗。如果用户之前拒绝过权限，函数会显示提示信息，并引导用户到设置页面手动开启权限。
+
+对于微信小程序，选择图片不需要相册权限，函数会自动处理这种特殊情况。
 
 ### checkSelfPermission
 

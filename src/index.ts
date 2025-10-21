@@ -20,6 +20,7 @@ export { type RouteInterceptorOptions } from "./interceptors";
 
 export {
   authTips,
+  AuthType,
   checkAndRequestImageAuth,
   checkAndRequestLocationAuth,
   checkPermissions,
@@ -33,4 +34,4 @@ export {
   showManualAuth,
 } from "./tools";
 
-export type { AuthType, MiniProgramPlatform } from "./typings";
+export type { MiniProgramPlatform } from "./typings";
