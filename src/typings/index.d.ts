@@ -14,14 +14,6 @@ export type MiniProgramPlatform
     | "app"
     | "h5";
 
-/**
- * 权限类型
- */
-export type AuthType
-  = | "android.permission.ACCESS_FINE_LOCATION"
-    | "android.permission.READ_EXTERNAL_STORAGE"
-    | "android.permission.CAMERA"
-    | "android.permission.CALL_PHONE";
 /* eslint-disable ts/consistent-type-definitions */
 declare global {
 

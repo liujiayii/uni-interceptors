@@ -33,7 +33,7 @@ export function useChooseImage(opts: UniApp.ChooseImageOptions): Promise<UniApp.
         resolve(normalizedRes);
       },
       fail(res) {
-        console.error("chooseMedia failed:", res);
+        console.log(`chooseMedia failed:${JSON.stringify(res)}`);
         reject(new Error(`选择图片失败: ${res.errMsg}`));
       },
     });
@@ -48,7 +48,7 @@ export function useChooseImage(opts: UniApp.ChooseImageOptions): Promise<UniApp.
         resolve(normalizeChooseAndUploadFileRes(res, "image"));
       },
       fail(res) {
-        console.error("chooseImage failed:", res);
+        console.log(`chooseImage failed:${JSON.stringify(res)}`);
         reject(new Error(`选择图片失败: ${res.errMsg}`));
       },
     });

@@ -52,7 +52,7 @@ app.use(routeInterceptor, {
 
 ### checkLoginAndRedirect
 
-手动检查登录状态并跳转到登录页的函数。
+手动检查登录状态并跳转到登录页的函数。可以在需要手动检查登录状态的场景中使用，例如在页面生命周期钩子或特定操作前。
 
 ```typescript
 import { checkLoginAndRedirect } from "uni-toolkit/interceptors";
@@ -62,6 +62,16 @@ const isLoggedIn = checkLoginAndRedirect("/pages/user/profile");
 if (!isLoggedIn) {
   console.log("用户未登录，已跳转到登录页");
 }
+
+// 在页面生命周期中使用
+onShow(() => {
+  // 检查用户是否已登录
+  const isLoggedIn = checkLoginAndRedirect();
+  if (isLoggedIn) {
+    // 已登录，加载用户数据
+    loadUserData();
+  }
+});
 ```
 
 #### 参数
@@ -74,6 +84,13 @@ if (!isLoggedIn) {
 
 - `true`: 已登录
 - `false`: 未登录，已跳转到登录页
+
+#### 使用场景
+
+- 在页面生命周期中检查登录状态
+- 在执行需要登录的操作前进行检查
+- 在不通过路由跳转的情况下手动检查登录状态
+- 作为其他功能的登录状态检查工具
 
 ## 拦截的API
 

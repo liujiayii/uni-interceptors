@@ -11,8 +11,8 @@
   <a href="https://www.npmjs.com/package/uni-toolkit" target="_blank">
     <img src="https://img.shields.io/npm/dt/uni-toolkit.svg" alt="NPM Downloads" />
   </a>
-  <a href="https://github.com/liujiayii/uni-toolkit/actions/workflows/build-test.yml" target="_blank">
-    <img src="https://github.com/liujiayii/uni-toolkit/actions/workflows/build-test.yml/badge.svg" alt="Build Status" />
+  <a href="https://github.com/liujiayii/uni-toolkit/actions/workflows/unit-test.yml" target="_blank">
+    <img src="https://github.com/liujiayii/uni-toolkit/actions/workflows/unit-test.yml/badge.svg" alt="Build Status" />
   </a>
   <a href="https://github.com/liujiayii/uni-toolkit/actions/workflows/deploy-docs.yml" target="_blank">
     <img src="https://github.com/liujiayii/uni-toolkit/actions/workflows/deploy-docs.yml/badge.svg" alt="Docs Status" />
@@ -127,6 +127,10 @@ if (isMpWeiXinWork) {
 
 - **权限管理**: 提供完整的权限检查、申请和提示功能
   - `checkSelfPermission` - 检查应用权限状态
+  - `checkPermissions` - 检查小程序权限状态
+  - `requestPermissions` - 请求小程序权限
+  - `checkAndRequestLocationAuth` - 检查并请求位置权限
+  - `checkAndRequestImageAuth` - 检查并请求图片选择权限
   - `permissionAuth` - 权限认证工具
   - `showAuthTip` - 显示权限提示对话框
   - `showManualAuth` - 引导用户手动授权
