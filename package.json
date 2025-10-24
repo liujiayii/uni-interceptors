@@ -70,7 +70,7 @@
   },
   "dependencies": {
     "@uni-helper/uni-env": "^0.2.0",
-    "es-toolkit": "^1.40.0"
+    "es-toolkit": "^1.41.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.0.0",
