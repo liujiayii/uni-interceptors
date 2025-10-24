@@ -74,7 +74,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.0.0",
-    "@dcloudio/types": "^3.4.25",
+    "@dcloudio/types": "^3.4.26",
     "@dcloudio/uni-app": "3.0.0-4070620250821001",
     "@types/node": "^24.7.2",
     "@typescript-eslint/parser": "^8.46.2",
