@@ -30,10 +30,10 @@ export const isAppPlus = platform === "app-plus";
 export const isAppHarmony = platform === "app-harmony";
 
 /** Android App */
-export const isAppAndroid = sysPlatform === "android";
+export const isAppAndroid = isApp && sysPlatform === "android";
 
 /** iOS App */
-export const isAppIOS = sysPlatform === "ios";
+export const isAppIOS = isApp && sysPlatform === "ios";
 
 /** 小程序环境 */
 export const isMp = /^mp-/i.test(platform);
