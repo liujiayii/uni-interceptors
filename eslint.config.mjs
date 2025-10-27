@@ -18,6 +18,8 @@ export default antfu({
     },
   },
   formatters: true,
-  rules: {},
+  rules: {
+    "node/prefer-global/process": "off",
+  },
   ignores: ["dist", "*/*.html"],
 });

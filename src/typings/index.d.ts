@@ -12,7 +12,12 @@ export type MiniProgramPlatform
     | "mp-kuaishou"
     | "mp-jd"
     | "app"
-    | "h5";
+    | "h5"
+    | "web"
+    | "app-plus"
+    | "app-harmony"
+    | "quickapp-webview-union"
+    | "quickapp-webview-huawei";
 
 /* eslint-disable ts/consistent-type-definitions */
 declare global {

@@ -1,5 +1,5 @@
 import type { AuthType } from "../authTips";
-import { isApp, isAppIOS } from "@uni-helper/uni-env";
+import { isApp, isAppIOS } from "../../env";
 
 /**
  * 是否需要显示请求权限提示
