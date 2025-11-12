@@ -95,4 +95,6 @@ if (!hasPermission) {
 
 - 查看 [使用指南](/guide/usage) 了解更多详细用法
 - 查看 [功能模块](/guide/overview) 了解所有可用功能
+- 查看 [开发指南](/guide/develop) 了解构建和开发流程
+- 查看 [样式指南](/guide/styles) 了解样式文件使用方法
 - 查看 [示例项目](https://github.com/liujiayii/uni-toolkit/tree/main/playground) 了解实际应用

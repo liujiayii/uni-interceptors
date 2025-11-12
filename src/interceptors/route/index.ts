@@ -34,13 +34,27 @@ let currentOptions: RouteInterceptorOptions = { ...defaultOptions };
 
 /**
  * 登录检查器，如果未登录，则跳转到登录页
- * @param redirect 重定向地址
+ * @param config - 配置对象
+ * @param config.redirect - 重定向地址
+ * @param config.needConfirm - 是否需要确认弹窗
  * @returns true 表示已登录，false 表示未登录
  */
-export function checkLoginAndRedirect(redirect: string = ""): boolean {
+export function checkLoginAndRedirect({ redirect = "", needConfirm = false }: { redirect?: string; needConfirm?: boolean } = {}): boolean {
   const hasLogin = currentOptions.isLogged();
   if (!hasLogin) {
-    goLogin(redirect);
+    if (needConfirm) {
+      uni.showModal({
+        title: "提示",
+        content: "您还未登录，是否前往登录页？",
+        success: (res) => {
+          if (res.confirm) {
+            goLogin(redirect);
+          }
+        },
+      });
+    } else {
+      goLogin(redirect);
+    }
     return false;
   }
   return true;

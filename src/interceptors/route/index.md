@@ -58,7 +58,7 @@ app.use(routeInterceptor, {
 import { checkLoginAndRedirect } from "uni-toolkit/interceptors";
 
 // 检查登录状态，如果未登录则跳转到登录页
-const isLoggedIn = checkLoginAndRedirect("/pages/user/profile");
+const isLoggedIn = checkLoginAndRedirect({ redirect: "/pages/user/profile" });
 if (!isLoggedIn) {
   console.log("用户未登录，已跳转到登录页");
 }

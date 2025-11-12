@@ -1,7 +1,7 @@
 {
   "name": "uni-toolkit",
   "type": "module",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "packageManager": "pnpm@10.18.3",
   "description": "uni tools,uni app 工具库",
   "author": "liujiayii <liujiayii@foxmail.com>",
@@ -49,7 +49,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && tsc",
+    "build": "node scripts/build.js",
     "build2": "tsdown",
     "dev": "npm run clean && tsc --watch",
     "dev2": "tsdown --watch",
