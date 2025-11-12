@@ -39,7 +39,7 @@ let currentOptions: RouteInterceptorOptions = { ...defaultOptions };
  * @param config.needConfirm - 是否需要确认弹窗
  * @returns true 表示已登录，false 表示未登录
  */
-export function checkLoginAndRedirect({ redirect = "", needConfirm = true }: { redirect: string; needConfirm?: boolean }): boolean {
+export function checkLoginAndRedirect({ redirect = "", needConfirm = false }: { redirect: string; needConfirm?: boolean }): boolean {
   const hasLogin = currentOptions.isLogged();
   if (!hasLogin) {
     if (needConfirm) {
