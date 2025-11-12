@@ -46,7 +46,11 @@ uni-toolkit/
 │   ├── hooks/          # Hooks 实现
 │   ├── tools/          # 工具函数实现
 │   ├── env/            # 环境检测实现
+│   ├── style/          # 样式文件目录
+│   │   └── nvue.scss   # nvue样式文件
 │   └── index.ts        # 主入口文件
+├── scripts/            # 构建脚本目录
+│   ├── build.js        # 完整构建脚本
 ├── docs/               # VitePress 文档目录
 ├── tests/              # 测试文件目录
 ├── playground/         # 示例代码目录
