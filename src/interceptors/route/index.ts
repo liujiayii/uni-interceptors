@@ -39,13 +39,14 @@ let currentOptions: RouteInterceptorOptions = { ...defaultOptions };
  * @param config.needConfirm - 是否需要确认弹窗
  * @returns true 表示已登录，false 表示未登录
  */
-export function checkLoginAndRedirect({ redirect = "", needConfirm = false }: { redirect: string; needConfirm?: boolean }): boolean {
+export function checkLoginAndRedirect({ redirect = "", needConfirm = false }: { redirect?: string; needConfirm?: boolean | UniNamespace.ShowModalOptions } = {}): boolean {
   const hasLogin = currentOptions.isLogged();
   if (!hasLogin) {
     if (needConfirm) {
       uni.showModal({
         title: "提示",
         content: "您还未登录，是否前往登录页？",
+        ...(typeof needConfirm === "object" ? needConfirm : {}),
         success: (res) => {
           if (res.confirm) {
             goLogin(redirect);
