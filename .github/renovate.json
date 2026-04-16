@@ -4,6 +4,7 @@
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
   "rangeStrategy": "bump",
+  "automerge": true,
   "ignoreDeps": [
     "vite",
     "vue",
