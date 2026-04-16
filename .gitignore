@@ -6,3 +6,4 @@ dist
 .idea
 docs/.vitepress/cache
 docs/.vitepress/dist
+.trae/specs

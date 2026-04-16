@@ -3,6 +3,8 @@ export { isMpWeiXinWork } from "./env";
 export {
   useChooseImage,
   useDesignSize,
+  useEventChannel,
+  useInstance,
   useOnShow,
 } from "./hooks";
 

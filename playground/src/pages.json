@@ -4,7 +4,9 @@
     { "path": "pages/need-login/index" },
     { "path": "pages/login/index" },
     { "path": "pages/choose-image/index", "style": { "navigationBarTitleText": "图片选择示例" } },
-    { "path": "pages/test-hooks", "style": { "navigationBarTitleText": "Hooks测试" } }
+    { "path": "pages/test-hooks", "style": { "navigationBarTitleText": "Hooks测试" } },
+    { "path": "pages/use-instance/index", "style": { "navigationBarTitleText": "useInstance示例" } },
+    { "path": "pages/use-event-channel/index", "style": { "navigationBarTitleText": "useEventChannel示例" } }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
