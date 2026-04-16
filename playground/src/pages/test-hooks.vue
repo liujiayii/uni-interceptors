@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { useChooseImage, useDesignSize, useOnShow } from "uni-toolkit";
 import { ref } from "vue";
-import { useChooseImage, useDesignSize, useOnShow } from "../../src/index";
 
 // 测试 useDesignSize
 const designSize = useDesignSize();

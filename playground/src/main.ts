@@ -2,7 +2,7 @@ import type { RouteInterceptorOptions } from "uni-toolkit";
 import {
   chooseImageInterceptor,
   makePhoneCallInterceptor,
-  RouteInterceptor,
+  routeInterceptor,
   setClipboardDataInterceptor,
   setStorageInterceptor,
 } from "uni-toolkit";
@@ -14,7 +14,7 @@ import "virtual:uno.css";
 
 export function createApp(): any {
   const app = createSSRApp(App);
-  app.use<RouteInterceptorOptions>(RouteInterceptor, { loginRoute, isLogged, needLoginPages });
+  app.use<RouteInterceptorOptions>(routeInterceptor, { loginRoute, isLogged, needLoginPages });
   app.use(makePhoneCallInterceptor);
   app.use(chooseImageInterceptor);
   // #ifdef MP-KUAISHOU

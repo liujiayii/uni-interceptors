@@ -5,8 +5,10 @@ Hooks 是基于 Vue 3 Composition API 封装的常用功能，简化组件开发
 ## 目录
 
 - [useChooseImage](./useChooseImage) - 封装图片选择功能
-- [useOnShow](./useOnShow) - 统一的页面显示事件钩子
 - [useDesignSize](./useDesignSize) - 获取设计尺寸信息
+- [useEventChannel](./useEventChannel) - 页面间 EventChannel 通信
+- [useInstance](./useInstance) - 获取组件实例 proxy 对象
+- [useOnShow](./useOnShow) - 统一的页面显示事件钩子
 
 ## 概述
 
@@ -14,11 +16,13 @@ uni-toolkit 提供了一系列实用的 Hooks，帮助开发者简化组件开�
 
 ### 主要 Hooks
 
-| Hook             | 功能描述             | 适用场景                       |
-| ---------------- | -------------------- | ------------------------------ |
-| `useChooseImage` | 简化图片选择流程     | 需要选择图片的组件             |
-| `useDesignSize`  | 响应式设计尺寸处理   | 需要响应式布局的组件           |
-| `useOnShow`      | 页面显示生命周期处理 | 需要在页面显示时执行操作的组件 |
+| Hook              | 功能描述                 | 适用场景                       |
+| ----------------- | ------------------------ | ------------------------------ |
+| `useChooseImage`  | 简化图片选择流程         | 需要选择图片的组件             |
+| `useDesignSize`   | 响应式设计尺寸处理       | 需要响应式布局的组件           |
+| `useEventChannel` | 页面间 EventChannel 通信 | 需要页面间传递数据的页面       |
+| `useInstance`     | 获取组件实例 proxy       | 需要访问组件实例的组件         |
+| `useOnShow`       | 页面显示生命周期处理     | 需要在页面显示时执行操作的组件 |
 
 ### 使用方式
 
@@ -45,7 +49,7 @@ function handleChooseImage() {
 
 ```javascript
 // 按需导入hooks
-import { useChooseImage, useDesignSize, useOnShow } from "uni-toolkit/hooks";
+import { useChooseImage, useDesignSize, useEventChannel, useInstance, useOnShow } from "uni-toolkit/hooks";
 ```
 
 每个 Hook 都有详细的文档和使用示例，您可以通过上方的链接查看具体信息。
