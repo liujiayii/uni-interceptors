@@ -14,7 +14,7 @@ importers:
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^6.0.0
-        version: 6.0.0(@unocss/eslint-plugin@66.6.8(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.32)(eslint-plugin-format@1.5.0(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(jsdom@16.7.0)(terser@5.44.0)(yaml@2.8.3))
+        version: 6.0.0(@unocss/eslint-plugin@66.6.8(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.32)(eslint-plugin-format@2.0.1(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(jsdom@16.7.0)(terser@5.44.0)(yaml@2.8.3))
       '@dcloudio/types':
         specifier: ^3.4.30
         version: 3.4.30
@@ -34,8 +34,8 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4(jiti@2.6.1)
       eslint-plugin-format:
-        specifier: 1.5.0
-        version: 1.5.0(eslint@9.39.4(jiti@2.6.1))
+        specifier: 2.0.1
+        version: 2.0.1(eslint@9.39.4(jiti@2.6.1))
       gh-pages:
         specifier: ^6.3.0
         version: 6.3.0
@@ -3743,8 +3743,8 @@ packages:
     peerDependencies:
       eslint: '>=8'
 
-  eslint-plugin-format@1.5.0:
-    resolution: {integrity: sha512-jaeOKrxs79Nn6rMkLycPkLHvBVKcgsFG+RqNXb6W9iS9y2Q0NYGhFTLcDUdp5mf01X99wEkjtX2O8cumM7lNMQ==}
+  eslint-plugin-format@2.0.1:
+    resolution: {integrity: sha512-0BA65p5DAiuKtx5MmMJfPk9WaTjoHHbyVW7ZXRhaZoA1fdiMHhay9QRiDL2wr0hJWZxdF7CRThOK/70VUKVg2g==}
     peerDependencies:
       eslint: ^8.40.0 || ^9.0.0 || ^10.0.0
 
@@ -6453,7 +6453,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
 
-  '@antfu/eslint-config@6.0.0(@unocss/eslint-plugin@66.6.8(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.32)(eslint-plugin-format@1.5.0(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(jsdom@16.7.0)(terser@5.44.0)(yaml@2.8.3))':
+  '@antfu/eslint-config@6.0.0(@unocss/eslint-plugin@66.6.8(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.32)(eslint-plugin-format@2.0.1(eslint@9.39.4(jiti@2.6.1)))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(jsdom@16.7.0)(terser@5.44.0)(yaml@2.8.3))':
     dependencies:
       '@antfu/install-pkg': 1.1.0
       '@clack/prompts': 0.11.0
@@ -6494,7 +6494,7 @@ snapshots:
       yaml-eslint-parser: 1.3.0
     optionalDependencies:
       '@unocss/eslint-plugin': 66.6.8(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
-      eslint-plugin-format: 1.5.0(eslint@9.39.4(jiti@2.6.1))
+      eslint-plugin-format: 2.0.1(eslint@9.39.4(jiti@2.6.1))
     transitivePeerDependencies:
       - '@eslint/json'
       - '@vue/compiler-sfc'
@@ -10829,7 +10829,7 @@ snapshots:
       eslint: 9.39.4(jiti@2.6.1)
       eslint-compat-utils: 0.5.1(eslint@9.39.4(jiti@2.6.1))
 
-  eslint-plugin-format@1.5.0(eslint@9.39.4(jiti@2.6.1)):
+  eslint-plugin-format@2.0.1(eslint@9.39.4(jiti@2.6.1)):
     dependencies:
       '@dprint/formatter': 0.5.1
       '@dprint/markdown': 0.21.1
