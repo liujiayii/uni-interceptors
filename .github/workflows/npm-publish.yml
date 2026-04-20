@@ -19,7 +19,7 @@ jobs:
         # 使用actions/checkout插件
         uses: actions/checkout@v6
       - name: Install Pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
       # 安装node
       - name: 设置Node.js
         # 使用actions/setup-node插件
