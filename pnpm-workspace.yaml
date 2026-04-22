@@ -1,2 +1,22 @@
+shellEmulator: true
+
+# eslint-disable-next-line pnpm/yaml-enforce-settings
+trustPolicy: off
+
 packages:
   - playground
+
+overrides:
+  "@vue/runtime-core": 3.4.21
+  vite: 5.2.8
+  vitest: 3.2.4 # vitest@4 需要vite@6+
+  vue: 3.4.21
+
+updateConfig:
+  ignoreDependencies:
+    - vite
+    - vue
+    - "@vue/runtime-core"
+    - "@dcloudio/*"
+    - sass
+    - vitest
