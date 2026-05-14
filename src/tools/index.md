@@ -294,6 +294,8 @@ async function requestAllPermissions() {
 
 对于微信小程序，选择图片不需要相册权限，函数会自动处理这种特殊情况。
 
+## 权限检查与请求
+
 ### checkSelfPermission
 
 #### 功能描述
