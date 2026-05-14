@@ -1,6 +1,7 @@
 export { isMpWeiXinWork } from "./env";
 
 export {
+  createEventChannelActions,
   useChooseImage,
   useDesignSize,
   useEventChannel,

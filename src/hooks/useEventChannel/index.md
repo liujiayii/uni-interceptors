@@ -6,6 +6,54 @@
 
 全平台
 
+## createEventChannelActions
+
+纯函数，为任意 EventChannel 实例提供类型安全的 on/emit/off 方法，不依赖 Vue 生命周期，适用于发送页面（上一个页面）等非 setup 场景。
+
+### 泛型参数
+
+| 参数 | 约束                     | 默认值           | 说明                                             |
+| ---- | ------------------------ | ---------------- | ------------------------------------------------ |
+| T    | extends IEventChannelMap | IEventChannelMap | 事件数据类型映射，定义事件名与数据类型的对应关系 |
+
+### 参数
+
+| 参数         | 类型                | 说明                         |
+| ------------ | ------------------- | ---------------------------- |
+| eventChannel | UniApp.EventChannel | 需要包装的 EventChannel 实例 |
+
+### 返回值
+
+`IEventChannelActions<T>` — 包含 on/emit/off 的类型安全对象
+
+### 使用示例
+
+```typescript
+import type { IEventChannelMap } from "uni-toolkit";
+import { createEventChannelActions } from "uni-toolkit";
+
+// 定义事件数据类型映射
+type IMyEventMap = {
+  acceptDataFromOpenerPage: { id: number; name: string };
+  sendDataToOpenerPage: { reply: string; timestamp: number };
+} & IEventChannelMap;
+
+uni.navigateTo({
+  url: "/pages/detail/index",
+  events: {
+    acceptDataFromOpenedPage: (data) => {
+      console.log("收到下级页面数据:", data);
+    }
+  },
+  success(res) {
+    // 使用 createEventChannelActions 包装，获得类型安全的 emit
+    const channel = createEventChannelActions<IMyEventMap>(res.eventChannel);
+    // emit 具有类型约束，事件名和数据类型都会被检查
+    channel.emit("acceptDataFromOpenerPage", { id: 1, name: "测试" });
+  }
+});
+```
+
 ## 泛型参数
 
 | 参数 | 约束                     | 默认值           | 说明                                             |
@@ -86,7 +134,16 @@ export default {
 ### 发送页面配合使用
 
 ```typescript
+import type { IEventChannelMap } from "uni-toolkit";
 // 发送页面（上一个页面）
+import { createEventChannelActions } from "uni-toolkit";
+
+// 定义事件数据类型映射（与接收页面共享同一类型）
+type IMyEventMap = {
+  acceptDataFromOpenerPage: { id: number; name: string };
+  sendDataToOpenerPage: { reply: string; timestamp: number };
+} & IEventChannelMap;
+
 uni.navigateTo({
   url: "/pages/detail/index",
   events: {
@@ -95,8 +152,10 @@ uni.navigateTo({
     }
   },
   success(res) {
-    // 通过 EventChannel 向下级页面发送数据
-    res.eventChannel.emit("acceptDataFromOpenerPage", { id: 1, name: "测试" });
+    // 使用 createEventChannelActions 包装，获得类型安全的 emit
+    const channel = createEventChannelActions<IMyEventMap>(res.eventChannel);
+    // emit 具有类型约束，事件名和数据类型都会被检查
+    channel.emit("acceptDataFromOpenerPage", { id: 1, name: "测试" });
   }
 });
 ```
@@ -108,6 +167,7 @@ uni.navigateTo({
 - 支持泛型事件映射，事件名和数据类型完全约束
 - 组件卸载时自动清理通过 on 注册的所有监听器，防止内存泄漏
 - 开发环境下，获取 EventChannel 失败时输出 console.warn 警告
+- `createEventChannelActions` 纯函数，为任意 EventChannel 提供类型安全的 on/emit/off，不依赖 Vue 生命周期
 
 ## 注意事项
 
@@ -116,3 +176,4 @@ uni.navigateTo({
 3. 开发环境下，如果获取 EventChannel 失败，控制台会输出警告信息
 4. 通过 on 注册的监听器会在组件卸载时自动清理，无需手动 off
 5. 如果需要手动移除某个监听器，可以使用 off 方法
+6. `createEventChannelActions` 是纯函数，不会自动清理监听器。如需自动清理，请使用 `useEventChannel`
