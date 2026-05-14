@@ -31,6 +31,32 @@ export type IEventChannelActions<T extends IEventChannelMap = IEventChannelMap> 
  * @template T - 事件数据类型映射，需继承 IEventChannelMap
  * @param eventChannel - 原始 EventChannel 实例
  * @returns 返回包含 on/emit/off 的类型安全对象
+ *
+ * @example
+ * ```typescript
+ * // 定义事件数据类型映射
+ * interface IMyEventMap {
+ *   acceptDataFromOpenerPage: { id: number; name: string };
+ *   someOtherEvent: { message: string };
+ * }
+ *
+ * // 获取 EventChannel 实例（如从页面跳转参数中获取）
+ * const eventChannel = getOpenerEventChannel();
+ *
+ * // 创建类型安全的操作方法
+ * const { on, emit, off } = createEventChannelActions<IMyEventMap>(eventChannel);
+ *
+ * // on — 类型安全监听
+ * on("acceptDataFromOpenerPage", (data) => {
+ *   console.log("收到数据:", data.id, data.name);
+ * });
+ *
+ * // emit — 类型安全发送
+ * emit("someOtherEvent", { message: "hello" });
+ *
+ * // off — 类型安全移除
+ * off("acceptDataFromOpenerPage");
+ * ```
  */
 export function createEventChannelActions<T extends IEventChannelMap = IEventChannelMap>(
   eventChannel: UniApp.EventChannel,

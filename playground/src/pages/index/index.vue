@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IEventChannelActions, IEventChannelMap } from "uni-toolkit";
+import type { IEventChannelActions } from "uni-toolkit/hooks";
 import { createEventChannelActions } from "uni-toolkit";
 import { ref } from "vue";
 
@@ -7,7 +7,7 @@ import { ref } from "vue";
 type IMyEventMap = {
   acceptDataFromOpenerPage: { id: number; name: string; message: string };
   sendDataToOpenerPage: { reply: string; timestamp: number };
-} & IEventChannelMap;
+};
 
 const data = ref({
   data: "Hello World",
