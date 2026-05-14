@@ -25,6 +25,35 @@ export type IEventChannelActions<T extends IEventChannelMap = IEventChannelMap> 
 };
 
 /**
+ * 为任意 EventChannel 实例创建类型安全的 on/emit/off 方法
+ * 纯函数，不依赖 Vue 生命周期，可在任何上下文中使用
+ *
+ * @template T - 事件数据类型映射，需继承 IEventChannelMap
+ * @param eventChannel - 原始 EventChannel 实例
+ * @returns 返回包含 on/emit/off 的类型安全对象
+ */
+export function createEventChannelActions<T extends IEventChannelMap = IEventChannelMap>(
+  eventChannel: UniApp.EventChannel,
+): IEventChannelActions<T> {
+  // 类型安全的事件监听
+  function on<K extends keyof T>(event: K, callback: IEventChannelCallback<T[K]>): void {
+    eventChannel.on(event as string, callback as IEventChannelCallback);
+  }
+
+  // 类型安全的事件发送
+  function emit<K extends keyof T>(event: K, data: T[K]): void {
+    eventChannel.emit(event as string, data);
+  }
+
+  // 类型安全的事件移除
+  function off<K extends keyof T>(event: K, callback?: IEventChannelCallback<T[K]>): void {
+    eventChannel.off(event as string, callback as IEventChannelCallback);
+  }
+
+  return { on, emit, off };
+}
+
+/**
  * 封装获取 EventChannel 并提供类型安全的 on/emit/off 便捷方法
  *
  * @description
@@ -76,17 +105,15 @@ export function useEventChannel<T extends IEventChannelMap = IEventChannelMap>()
     return undefined;
   }
 
+  // 使用 createEventChannelActions 创建基础类型安全方法
+  const actions = createEventChannelActions<T>(eventChannel);
+
   // 监听器映射表，用于跟踪所有通过 on 注册的回调，以便卸载时自动清理
   const listenerMap = new Map<keyof T, Set<IEventChannelCallback>>();
 
-  /**
-   * 类型安全的事件监听
-   * @param event - 事件名称
-   * @param callback - 事件回调函数
-   */
+  // 包装 on，增加 listenerMap 记录
   function on<K extends keyof T>(event: K, callback: IEventChannelCallback<T[K]>): void {
-    // 在原始 EventChannel 上注册监听（此时 eventChannel 必定存在，因为不存在时已提前 return）
-    eventChannel!.on(event as string, callback as IEventChannelCallback);
+    actions.on(event, callback);
 
     // 将回调记录到映射表中，便于后续自动清理
     if (!listenerMap.has(event)) {
@@ -95,22 +122,9 @@ export function useEventChannel<T extends IEventChannelMap = IEventChannelMap>()
     listenerMap.get(event)!.add(callback as IEventChannelCallback);
   }
 
-  /**
-   * 类型安全的事件发送
-   * @param event - 事件名称
-   * @param data - 发送的数据
-   */
-  function emit<K extends keyof T>(event: K, data: T[K]): void {
-    eventChannel!.emit(event as string, data);
-  }
-
-  /**
-   * 类型安全的事件移除
-   * @param event - 事件名称
-   * @param callback - 可选，指定要移除的回调函数；不传则移除该事件的所有回调
-   */
+  // 包装 off，增加 listenerMap 清理
   function off<K extends keyof T>(event: K, callback?: IEventChannelCallback<T[K]>): void {
-    eventChannel!.off(event as string, callback as IEventChannelCallback);
+    actions.off(event, callback);
 
     // 同步清理映射表中的记录
     if (callback) {
@@ -124,11 +138,11 @@ export function useEventChannel<T extends IEventChannelMap = IEventChannelMap>()
   onUnmounted(() => {
     listenerMap.forEach((callbacks, event) => {
       callbacks.forEach((cb) => {
-        eventChannel!.off(event as string, cb);
+        eventChannel.off(event as string, cb);
       });
     });
     listenerMap.clear();
   });
 
-  return { on, emit, off };
+  return { on, emit: actions.emit, off };
 }

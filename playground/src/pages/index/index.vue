@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import type { IEventChannelActions, IEventChannelMap } from "uni-toolkit";
+import { createEventChannelActions } from "uni-toolkit";
 import { ref } from "vue";
+
+// 定义事件数据类型映射（与接收页面共享同一类型）
+type IMyEventMap = {
+  acceptDataFromOpenerPage: { id: number; name: string; message: string };
+  sendDataToOpenerPage: { reply: string; timestamp: number };
+} & IEventChannelMap;
 
 const data = ref({
   data: "Hello World",
@@ -7,8 +15,8 @@ const data = ref({
 
 const selectedImages = ref<string[]>([]);
 
-// EventChannel 引用，用于后续再次发送数据
-const eventChannelRef = ref<WechatMiniprogram.EventChannel | null>(null);
+// EventChannel 类型安全引用，用于后续再次发送数据
+const eventChannelRef = ref<IEventChannelActions<IMyEventMap> | null>(null);
 
 // 从接收页面收到的数据日志列表
 const eventChannelReceivedLogs = ref<string[]>([]);
@@ -118,10 +126,12 @@ function navigateToEventChannelDemo() {
       },
     },
     success: (res) => {
-      // 保存 eventChannel 引用，用于后续再次发送
-      eventChannelRef.value = res.eventChannel;
-      // 通过 eventChannel 向接收页面发送初始数据
-      res.eventChannel.emit("acceptDataFromOpenerPage", {
+      // 使用 createEventChannelActions 包装，获得类型安全的操作
+      const channel = createEventChannelActions<IMyEventMap>(res.eventChannel);
+      // 保存类型安全的 channel 引用，用于后续再次发送
+      eventChannelRef.value = channel;
+      // 通过类型安全的 emit 向接收页面发送初始数据
+      channel.emit("acceptDataFromOpenerPage", {
         id: 1,
         name: "首页",
         message: "来自首页的问候",
@@ -152,7 +162,7 @@ function sendDataToReceiver() {
 </script>
 
 <template>
-  <view class="pt-20 gap-20">
+  <view class="gap-20 pt-20">
     <button @click="makePhoneCall">
       uni.makePhoneCall
     </button>
@@ -199,7 +209,7 @@ function sendDataToReceiver() {
 
     <!-- 显示从接收页面收到的回传数据 -->
     <view v-if="eventChannelReceivedLogs.length > 0" class="mt-20">
-      <text class="block mb-10">
+      <text class="mb-10 block">
         EventChannel 收到的回传数据：
       </text>
       <view class="log-list">
@@ -211,7 +221,7 @@ function sendDataToReceiver() {
 
     <!-- 显示选择的图片 -->
     <view v-if="selectedImages.length > 0" class="mt-20">
-      <text class="block mb-10">
+      <text class="mb-10 block">
         已选择的图片：
       </text>
       <view class="flex-row flex-wrap gap-10">
@@ -220,7 +230,7 @@ function sendDataToReceiver() {
           :key="index"
           :src="img"
           mode="aspectFill"
-          class="w-100 h-100"
+          class="h-100 w-100"
         />
       </view>
     </view>
