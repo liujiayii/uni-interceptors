@@ -29,14 +29,13 @@
 ### 使用示例
 
 ```typescript
-import type { IEventChannelMap } from "uni-toolkit";
 import { createEventChannelActions } from "uni-toolkit";
 
 // 定义事件数据类型映射
 type IMyEventMap = {
   acceptDataFromOpenerPage: { id: number; name: string };
   sendDataToOpenerPage: { reply: string; timestamp: number };
-} & IEventChannelMap;
+};
 
 uni.navigateTo({
   url: "/pages/detail/index",
@@ -100,14 +99,13 @@ export default {
 ### 带类型约束的用法
 
 ```typescript
-import type { IEventChannelMap } from "uni-toolkit";
 import { useEventChannel } from "uni-toolkit";
 
 // 定义事件数据类型映射
 type IMyEventMap = {
   acceptDataFromOpenerPage: { id: number; name: string };
   someOtherEvent: { message: string };
-} & IEventChannelMap;
+};
 
 export default {
   setup() {
@@ -134,7 +132,6 @@ export default {
 ### 发送页面配合使用
 
 ```typescript
-import type { IEventChannelMap } from "uni-toolkit";
 // 发送页面（上一个页面）
 import { createEventChannelActions } from "uni-toolkit";
 
@@ -142,7 +139,7 @@ import { createEventChannelActions } from "uni-toolkit";
 type IMyEventMap = {
   acceptDataFromOpenerPage: { id: number; name: string };
   sendDataToOpenerPage: { reply: string; timestamp: number };
-} & IEventChannelMap;
+};
 
 uni.navigateTo({
   url: "/pages/detail/index",
