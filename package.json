@@ -78,7 +78,7 @@
     "@types/node": "^24.12.4",
     "@typescript-eslint/parser": "^8.59.3",
     "@uni-helper/uni-use": "^0.19.17",
-    "eslint": "^10.3.0",
+    "eslint": "^10.4.0",
     "eslint-plugin-format": "2.0.1",
     "gh-pages": "^6.3.0",
     "husky": "^9.1.7",
