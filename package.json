@@ -2,7 +2,7 @@
   "name": "uni-toolkit",
   "type": "module",
   "version": "0.5.0",
-  "packageManager": "pnpm@10.34.0",
+  "packageManager": "pnpm@10.34.1",
   "description": "uni tools,uni app 工具库",
   "author": "liujiayii <liujiayii@foxmail.com>",
   "license": "MIT",
