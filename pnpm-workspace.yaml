@@ -9,7 +9,7 @@ packages:
 overrides:
   "@vue/runtime-core": 3.4.21
   vite: 5.2.8
-  vitest: 3.2.4 # vitest@4 需要vite@6+
+  vitest: 3.2.6 # vitest@4 需要vite@6+
   vue: 3.4.21
 
 updateConfig:
