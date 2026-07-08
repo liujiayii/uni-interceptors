@@ -149,8 +149,8 @@ importers:
         specifier: ^66.7.5
         version: 66.7.5(vite@5.2.8(@types/node@25.7.0)(terser@5.44.0))
       unocss-applet:
-        specifier: ^0.13.6
-        version: 0.13.6(unocss@66.7.5(vite@5.2.8(@types/node@25.7.0)(terser@5.44.0)))
+        specifier: ^0.13.7
+        version: 0.13.7(unocss@66.7.5(vite@5.2.8(@types/node@25.7.0)(terser@5.44.0)))
       vite:
         specifier: 5.2.8
         version: 5.2.8(@types/node@25.7.0)(terser@5.44.0)
@@ -2573,17 +2573,17 @@ packages:
       typescript:
         optional: true
 
-  '@unocss-applet/preset-applet@0.13.6':
-    resolution: {integrity: sha512-pPX3kS+Dlr+ap9DGsfMYYZMQl/B7so7/R2HkjsGZhtN/Dkw4+84wVs1Q2vw9R2xZbGwnqDSES4kfjvwCBN/WEw==}
+  '@unocss-applet/preset-applet@0.13.7':
+    resolution: {integrity: sha512-pwF7cvH06k6AQFwW7k60ECZhyhKx73xgoG47rWVNsyZqjcMdwUG+SHYxpPJbIr0uZErBYKcv18q+U+CrRtxEWA==}
 
-  '@unocss-applet/preset-rem-rpx@0.13.6':
-    resolution: {integrity: sha512-ckA/seQIbNl4xAEjerm9x9pSLPYvn/cQ6gvYUsqJX6AHSTgot1omW7S9u4SPuQmxNYp7vgCb6UD/4iZk9ZKSCQ==}
+  '@unocss-applet/preset-rem-rpx@0.13.7':
+    resolution: {integrity: sha512-2cnqApbkmlxUMq9K4G2H0w6CEFHAnBFctFcWGkG1n6awFA13RXkNxhCKXBZyBWyMuMyaAuIQ6OlP41my8j5pug==}
 
-  '@unocss-applet/transformer-attributify@0.13.6':
-    resolution: {integrity: sha512-M1FXHf63diPeXRMXPo1N0n1cIgpgIILdKxEwlfwyP+ru32WqYtemrNY1OqNMb43TCamWLsYzvkudx4zBIykOQA==}
+  '@unocss-applet/transformer-attributify@0.13.7':
+    resolution: {integrity: sha512-PsoJ19U7nu6tweAqz+0BNCsw9SbGoM860rk6bcditNpMmeB6X4AO1aNiDg9zfBUvxG+0tzMComNBbmTk61BRBg==}
 
-  '@unocss-applet/transformer-hover@0.13.6':
-    resolution: {integrity: sha512-XdLeoN8VLJo55BS/f6pH3VI1saIdMfynmJ/1WRJ5paplW6dli0PUjmwlLl8shxLjoLhTTcUIwnfaNVvAvHvT7A==}
+  '@unocss-applet/transformer-hover@0.13.7':
+    resolution: {integrity: sha512-x8QQdwc9Q73yBs9j2nElVMk8ak0DF6SpvtzQooVfcrhK/eWAVnul+0i8U2aiA5EV3D9Mx434vMBiEQ2qcS1pTA==}
 
   '@unocss/cli@66.7.5':
     resolution: {integrity: sha512-fgWkECRn2LGVo9sEpmjk/KJ3NSKUDitaZCNrJcEYM93DG+ELriTHcL+VWBlF4rcZf9fdGlq1nKbbRHUZirFCHQ==}
@@ -6012,8 +6012,8 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  unocss-applet@0.13.6:
-    resolution: {integrity: sha512-gRAl39LEzKppXyvUJjHVr0gxjV7L8KDrQDkQMIJXsmTNewGIRg1BAjkHtw60DiXGj0oWMr5sfbbCm41eklzydw==}
+  unocss-applet@0.13.7:
+    resolution: {integrity: sha512-y309Wy1Ob+uBa+BWoB3uB/IKwcRYNebAPSLaIOmoJI6x3XBI+bkZnZ8abIdYufWHswooA7nYw1wKgPEVkhMzyg==}
     peerDependencies:
       unocss: ~66.7.4
 
@@ -9616,23 +9616,23 @@ snapshots:
       - supports-color
       - ts-node
 
-  '@unocss-applet/preset-applet@0.13.6':
+  '@unocss-applet/preset-applet@0.13.7':
     dependencies:
       '@unocss/core': 66.7.5
       '@unocss/preset-mini': 66.7.5
       '@unocss/preset-wind3': 66.7.5
       '@unocss/preset-wind4': 66.7.5
 
-  '@unocss-applet/preset-rem-rpx@0.13.6':
+  '@unocss-applet/preset-rem-rpx@0.13.7':
     dependencies:
       '@unocss/core': 66.7.5
 
-  '@unocss-applet/transformer-attributify@0.13.6':
+  '@unocss-applet/transformer-attributify@0.13.7':
     dependencies:
       '@unocss/core': 66.7.5
       magic-string: 0.30.21
 
-  '@unocss-applet/transformer-hover@0.13.6':
+  '@unocss-applet/transformer-hover@0.13.7':
     dependencies:
       '@unocss/core': 66.7.5
       magic-string: 0.30.21
@@ -13722,12 +13722,12 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unocss-applet@0.13.6(unocss@66.7.5(vite@5.2.8(@types/node@25.7.0)(terser@5.44.0))):
+  unocss-applet@0.13.7(unocss@66.7.5(vite@5.2.8(@types/node@25.7.0)(terser@5.44.0))):
     dependencies:
-      '@unocss-applet/preset-applet': 0.13.6
-      '@unocss-applet/preset-rem-rpx': 0.13.6
-      '@unocss-applet/transformer-attributify': 0.13.6
-      '@unocss-applet/transformer-hover': 0.13.6
+      '@unocss-applet/preset-applet': 0.13.7
+      '@unocss-applet/preset-rem-rpx': 0.13.7
+      '@unocss-applet/transformer-attributify': 0.13.7
+      '@unocss-applet/transformer-hover': 0.13.7
       unocss: 66.7.5(vite@5.2.8(@types/node@25.7.0)(terser@5.44.0))
 
   unocss@66.7.5(vite@5.2.8(@types/node@25.7.0)(terser@5.44.0)):
