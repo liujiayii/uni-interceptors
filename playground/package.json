@@ -47,7 +47,7 @@
     "typescript": "^6.0.3",
     "unocss": "^66.7.5",
     "unocss-applet": "^0.13.8",
-    "vite": "7.1.10",
+    "vite": "7.3.5",
     "vue-tsc": "^3.3.7"
   }
 }
