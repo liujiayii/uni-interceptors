@@ -1,7 +1,7 @@
 # 接入 Changesets 自动发布流程 — 设计文档
 
 - 日期：2026-08-14
-- 状态：待实现
+- 状态：已实现
 - 分支：feat/new-hooks-and-tools
 
 ## 1. 背景与目标
@@ -87,11 +87,11 @@
   "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
   "changelog": ["@changesets/changelog-github", { "repo": "liujiayii/uni-toolkit" }],
   "commit": false,
-  "fixed": [["uni-toolkit"]],
+  "fixed": [],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
-  "updateInternalDependencies": false,
+  "updateInternalDependencies": "patch",
   "ignore": []
 }
 ```
@@ -99,10 +99,11 @@
 字段说明：
 
 - `changelog`：用 `@changesets/changelog-github`，CHANGELOG 每条变更带上对应 PR/commit 的 GitHub 链接
-- `fixed: [["uni-toolkit"]]`：fixed 模式，单包同步发版
+- `fixed: []`：单包仓库，无多包同步发版需求。changesets v3 不再把根包纳入 fixed 校验，留空即可
 - `access: "public"`：公开包，发布时 `--access public`
 - `baseBranch: "main"`：主分支为 main
 - `commit: false`：Release PR 的 commit message 由 action 统一处理
+- `updateInternalDependencies: "patch"`：新版 `@changesets/config` schema 仅接受 `"minor" | "patch"`，不再接受 `false`；单包仓库无 internal 依赖，此字段无实际作用
 
 ### 5.2 `.changeset/README.md`
 
