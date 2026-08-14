@@ -46,7 +46,7 @@ jobs:
       # 核心：有未消费 changeset → 开/更新 Release PR（不发布）；无未消费 changeset（Release PR 刚合并）→ 执行 publish 发包
       - name: Create Release Pull Request or Publish
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@v2.1.0
         with:
           # 版本号已 bump 时执行的发布命令
           publish: pnpm changeset publish
