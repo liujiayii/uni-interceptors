@@ -1,0 +1,60 @@
+name: Release
+
+# 当代码合并到 main 时触发：有未消费 changeset 则开 Release PR，否则发布
+on:
+  push:
+    branches: [main]
+
+# 防止并发发布，同分支多次 push 排队不抢占，避免版本号 bump 了但没发包的脏状态
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+# 显式声明权限：changesets/action 开 Release PR 需要 contents 与 pull-requests 写权限
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      # 检出代码
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # 安装 pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      # 设置 Node 与 npm 注册表
+      - name: Set Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.19.0
+          registry-url: https://registry.npmjs.org/
+          cache: pnpm
+
+      # 安装依赖
+      - name: Install deps
+        run: pnpm install
+
+      # 构建
+      - name: Build
+        run: pnpm run build
+
+      # 核心：有未消费 changeset → 开/更新 Release PR（不发布）；无未消费 changeset（Release PR 刚合并）→ 执行 publish 发包
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # 版本号已 bump 时执行的发布命令
+          publish: pnpm changeset publish
+          # Release PR 的标题与 commit message
+          title: "chore(release): 版本发布"
+          commit: "chore(release): 版本发布"
+        env:
+          # changesets/action 用 GITHUB_TOKEN 开 Release PR
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # changesets/action 把 NPM_TOKEN 注入 .npmrc，发包时自动用；复用现有 NPM_ACCESS_TOKEN secret
+          NPM_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}

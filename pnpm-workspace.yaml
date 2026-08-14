@@ -4,6 +4,7 @@ shellEmulator: true
 trustPolicy: off
 
 packages:
+  - . # 根包自身，让 changesets 把 uni-toolkit 识别为可发布的工作区包
   - playground
 
 overrides:

@@ -207,7 +207,7 @@ function navigateWithChannel() {
       <view class="desc">
         点击返回上一页，组件卸载时 useEventChannel 会自动清理所有通过 on 注册的监听器，可在控制台和日志面板查看
       </view>
-      <button class="mt-10 btn-warning" @click="goBack">
+      <button class="btn-warning mt-10" @click="goBack">
         返回上一页（触发卸载）
       </button>
     </view>

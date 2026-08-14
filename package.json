@@ -1,7 +1,7 @@
 {
   "name": "uni-toolkit",
   "type": "module",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "packageManager": "pnpm@10.34.5",
   "description": "uni tools,uni app 工具库",
   "author": "liujiayii <liujiayii@foxmail.com>",
@@ -39,7 +39,9 @@
       "types": "./dist/tools/index.d.ts",
       "import": "./dist/tools/index.js",
       "require": "./dist/tools/index.js"
-    }
+    },
+    "./style/*": "./dist/style/*",
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -48,6 +50,7 @@
     "dist"
   ],
   "scripts": {
+    "changeset": "changeset",
     "clean": "rimraf dist",
     "build": "node scripts/build.js",
     "build2": "tsdown",
@@ -73,6 +76,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.3.0",
+    "@changesets/changelog-github": "^1.0.0",
+    "@changesets/cli": "^3.0.0",
     "@dcloudio/types": "^3.4.32",
     "@dcloudio/uni-app": "3.0.0-4070620250821001",
     "@types/node": "^24.13.3",
