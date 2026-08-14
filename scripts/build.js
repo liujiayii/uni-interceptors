@@ -18,33 +18,38 @@ function runCommand(command, description) {
 }
 
 /**
- * 复制样式文件到dist目录
+ * 递归复制源目录下的所有文件到目标目录（跳过子目录）
+ * @param {string} srcDir - 源目录相对路径
+ * @param {string} distDir - 目标目录相对路径
+ * @param {string} label - 复制时的日志标签，用于区分不同类型文件
  */
-function copyStyles() {
-  const srcDir = path.join(process.cwd(), "src/style");
-  const distDir = path.join(process.cwd(), "dist/style");
+function copyDirectoryFiles(srcDir, distDir, label) {
+  const src = path.join(process.cwd(), srcDir);
+  const dist = path.join(process.cwd(), distDir);
 
-  // 确保目标目录存在
-  if (!fs.existsSync(distDir)) {
-    fs.mkdirSync(distDir, { recursive: true });
+  // 源目录不存在则无需复制
+  if (!fs.existsSync(src)) {
+    console.log(`⚠️ 源目录不存在，跳过 ${label}: ${srcDir}`);
+    return;
   }
 
-  // 获取源目录中的所有文件
-  const files = fs.readdirSync(srcDir);
+  // 确保目标目录存在
+  if (!fs.existsSync(dist)) {
+    fs.mkdirSync(dist, { recursive: true });
+  }
 
-  // 复制所有样式文件
-  files.forEach((file) => {
-    const srcPath = path.join(srcDir, file);
-    const distPath = path.join(distDir, file);
-
-    // 只复制文件，跳过子目录
+  // 复制所有文件，跳过子目录
+  let count = 0;
+  fs.readdirSync(src).forEach((file) => {
+    const srcPath = path.join(src, file);
     if (fs.statSync(srcPath).isFile()) {
-      fs.copyFileSync(srcPath, distPath);
-      console.log(`📄 复制样式文件: ${file}`);
+      fs.copyFileSync(srcPath, path.join(dist, file));
+      console.log(`📄 复制${label}: ${file}`);
+      count++;
     }
   });
 
-  console.log(`🎨 样式文件已复制到 ${distDir}`);
+  console.log(`✅ 已复制 ${count} 个${label}到 ${distDir}`);
 }
 
 /**
@@ -59,8 +64,13 @@ function build() {
   // 2. 执行TypeScript编译
   runCommand("tsc", "TypeScript编译");
 
-  // 3. 复制样式文件
-  copyStyles();
+  // 3. 复制全局类型声明文件（纯 declare global 的 .d.ts，
+  //    tsc declaration:true 不会为其 emit 产物，需物理复制，
+  //    供消费端 tsconfig 的 "types" 数组以 "uni-toolkit/types" 引入）
+  copyDirectoryFiles("src/typings", "dist/types", "类型声明文件");
+
+  // 4. 复制样式文件
+  copyDirectoryFiles("src/style", "dist/style", "样式文件");
 
   console.log("\n🎉 构建完成！");
 }

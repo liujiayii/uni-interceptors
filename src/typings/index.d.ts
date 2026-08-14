@@ -1,48 +1,13 @@
 /// <reference types="@dcloudio/types" />
+/// <reference path="./uni.d.ts" />
+/// <reference path="./platform.d.ts" />
+/// <reference path="./window.d.ts" />
+/// <reference path="./umtrack.d.ts" />
 
 /**
- * 小程序平台类型
+ * 全局类型声明聚合入口
+ * - 依赖 uni-toolkit 的消费端，在 tsconfig 的 "types" 数组加 "uni-toolkit/types"，
+ *   即可经此引入 uni 平台 / 各端 JS-SDK / H5 window 的全部全局补充声明。
+ * - 声明按类别拆分到同目录各 *.d.ts，本文件仅做 reference 聚合（无内容实现）。
  */
-export type MiniProgramPlatform
-  = | "mp-alipay"
-    | "mp-weixin"
-    | "mp-baidu"
-    | "mp-qq"
-    | "mp-toutiao"
-    | "mp-kuaishou"
-    | "mp-jd"
-    | "app"
-    | "h5"
-    | "web"
-    | "app-plus"
-    | "app-harmony"
-    | "quickapp-webview-union"
-    | "quickapp-webview-huawei";
-
-/* eslint-disable ts/consistent-type-definitions */
-declare global {
-
-  namespace NodeJS {
-    interface ProcessEnv {
-      UNI_PLATFORM: MiniProgramPlatform;
-    }
-  }
-  // 更明确地扩展 uni 的命名空间类型
-  namespace UniNamespace {
-    interface GetSystemInfoSyncResult {
-      /** 环境变量，如在企业微信中为 'wxwork' */
-      environment?: string;
-    }
-
-    interface GetSystemInfoResult {
-      /** 环境变量，如在企业微信中为 'wxwork' */
-      environment?: string;
-    }
-    interface AuthSetting {
-      /** 支付宝小程序位置权限 */
-      location?: boolean;
-    }
-  }
-}
-
-export {};
+export type { MiniProgramPlatform } from "./uni.d.ts";

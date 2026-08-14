@@ -40,6 +40,9 @@
       "import": "./dist/tools/index.js",
       "require": "./dist/tools/index.js"
     },
+    "./types": {
+      "types": "./dist/types/index.d.ts"
+    },
     "./style/*": "./dist/style/*",
     "./package.json": "./package.json"
   },
