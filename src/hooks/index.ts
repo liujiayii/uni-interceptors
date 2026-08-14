@@ -1,6 +1,10 @@
 export { useChooseImage } from "./useChooseImage";
 export { useDesignSize } from "./useDesignSize";
+export { useDraggable, useDragState } from "./useDraggable";
+export { type DraggableTouch, type DraggableTouchEvent, type UseDraggableOptions, type UseDraggableReturn } from "./useDraggable";
 export { createEventChannelActions, useEventChannel } from "./useEventChannel";
 export { type IEventChannelActions } from "./useEventChannel";
 export { useInstance } from "./useInstance";
 export { useOnShow } from "./useOnShow";
+export { createScrollState, scrollHandler, triggerScroll, useScrollState } from "./useScrollState";
+export { type ScrollState, type ScrollStateOptions } from "./useScrollState";

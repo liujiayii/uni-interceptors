@@ -1,8 +1,14 @@
 export { authTips, AuthType } from "./authTips";
 export { checkSelfPermission } from "./checkSelfPermission";
 export { cloneDeep } from "./cloneDeep";
+export { convertHtmlToText } from "./convertHtmlToText";
 export { getCurrentPageRoute } from "./getCurrentPageRoute";
+export { getSafeAreaTop } from "./getSafeAreaTop";
+export { type GetSafeAreaTopOptions } from "./getSafeAreaTop";
+export { getSingleNodeInfo } from "./getSingleNodeInfo";
 export { isPageLevelComponent } from "./isPageLevelComponent";
+export { openDocumentByUrl } from "./openDocument";
+export { type OpenDocumentMessages, type OpenDocumentOptions } from "./openDocument";
 export { checkAndRequestImageAuth, checkAndRequestLocationAuth, checkPermissions, requestPermissions } from "./permissionAuth";
 export { shouldShowRequestPermissionRationale } from "./shouldShowRequestPermissionRationale";
 export { showAuthTip } from "./showAuthTip";
