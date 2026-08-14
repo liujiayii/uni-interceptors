@@ -49,10 +49,10 @@ jobs:
         uses: changesets/action@v2.1.0
         with:
           # 版本号已 bump 时执行的发布命令
-          publish: pnpm changeset publish
+          publish-script: pnpm changeset publish
           # Release PR 的标题与 commit message
-          title: "chore(release): 版本发布"
-          commit: "chore(release): 版本发布"
+          pr-title: "chore(release): 版本发布"
+          commit-message: "chore(release): 版本发布"
         env:
           # changesets/action 用 GITHUB_TOKEN 开 Release PR
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
