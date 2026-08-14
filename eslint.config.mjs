@@ -22,7 +22,7 @@ export default antfu(
     rules: {
       "node/prefer-global/process": "off",
     },
-    ignores: ["dist", "*/*.html"],
+    ignores: ["dist", "*/*.html", ".superpowers"],
   },
   {
     // markdown 中的 vue 代码块经 @eslint/markdown 提取后，
