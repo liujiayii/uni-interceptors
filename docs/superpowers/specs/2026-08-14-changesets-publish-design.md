@@ -60,9 +60,10 @@
 
 ### 改动
 
-| 文件           | 改动                                                                                                        |
-| -------------- | ----------------------------------------------------------------------------------------------------------- |
-| `package.json` | 加 `@changesets/cli`、`@changesets/changelog-github` 到 devDependencies；加 `"changeset": "changeset"` 脚本 |
+| 文件                  | 改动                                                                                                                  |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `package.json`        | 加 `@changesets/cli`、`@changesets/changelog-github` 到 devDependencies；加 `"changeset": "changeset"` 脚本           |
+| `pnpm-workspace.yaml` | `packages` 字段加 `- .` 让 changesets v3 把根包 `uni-toolkit` 识别为可发布工作区包（v3 不再把根目录包默认纳入工作区） |
 
 ### 删除
 
@@ -92,7 +93,7 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": ["playground"]
 }
 ```
 
@@ -104,6 +105,7 @@
 - `baseBranch: "main"`：主分支为 main
 - `commit: false`：Release PR 的 commit message 由 action 统一处理
 - `updateInternalDependencies: "patch"`：新版 `@changesets/config` schema 仅接受 `"minor" | "patch"`，不再接受 `false`；单包仓库无 internal 依赖，此字段无实际作用
+- `ignore: ["playground"]`：忽略 playground 测试包，防止其被误 bump 或发布（playground 是本地调试用包）
 
 ### 5.2 `.changeset/README.md`
 

@@ -10,6 +10,11 @@ concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: false
 
+# 显式声明权限：changesets/action 开 Release PR 需要 contents 与 pull-requests 写权限
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
