@@ -58,3 +58,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # changesets/action 把 NPM_TOKEN 注入 .npmrc，发包时自动用；复用现有 NPM_ACCESS_TOKEN secret
           NPM_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+          # actions/setup-node 生成的 .npmrc 用 ${NODE_AUTH_TOKEN} 占位符，必须提供同名环境变量，否则令牌解析为空导致 404
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
