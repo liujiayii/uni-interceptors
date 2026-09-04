@@ -79,7 +79,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.3.0",
-    "@changesets/changelog-github": "^1.0.0",
+    "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.1",
     "@dcloudio/types": "^3.4.32",
     "@dcloudio/uni-app": "3.0.0-4070620250821001",
